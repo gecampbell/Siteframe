@@ -1,0 +1,10 @@
+/* $Id: print.css,v 1.3 2003/06/27 05:28:37 glen Exp $ */
+#header {
+    display: none;
+}
+#right {
+    display: none;
+}
+fieldset {
+    padding: .25in;
+}

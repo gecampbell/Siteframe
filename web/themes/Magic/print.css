@@ -1,0 +1,26 @@
+/* $Id: print.css,v 1.1 2002/11/05 16:48:25 glen Exp $ */
+h1,h2,h3,h4,#footer,p.author,p.info,p.subject {
+font-family: arial,helvetica,sans-serif;
+}
+#footer {
+margin-top: 1em;
+font-size: smaller;
+color: gray;
+}
+div.Comments {
+font-size: smaller;
+}
+div.Comments p {
+margin: 0;
+}
+div.Comments p.subject {
+margin-top: 1em;
+font-weight: bold;
+}
+p.author,p.info {
+font-size: smaller;
+}
+
+#menu,.action,.edit,.path,.textad,.textadblock {
+display: none;
+}

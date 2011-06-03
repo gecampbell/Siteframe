@@ -1,0 +1,257 @@
+Siteframe v3.1
+Copyright (c)2001-2003, Broadpool, LLC. All rights reserved.
+See LICENSE.txt for details.
+$Id: README.txt,v 1.139 2005/11/06 16:30:24 glen Exp $
+http://siteframe.org
+
+======================================================================
+SYSTEM REQUIREMENTS
+======================================================================
+See http://siteframe.org for the complete list of required software.
+
+Apache - the system was developed and tested on Apache 1.3.19. In
+fact, Siteframe will probably work on any system that supports PHP
+and MySQL, but no testing has been done outside this platform. Users
+have reported success in using Siteframe on a Windows 2000 platform
+with Microsoft Internet Information Services (IIS), but this has not
+been verified. Siteframe works quite happily with Apache 2.0.
+
+PHP version 4.2 - Siteframe uses features of PHP 4.0.6 that do
+not appear in earlier versions of PHP. PHP must be compiled with
+the "GD 2.0" option if you wish to use graphics.
+
+MySQL 3.23.53 - it may work (and probably will work) with earlier
+versions of MySQL, but it has not been tested. The earliest known
+release of MySQL to work with Siteframe is 3.23.32.
+
+Siteframe has been validated against MySQL 4.0, and there is evidence
+of vastly improved performance when MySQL's query caching is enabled.
+
+Siteframe has not been thoroughly tested with MySQL 4.1, and its
+use is not currently recommended or supported.
+
+======================================================================
+INSTALLATION
+======================================================================
+See the file INSTALL.txt for installation instructions (check out
+http://siteframe.org for more extended documentation).
+
+IF YOU ARE UPGRADING FROM AN OLDER VERSION OF SITEFRAME, PLEASE
+MAKE SURE YOU READ THE UPGRADE30.txt FILE FOUND IN THIS DISTRIBUTION.
+
+======================================================================
+SUPPORT
+======================================================================
+It is highly recommended that you subscribe to the Siteframe mailing
+list at http://siteframe.org/mailman/listinfo/siteframe to keep up
+with product releases and security announcements. If you wish to
+participate in the development of additional Siteframe features, make
+sure you register with the website at http://siteframe.org.
+
+General support inquiries should be directed to the Siteframe mailing
+list so that other members can participate in the discussion and
+resolution, and so that there will be an archive of responses for
+future reference.
+
+======================================================================
+RELEASE 3.2.2 - November 6, 2005
+======================================================================
+
+Release 3.2 makes a number of changes to table column names to ensure
+that all data is available; please read UPGRADE32.txt - you will need
+to run a SQL script to update your database.
+
+This release includes two fixes for security issues that left Siteframe
+sites vulnerable to cross-site scripting (XSS) attacks. It is strongly
+recommended that all users install this version.
+
+======================================================================
+RELEASE 3.1.5 - March 16, 2004
+======================================================================
+
+Corrected a problem caused when a user was deleted; folders owned
+by the user were also deleted (correctly), however, documents owned
+by other users in shared folders owned by the deleted user were not
+deleted as well.
+
+Corrected a problem where document tags would not work when the web
+server had enable_globals turned off (the ?tag= was not correctly
+passed to the document.php script).
+
+======================================================================
+RELEASE 3.1.3 - September 20, 2003
+======================================================================
+
+Added "PROOF" function; when selected, adds the word "PROOF" across
+all images larger than 150 pixels.
+
+======================================================================
+RELEASE 3.1.2 - September 20, 2003
+======================================================================
+
+Modifications to siteframe.sql so that the database will build
+properly under MySQL 4.1. MySQL 4.1 provides a much more sophisticated
+search interface than in previous versions; however, the SQL syntax
+has some incompatibilities.
+
+======================================================================
+RELEASE 3.1.1 - July 4, 2003
+======================================================================
+
+Added new script rotate.php that rotates an image in 90 degree
+increments. Modified comment template to invoke it.
+
+======================================================================
+RELEASE 3.1 - June 28, 2003
+======================================================================
+
+NOTE: please read the file UPGRADE31.txt if you are upgrading from
+release 3.0 to 3.1.
+
+Fixed a problem that started with PHP 4.3.2 where large image files
+would crash with an out-of-memory error. Resolved by adding a line
+of code to web/classes/siteframe.php that set the PHP memory
+allocation limit to 32M whenever it was processing an image file.
+
+Corrected a bug in the user_ratings content template that caused
+to spuriously show an incorrect rating for a document.
+
+Modified the default navigation menu to include folders and categories
+whenever they are defined.
+
+Changed admin/chart_days.ihtml to use the property {site_path}.
+
+Implemented plugins/folder_image.php. This plugin allows the site
+administrator to (a) select a default image to be displayed for a
+folder, and (b) to optionally choose an image from the folder to
+be used as the folder's image. It does *not* modify any of the
+standard templates (in which the folder's icon is hard-coded); that
+must be done separately. This just provides a mechanism for doing
+so.
+
+Implemented Subscriptions and associated notifications (messages).
+
+Global property SELF_RATING_ALLOWED; if set, will allow members to
+rate their own documents. Default is to NOT allow self-rating.
+
+A new script, contact.php, has been provided to allow site visitors
+(not logged in) to contact the site administrators. This page allows
+anyone to send e-mail to $SITE_EMAIL. Note that there are no links
+provided by default to this script; if you want to use it, you'll
+need to add something like this:
+
+  <a href="contact.php">Contact Us!</a>
+
+to one of your templates.
+
+Rewrote the comment class, comment.php, and rate.php, to consolidate
+the comment and rating mechanism and to clean up some anomolies.
+Modified the ratingbox macro to use the new rate.php page correctly.
+
+Created plugins/restricted.php. This plugin defines a macro,
+{!restricted 'group'!} which, when used on a page, will only permit
+members of the designated group to view it (administrators can also
+view it).
+
+Created an initial online help system, mainly intended to provide
+context-sensitive help on form entry fields. This will be expanded
+as time and energy permits.
+
+Modified the template import function so that a) if the template
+body is unmodified, it does not import it, and b) if it imports and
+existing template, it renames it to template.BAK.
+
+======================================================================
+RELEASE 3.0.2 - June 11, 2003
+======================================================================
+Modified classes/vfolder.php to correct a problem where a virtual
+folder, when deleted, would delete all the documents in it. It ain't
+supposed to do that.
+
+Modified import_templates.php so that it will not run if there are
+already templates in the database. This is to prevent inadvertently
+(or maliciously) running the script a second time after the templates
+have already been loaded.
+
+Corrected a number of problems detected when register_globals=Off.
+You should probably leave register_globals=On for the time being.
+
+Modified edit.php and editfolder.php so that they do not lose entered
+data in case of an error.
+
+Updated some content templates (mainly "index") to support previously
+unsupported features. Templates are now stored in templates.sql,
+with prior versions as "templates301.sql," for example. New template
+sets are stored in templates/templates.xml for later importing, if
+necesssary.
+
+======================================================================
+RELEASE 3.0.1 - June 10, 2003
+======================================================================
+Release 3.0 of Siteframe contains substantial modifications and
+enhancements throughout the code. All templates are now stored in
+database tables, for example, and there are numerous other
+modifications.
+
+Added session reports to the Control Panel (visits per day in both
+report and graphic chart format).
+
+(beta 2) modified templates to add a "Type ID" field that identifies
+the template as Generic, Home Page, Navigation, or Footer.
+
+Two new autoblocks to support weblogs:
+  doc_days - iterates over the last N days that have documents
+    creates the single variable {day}
+  day_docs - iterates over all the documents for a given day.
+You'll use them like this:
+  {BEGIN:doc_days 14}
+  <p class="date">{!date '{site_date_format}' '{day}'!}</p>
+      {BEGIN:day_docs day}
+      ... put document stuff here ...
+      {END:day_docs}
+  {END:doc_days}
+
+Eliminated the global property USE_GD18 - it now automatically
+detects whether or not GD2.0 is available; if so, it uses it.
+
+Modified daily.php so that it cannot be run from a browser (either
+accidentally or on purpose). Made other modifications just so it's
+cleaner for users to understand. Now, daily.php performs most of
+the daily functions necessary.
+
+Cleaned up the global properties settings. Now, all global properties
+are defined in admin/global_defs.php in a simple structure that can
+be appended to by plugins. Modified the Trackback plugin so that
+it can be turned on or off by a global property.
+
+New global property DOC_REQUIRE_FOLDER which, if set, requires that
+all documents be assigned to a folder.
+
+New global property DOC_REQUIRE_CATEGORY which, if set, requires
+that all documents have at least one assigned category.
+
+Modified all the web/ scripts so that they use $_GET and $_POST
+instead of relying upon global variables. This means that Siteframe,
+at long last, should be able to run on a site where the PHP setting
+register_globals=Off. This should provide a much greater degree of
+security for the entire website.
+
+A number of scripts that are intended to run as batch files from
+the command line (daily.php is the primary one of these, as noted
+above) have been modified so that they will fail with an error if
+they are invoked from a browser.
+
+Added another template type "Macro" and a new global property
+MACRO_AUTOLOAD which, if set, should contain the name of a template
+to be automatically parsed for macros. So macros can be set by
+either creating them online in this template, or by loading them
+from files. The standard macro library is being moved from a file
+to a template for this release.
+
+Changed the default "index" template to use a common weblog format
+instead of the "corporate" tabular format in prior releases. I hope
+to release a number of alternative front-page templates in coming
+releases.
+
+New global property MAINT_MODE_MSG, which allows the administrator
+to customize the "maintenance mode" message.

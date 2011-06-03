@@ -1,0 +1,22 @@
+/* print.css 
+** $Id: print.css,v 1.1.1.1 2002/09/05 16:43:14 glen Exp $
+** Copyright (c)2001, Broadpool, LLC. All rights reserved.
+*/
+body {
+    margin-left: 1in;
+    margin-right: 1in;
+    font-family: helvetica,arial,sans-serif;
+    font-size: .8em;
+    line-height: 150%;
+}
+#menu,#navigation,.action,.editor,.inputform {
+    display: none;
+}
+h1 {
+    font-size: 12pt;
+    text-transform: uppercase;
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: .5in;
+}

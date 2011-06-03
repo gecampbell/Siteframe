@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>{page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+{head_content}
+{rdf}
+</head>
+<body>
+
+<div id="banner">
+{!if defined(control_panel_title) '{control_panel_title}' 'Control Panel'!}
+</div>
+<div id="tag">
+<span style="float:right;">{!date 'F j, Y'!}</span>
+{!if defined(site_name) '{site_name}' '--site not defined--'!}
+</div>
+
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr><td id="menu">
+    <b>Menu</b><br/>
+    <a href="{site_url}/admin/">Control Panel</a><br/>
+    <a href="{site_url}/">Website Home</a>
+</td>
+<td id="content">
+    <h1>{page_title}</h1>
+    {!if defined(error) '<p class="error">{error}</p>'!}
+    {recordset}
+    {body}
+</td></tr></table>
+
+<div id="footer">
+{footer}
+</div>
+
+</body>
+</html>

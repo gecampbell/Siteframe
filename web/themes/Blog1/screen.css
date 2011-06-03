@@ -1,0 +1,247 @@
+/* $Id: screen.css,v 1.5 2002/10/28 20:14:45 glen Exp $
+** Copyright (c)2001, Broadpool, LLC. All Rights Reserved.
+*/
+body {
+width: 700px;
+}
+body,input,select,textarea,td {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+}
+td {
+vertical-align: top;
+}
+#title {
+padding: 5px;
+}
+#content {
+border: 1px solid #eeeeee;
+padding: 5px;
+}
+#content * {
+line-height: 150%;
+}
+#footer {
+padding: 5px;
+}
+#navigation {
+white-space: nowrap;
+width: 130px;
+font-size: 10px;
+border-top: 1px solid gray;
+color: gray;
+}
+#menu {
+font-size: 9px;
+text-align: right;
+color: gray;
+}
+div.edit {
+background: #eeeeee;
+padding: 5px;
+}
+/*==================================================
+** Heading Formats
+*/
+h1 {
+font-family: georgia,tahoma,times new roman,times,serif;
+font-size: 24px;
+font-weight: normal;
+line-height: 100%;
+}
+h2 {
+margin-top: 0;
+margin-bottom: 24px;
+}
+h3 {
+font-size: 18px;
+border-top: 1px #eeeeee solid;
+}
+h4 {
+font-size: 12px;
+margin-bottom: 0;
+}
+h4+p {
+margin-top: 0;
+}
+
+/*==================================================
+** Paragraph Formats
+*/
+p.action {
+font-size: 9px;
+font-weight: bold;
+text-align: right;
+}
+p.author {
+font-size: 10px;
+font-style: italic;
+}
+p.editor {
+font-size: 9px;
+text-align: center;
+margin-top: 0;
+margin-bottom: 0;
+}
+p.error {
+color: red;
+}
+p.info {
+font-size: 10px;
+padding-top: 1px;
+border-top: 1px solid #eeeeee;
+text-align: right;
+}
+p.opt {
+font-weight: bold;
+margin: 0;
+padding-top: 1px;
+padding-bottom: 1px;
+border-bottom: 1px solid gray;
+background: #eeeeee;
+width: 100%;
+white-space: nowrap;
+}
+
+/*==================================================
+** General Overrides
+*/
+dt {
+font-weight: bold;
+margin-top: 5px;
+}
+hr {
+height: 1px;
+color: #eeeeee;
+}
+th {
+border: 1px solid #eeeeee;
+padding: 2px;
+}
+.calday {
+margin: 0;
+text-align: right;
+font-size: 16px;
+color: gray;
+font-family: georgia,tahoma,times new roman,times,serif;
+font-weight: bold;
+}
+.day {
+height: 75px;
+border: 1px solid #eeeeee;
+}
+.even {
+background: #eeeeee;
+}
+.event_date {
+white-space: nowrap;
+}
+.today {
+color: black;
+}
+
+/*==================================================
+** Link Styles
+*/
+a {
+color: navy;
+text-decoration: none;
+}
+a:visited {
+color: gray;
+}
+a:hover {
+color: red;
+text-decoration: underline;
+}
+p.opt a, #menu a {
+color: navy;
+}
+p.opt a:hover {
+color: red;
+text-decoration: none;
+}
+p.editor a {
+border: 1px solid gray;
+padding: 1px;
+}
+p.editor a:hover {
+border: 1px solid red;
+text-decoration: none;
+}
+form {
+width: 100%;
+}
+textarea {
+width: 100%;
+}
+.inputform {
+width: 100%;
+}
+fieldset {
+border: 1px gray solid;
+padding: 5px;
+}
+
+div.subfolders {
+clear: right;
+}
+div.subfolder {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+line-height: 100%;
+width: 90px;
+height: 90px;
+overflow: auto;
+border: 1px gray solid;
+padding: 2px;
+margin: 2px;
+float: left;
+text-align: center;
+}
+div.path {
+background: lemonchiffon;
+color: gray;
+padding: 3px;
+margin: 5px 0 5px 0;
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+}
+div.thumbnail {
+width: 120px;
+height: 150px;
+padding: 2px;
+margin: 2px;
+border: 1px gray solid;
+text-align: center;
+}
+
+/* advertisements */
+div.ad {
+margin: 5px;
+border: 3px gray solid;
+padding: 5px;
+}
+div.adtitle {
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 12px;
+}
+div.adbody {
+font-family: times new roman,times,serif;
+font-size: 12pt;
+display: inline;
+}
+div.adbody p {
+display: inline;
+}
+div.adurl {
+font-family: verdana,arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 10px;
+}
+div.adowner {
+font-family: verdana,arial,helvetica,sans-serif;
+font-weight: normal;
+font-size: 9px;
+}

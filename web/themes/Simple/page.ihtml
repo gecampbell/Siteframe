@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<meta http-equiv="content-type" content="text/html; charset={charset}">
+<meta name="generator" content="Siteframe {version}">
+{!if defined(site_meta_keywords)
+'<meta name="keywords" content="{site_meta_keywords}"/>'
+!}
+    <title>{page_title}</title>
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{site_path}/themes/{theme}/style.css"/>
+    {!if defined(custom_css)
+        '<style type="text/css">
+         @import url({custom_css});
+         </style>'
+    !}
+    {!if defined(head_content) '{head_content}'!}
+{rdf}
+</head>
+<body>
+{!if defined(logo)
+    '<div id="logo"><a href="{site_path}/"
+     ><img src="{logo}" border="0"
+           alt="{site_name}" title="{site_name}"/></a>
+     </div>'
+!}
+<table id="title">
+<tr>
+    <td class="sitename">
+    {!if defined(site_description)
+        '{site_description}'
+        '{site_name}'
+    !}
+    </td>
+    <td class="links">
+    {!if defined(user_id)
+        '{user_name} |'
+    !}
+    <a href="{site_path}/">Home</a>
+    {!if defined(user_id)
+        '| <a href="{site_path}/user.php">My Page</a>
+         | <a href="{site_path}/prefs.php">Preferences</a>'
+        '| <a href="{site_path}/login.php">Login</a>
+         | <a href="{site_path}/register.php">Register</a>'
+    !}
+    {!if '{gen_rss}+0'
+        '| <a href="{site_path}/rss.xml">
+         <img src="{site_path}/images/xml.gif" border="0" alt="RSS" style="vertical-align:middle;"/>
+         </a>'
+    !}
+    </td>
+</tr>
+</table>
+<table style="border:0; width:100%;"><tr>
+{!if defined(navigation)
+    '<td id="menu">
+    {navigation}
+    </td>'
+!}
+<td id="page">
+    {!if defined(folder_path)
+      '{folder_path}'
+      '<div class="path">&nbsp;</div>'
+    !}
+    {!if defined(no_title) '' '<h1>{page_title}</h1>'!}
+    {!if defined(error) '<p class="error">{error}</p>'!}
+    {recordset}
+    <div id="content">
+    {body}
+    </div>
+    <div id="footer">
+    {!if defined(footer) '{footer}'
+        '&copy;2002, {site_name}. All Rights Reserved.'!}
+    </div>
+</td></tr></table>
+</body>
+</html>

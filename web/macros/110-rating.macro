@@ -1,0 +1,32 @@
+{!define docrating
+'<!-- Start Rating Box -->
+<form method="post"
+    action="{site_path}/rate.php"
+    enctype="multipart/form-data"
+    name="ratingform"
+    style="border:none; display:inline; padding:0; margin:0;">
+<table>
+<tr>
+<td align="center">1</td>
+<td align="center" colspan="8">&larr; select rating &rarr;</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td><input type="radio" name="rate" value="1" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="2" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="3" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="4" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="5" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="6" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="7" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="8" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="9" onClick="ratingform.submit();"/></td>
+<td><input type="radio" name="rate" value="10" onClick="ratingform.submit();"/></td>
+</tr>
+</table>
+<input type="hidden" name="submitted" value="1"/>
+<input type="hidden" name="id" value="{doc_id}"/>
+<input type="hidden" name="uid" value="{user_id}"/>
+</form>
+<!-- End Rating Box -->'
+!}

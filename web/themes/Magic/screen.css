@@ -1,0 +1,368 @@
+/* $Id: screen.css,v 1.26 2003/06/25 02:33:25 glen Exp $ */
+body {
+margin-left: 150px;
+margin-right: 150px;
+}
+
+#site {
+font-family: arial,helvetica,sans-serif;
+font-size: 12px;
+text-transform: lowercase;
+color: silver;
+font-weight: bold;
+margin-bottom: 30px;
+}
+#site a {
+color: silver;
+text-decoration: none;
+}
+#site a:hover {
+color: #eeeeee;
+text-decoration: none;
+}
+
+#menu, div.edit {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+line-height: 13px;
+width: 134px;
+}
+#menu {
+position: absolute;
+top: 10px;
+right: 10px;
+}
+div.edit {
+position: absolute;
+right: 10px;
+line-height: auto;
+}
+#menu br {
+display: none;
+}
+#menu a, #menu b, div.edit a, div.edit a:visited {
+display: block;
+color: gray;
+background: #eeeeee;
+padding: 1px 5px 1px 5px;
+margin: 1px;
+text-decoration: none;
+}
+#menu a > img {
+background: white;
+}
+#menu b {
+color: black;
+}
+#menu a:hover, div.edit a:hover {
+background: silver;
+color: black;
+text-decoration: none;
+}
+#menu a:hover > img {
+background: white;
+}
+
+#content {
+line-height: 150%;
+height: 85%;
+overflow: visible;
+}
+
+#footer {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+color: silver;
+margin: 20px 0 10px 0;
+clear: both;
+}
+
+#shutterfly {
+display: none;
+}
+
+a, a:visited {
+color: darkolivegreen;
+text-decoration: none;
+}
+a img {
+border: none;
+}
+a:hover {
+color: dimgray;
+text-decoration: underline;
+}
+
+table {
+border: none;
+}
+table.list {
+border-bottom: 1px #eeeeee solid;
+}
+table.list p {
+display: inline;
+}
+.listinfo {
+white-space: nowrap;
+}
+tr {
+line-height: 120%;
+}
+th,td {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+}
+th {
+text-align: left;
+border-bottom: 1px #eeeeee solid;
+vertical-align: bottom;
+}
+.infotable {
+width: 600px;
+margin-left: 0;
+padding-left: 0;
+}
+.infotable th {
+width: 150px;
+border: none;
+vertical-align: top;
+}
+.infotable th, .infotable td {
+padding: 0 2px 0 2px;
+}
+.infotable tr {
+background: #eeeeee;
+margin-left: 0;
+padding-left: 5px;
+}
+td {
+vertical-align: top;
+}
+.even {
+background: #eeeeee;
+}
+
+h1,h2,h3,h4 {
+font-family: arial,helvetica,sans-serif;
+color: gray;
+margin-bottom: 5px;
+}
+h2 {
+}
+h3 {
+}
+h4 {
+}
+h1 {
+font-weight: normal;
+line-height: 120%;
+margin: 10px 0 40px 0;
+}
+
+div.path,p.action,p.author,p.info,p.recordset,.cfolderinfo {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+line-height: 12px;
+}
+p.action {
+clear: both;
+}
+.event_date {
+white-space: nowrap;
+}
+div.path, div.path a, div.path a:visited {
+color: gray;
+}
+
+hr {
+height: 1px;
+color: silver;
+}
+
+form {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 12px;
+border: 1px #eeeeee solid;
+padding: 10px 20px 20px 20px;
+}
+form hr {
+display: none;
+}
+form h3 {
+background: #eeeeee;
+padding: 2px 5px 2px 5px;
+}
+form.cfolder {
+border: none;
+padding: none;
+}
+p.doc,textarea {
+width: 500px;
+}
+textarea {
+font-family: auto;
+}
+p.doc {
+font-size: 10px;
+line-height: 12px;
+color: gray;
+margin-top: 2px;
+}
+p.field {
+margin: 0;
+}
+p.prompt {
+color: gray;
+font-style: italic;
+margin-top: 10px;
+margin-bottom: 0;
+}
+
+.notice {
+margin-bottom: 10px;
+}
+.notice p, .notice h4 {
+display: inline;
+margin-right: 10px;
+}
+
+.subfolders,.imageboxes {
+margin: 5px 0 5px 0;
+clear: both;
+}
+.subfolder,.picbox,.picboxlong {
+text-align:center;
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+line-height: 12px;
+margin: 2px;
+padding: 2px;
+border: 1px #eeeeee solid;
+float: left;
+}
+.subfolder {
+width: 90px;
+height: 90px;
+}
+.picbox {
+width: 110px;
+height: 110px;
+}
+.picboxlong {
+width: 110px;
+height: 130px;
+}
+
+.backnext a, .backnext a:hover, .backnext a:hover span {
+text-decoration: none;
+color: gray;
+text-transform: lowercase;
+}
+.backnext table {
+float:right;
+}
+.backnext span {
+color: white;
+}
+
+.Comments {
+line-height: 140%;
+font-size: smaller;
+}
+.Comments p.subject {
+font-family: verdana,arial,helvetica,sans-serif;
+padding-top: 2px;
+font-weight: bold;
+margin-top: 10px;
+margin-bottom: 5px;
+border-top: 1px #eeeeee solid;
+}
+.Comments p {
+margin: 0 0 5px 0;
+}
+.Comments p.info {
+font-family: verdana,arial,helvetica,sans-serif;
+margin-bottom: 10px;
+}
+
+fieldset {
+padding: 20px;
+}
+fieldset * {
+margin-top: 0;
+margin-bottom: 5px;
+}
+legend {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 9px;
+color: darkgreen;
+}
+
+
+
+.imageboxes td { }
+.imageboxes { }
+.list td p, .infotable td p { }
+.list { }
+.listinfo { }
+.subfolder, .picbox, .picboxlong { }
+.subfolder, .picboxlong { }
+.textad a, #menu .textad a { }
+.textad b { }
+.textad { }
+.textadblock { }
+div.Comments p { }
+div.Comments p.info { }
+div.Comments p.subject { }
+div.Comments { }
+div.ad { }
+div.adbody p { }
+div.adbody { }
+div.adowner { }
+div.adtitle { }
+div.adurl { }
+div.description { }
+div.image { }
+div.notices p { }
+div.notices { }
+div.path { }
+div.subfolders { }
+form { }
+form#searchform { }
+legend { }
+p.author { }
+p.editor { }
+p.error {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 12px;
+color: crimson;
+}
+p.imageframe {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+color: silver;
+line-height: 12px;
+text-transform: lowercase;
+}
+p.imageframe img {
+border: 1px silver solid;
+}
+p.recordset a { }
+p.recordset { }
+span.pollbar { }
+table { }
+td { }
+td.event_date { }
+th { }
+tr { }
+tr.backnext a { }
+
+.rating {
+display: none;
+}
+
+.messages {
+background: yellow;
+text-align: center;
+padding: 5px;
+}

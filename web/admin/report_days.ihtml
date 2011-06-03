@@ -1,0 +1,9 @@
+<p>This report is based on the number of unique <i>sessions</i> that have been recorded. A <i>session</i> is a single visit during the time that the user's browser has been open. If the user closes his or her browser and re-opens it, that counts as two or more sessions. If the user visits multiple pages in one session, that still only counts as a single session.</p>
+
+<table class="list">
+<tr><th>Date</th><th>Count</th></tr>
+{BEGIN:sessions_day -r}
+<tr class="{row_class}"><td>{!date 'l, F j, Y' '{session_date}'!}</td>
+  <td align="right">{!format '{session_count}'!}</td></tr>
+{END:sessions_day}
+</table>

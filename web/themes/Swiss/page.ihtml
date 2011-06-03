@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>{page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" href="{site_path}/themes/{theme}/swiss.css"/>
+{head_content}
+{rdf}
+</head>
+<body>
+
+{!menu_item topmenu 'Login' '{site_path}/login.php' '!({user_id}+0)'!}
+{!menu_item topmenu 'Register' '{site_path}/register.php' '!({user_id}+0)'!}
+{!menu_item topmenu 'Logout' '{site_path}/login.php' '{user_id}+0'!}
+{!menu_item topmenu 'My Page' '{site_path}/user.php?id={user_id}' '{user_id}+0'!}
+{!menu_item topmenu 'Prefs' '{site_path}/prefs.php' '{user_id}+0'!}
+
+<table id="top" width="96%" align="center">
+<tr>
+{!if defined(logo) '<td rowspan="2" id="logo"><a href="{site_url}" title="{site_name}"><img src="{logo}" alt="{site_name} logo"/></a></td>'!}
+<td width="99%">
+<p id="topmenu">{!menu topmenu ' &nbsp; &nbsp; '!}</p>
+<h1><a href="{site_url}">{site_name}</a></h1></td></tr>
+<tr><td class="sitedesc">
+{!if defined(folder_path) '{folder_path}' '{site_description}'!}
+</td></tr>
+</table>
+
+<table id="content">
+<tr>
+{!if defined(no_navigation) 
+  ''
+  '<td id="left">
+   <div class="menu">
+     <p class="title">Menu</p>
+     {navigation}
+   </div></td>
+'!}
+<td id="right">
+{!if defined(no_title) '' '<h1>{page_title}</h1>'!}
+{!if defined(error) '<p class="error">{error}</p>'!}
+{recordset}
+{body}
+</td></tr></table>
+
+<table id="footer" width="96%" align="center">
+<tr><td>{footer}</td></tr>
+</table>
+
+</body>
+</html>

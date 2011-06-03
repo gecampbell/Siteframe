@@ -1,0 +1,26 @@
+$Id: UPGRADE31.txt,v 1.2 2003/07/02 03:14:52 glen Exp $
+UPGRADE31.txt
+
+If you are upgrading from Siteframe 3.0 to 3.1, you will need to
+import the new and modified templates. These are provided in the
+file
+
+    templates/templates.xml
+
+To import them, go to the Control Panel, then select "Import
+theme/template XML file." When prompted, browse for this file on
+your local system.
+
+NOTE: this actually includes all standard Siteframe templates.
+Only templates which differ from your existing templates are
+imported, and your existing templates will be renamed with a .BAK
+extension.
+
+DO NOT change the theme name, or else the templates will not
+function.
+
+Press Submit to import the templates.
+
+If you have made any changes to these content templates, you should
+manually evaluate the new templates and decide whether to edit the
+templates or to simply use the new ones.

@@ -1,0 +1,481 @@
+/* $Id: siteframe.css,v 1.13 2003/06/23 05:22:44 glen Exp $
+** copyright (c)2002, broadpool, llc. all rights reserved.
+** this cascading stylesheet contains screen formatting materials
+** for the "Siteframe" theme
+*/
+body {
+background: white;
+color: black;
+margin: 0;
+padding: 0;
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 12px;
+}
+
+/* default hyperlinks */
+a {
+color: mediumslateblue;
+text-decoration: none;
+}
+a:hover {
+color: dodgerblue;
+}
+
+/* the #page table encompasses the entire viewport */
+#page {
+margin: 0;
+}
+
+/* the #title division runs the full width of the viewport
+** at the very top of the screen */
+#title {
+background: white;
+font-family: georgia,times new roman,times,serif;
+font-weight: bold;
+vertical-align: bottom;
+font-size: 30px;
+padding: 0 5px 0 5px;
+color: midnightblue;
+}
+#title a,#title a:visited {
+color: midnightblue;
+text-decoration: none;
+}
+#title a:hover {
+color: darkslateblue;
+text-decoration: none;
+}
+/* this little menu immediately follows the #title and acts as a
+** separator for the remainder of the page */
+#topmenu {
+font-size: 10px;
+font-weight: bold;
+background: black;
+color: silver;
+padding: 2px;
+border-top: 1px gray solid;
+border-bottom: 1px gray solid;
+text-align: right;
+}
+#topmenu a {
+color: steelblue;
+text-decoration: none;
+}
+#topmenu a:hover {
+color: dodgerblue;
+}
+
+/* the #main division covers the entire rest of the viewing space */
+#main {
+}
+#left,#right {
+width: 130px;
+font-size: 11px;
+background: silver;
+}
+
+/* the code for this left-hand menu
+** was adapted from http://alistapart.com/stories/taminglists/
+** by Mark Newhouse
+*/
+#left {
+padding: 0;
+white-space: nowrap;
+}
+#left ul {
+list-style: none;
+margin: 0;
+padding: 0;
+border: none;
+}
+#left a {
+border-bottom: 1px black solid;
+margin: 0;
+font-weight: bold;
+}
+#left .title {
+padding: 2px 2px 2px 7px;
+border-bottom: 1px black solid;
+margin: 0;
+font-weight: bold;
+background: gray;
+color: white;
+}
+#left .info {
+padding: 2px 2px 2px 7px;
+font-weight: normal;
+}
+#left a {
+display: block;
+width: 100%;
+text-decoration: none;
+background: silver;
+color: navy;
+padding: 2px;
+border-left: 5px gray solid;
+}
+html>body #left a {
+width: auto;
+}
+#left a:hover {
+background-color: white;
+color: darkslategray;
+border-left: 5px red solid;
+}
+#left br {
+display: none;
+}
+
+/* the right-hand column is a rather arbitrary one; it contains
+** "extra stuff" to be defined in context. For example, on document
+** pages it contains a list of other documents in the same folder.
+*/
+#right a {
+color: navy;
+text-decoration: none;
+}
+#right a:hover {
+color: slateblue;
+}
+#right {
+line-height: 150%;
+font-size: 11px;
+padding: 5px;
+}
+#right p {
+margin: 0 0 5px 0;
+}
+#center {
+background: white;
+color: black;
+padding: 10px;
+margin: 0 145px 0 132px;
+border: 1px gray solid;
+border-top: none;
+}
+
+/* the content area is where the primary text goes */
+#content {
+line-height: 150%;
+}
+#content a {
+color: navy;
+text-decoration: none;
+}
+#content a:hover {
+color: slateblue;
+text-decoration: underline;
+}
+#content a:active {
+color: crimson;
+text-decoration: none;
+}
+
+/* the footer goes at the bottom */
+#footer {
+color: gray;
+font-size: 10px;
+margin-top: 20px;
+}
+#footer a {
+color: darkslategray;
+text-decoration: none;
+}
+#footer a:hover {
+text-decoration: underline;
+}
+
+h1 {
+font-family: arial,helvetica,sans-serif;
+font-weight: normal;
+color: gray;
+}
+h2,h3,h4 {
+font-family: arial,helvetica,sans-serif;
+font-weight: normal;
+color: gray;
+margin-top: 20px;
+margin-bottom: 5px;
+}
+
+img.logo {
+border: none;
+padding: 2px;
+}
+
+p {
+margin-top: 0;
+padding-top: 0;
+}
+p.action {
+clear:both;
+text-align: left;
+}
+p.action a {
+color: gray;
+}
+p.ahem {
+line-height: 200%;
+color: red;
+display: none;
+}
+p.error {
+font-family: verdana,arial,helvetica,sans-serif;
+color: crimson;
+margin: 10px 0 10px 0;
+line-height: 150%;
+}
+p.info {
+margin: 5px 0 5px 0;
+color: gray;
+font-size: 10px;
+}
+div.path {
+display: none;
+}
+p.folderpath {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+color: gray;
+margin: 0;
+padding: 0;
+}
+p.folderpath a {
+color: gray;
+text-decoration: none;
+}
+p.folderpath a:hover {
+color: dodgerblue;
+}
+p.recordset {
+font-size: 10px;
+color: silver;
+}
+p.recordset a {
+color: gray;
+text-decoration: none;
+}
+p.recordset a:visited {
+color: lightgray;
+}
+p.recordset a:hover {
+color: black;
+text-decoration: underline;
+}
+
+/* comments */
+p.subject {
+background: silver;
+font-weight: bold;
+font-size: 11px;
+padding: 1px;
+margin: 5px 0 2px 0;
+color: black;
+}
+.comment p {
+margin: 0;
+padding: 0;
+}
+
+/* page editing */
+#content div.edit {
+position: absolute;
+top: 0;
+right: 0;
+padding: 2px;
+margin: 5px;
+background: snow;
+border: 1px gray solid;
+color: gray;
+font-size: 10px;
+font-weight: bold;
+}
+#content p.editor {
+margin: 0;
+padding: 0;
+}
+
+form {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+}
+form hr {
+display: none;
+}
+form p {
+margin: 0;
+padding: 2px;
+}
+form p.prompt {
+margin-top: 5px;
+font-weight: bold;
+color: gray;
+}
+form p.field {
+}
+form p.doc {
+color: gray;
+border-bottom: 1px dotted silver;
+margin-bottom: 5px;
+}
+textarea {
+font-family: verdana,arial,helvetica,sans-serif;
+width: 600px;
+}
+
+/* divisions */
+div.imageboxes {
+display: block;
+}
+
+/* tables */
+table {
+margin: 20px 0 20px 0;
+padding: 0;
+}
+tr.even {
+background: #eeeeee;
+padding: 1px;
+}
+th {
+font-size: 11px;
+font-weight: bold;
+text-align: left;
+border-bottom: 1px silver solid;
+}
+.infotable th {
+border: none;
+vertical-align: top;
+}
+td {
+vertical-align: top;
+font-size: 11px;
+}
+td.event_date {
+white-space: nowrap;
+}
+table.list {
+clear: both;
+border-bottom: 1px silver solid;
+}
+table.list td {
+padding: 3px;
+line-height: 130%;
+}
+.listinfo {
+white-space:nowrap;
+}
+.nowrap {
+white-space:nowrap;
+}
+
+/* definition lists */
+dt {
+font-weight: bold;
+}
+
+/* "box" display for front page */
+table.box {
+width: 100%;
+margin: 0;
+}
+td.box {
+padding: 10px;
+width: 33%;
+height: 200px;
+border: 1px gray dotted;
+font-size: 11px;
+}
+td.box p {
+margin-bottom: 5px;
+padding: 0;
+}
+td.box h2, td.box h3, td.box h4, .infobox h2, .infobox h3, .infobox h4 {
+margin-top: 0;
+font-weight: bold;
+}
+
+div.infobox {
+margin-top: 10px;
+margin-bottom: 10px;
+padding: 10px;
+border: 1px silver solid;
+}
+
+.q {
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 14px;
+color: saddlebrown;
+}
+
+/* folders */
+div.subfolders {
+/*display: none;*/
+}
+div.subfolder {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+line-height: 100%;
+width: 90px;
+height: 90px;
+overflow: auto;
+border: 1px gray solid;
+padding: 2px;
+margin: 2px;
+text-align: center;
+float: left;
+}
+
+hr {
+height: 1px;
+color: silver;
+margin: 0;
+padding: 0;
+}
+
+.portal {
+width: 100%;
+}
+.portal td {
+margin: 5px;
+padding: 0;
+border: 1px navy solid;
+}
+.portal td h3 {
+margin: 0;
+padding: 5px;
+background: navy;
+color: white;
+font-size: 14px;
+font-weight: bold;
+}
+.portal td p {
+padding: 5px;
+}
+a img {
+border: none;
+}
+
+div.notices {
+margin-left: 1em;
+text-indent: -1em;
+}
+div.notices p {
+display: inline;
+}
+
+.messages {
+text-align: center;
+margin: 5px;
+padding: 5px;
+border: 1px yellow solid;
+}
+#left .messages a {
+border: none;
+display: inline;
+font-weight: bold;
+}
+#left .messages br {
+display: inline;
+}

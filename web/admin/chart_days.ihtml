@@ -1,0 +1,5 @@
+<!-- $Id: chart_days.ihtml,v 1.2 2003/06/13 13:55:38 glen Exp $ -->
+<p>Because of the volume of data involved, this chart can
+sometimes take a few minutes to generate.</p>
+<p><img src="{site_path}/chart_perday.php"
+     height="400px" width="600px" style="border:1px gray solid;"></p>

@@ -1,0 +1,355 @@
+/* $Id: style.css,v 1.26 2003/06/24 20:57:44 glen Exp $
+** Copyright (c)2002, Broadpool, LLC. All Rights Reserved.
+*/
+body,th,td,input,select,textarea {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+}
+body {
+background: white;
+color: black;
+}
+td {
+vertical-align: top;
+}
+table#title {
+padding: 2px;
+background: #dddddd;
+margin-top: 5px;
+width: 100%;
+font-size: 11px;
+}
+#content {
+line-height: 150%;
+}
+#footer {
+color: gray;
+font-size: 10px;
+margin-top: 10px;
+padding-top: 5px; 
+}
+#page {
+background: white;
+margin-left: 20px;
+padding: 10px;
+}
+#menu {
+background: #dddddd;
+padding: 10px;
+white-space: nowrap;
+width: 120px;
+margin-right: 20px;
+line-height: 14px;
+}
+#menu a {
+}
+#menu p {
+margin-top: 0;
+margin-bottom: 0;
+}
+
+div.edit {
+}
+p.editor {
+float: right;
+font-weight: bold;
+font-size: 9px;
+background: #f5f5dc;
+color: gray;
+border: 1px gray solid;
+border-right: 6px gray solid;
+padding: 2px;
+}
+p.editor a {
+text-decoration: none;
+color: gray;
+}
+p.editor a:hover {
+text-decoration: none;
+color: red;
+}
+
+form {
+border: 1px gray solid;
+padding: 5px;
+background: #eeeeee;
+}
+textarea {
+width: 90%;
+}
+div.image {
+}
+p.imageframe {
+border: 1px gray solid;
+padding: 10px;
+text-align: center;
+}
+div.Comments {
+}
+p.subject {
+font-weight: bold;
+margin: 0;
+}
+.Comments p {
+margin-top: 0;
+margin-bottom: 5px;
+}
+.Comments p.info {
+margin-bottom: 20px;
+}
+
+p.prompt {
+font-weight: bold;
+margin-bottom: 0;
+margin-top: 5px;
+}
+p.field {
+margin: 0;
+padding-left: 10px;
+}
+p.doc {
+margin-top: 0;
+color: gray;
+}
+p.info,.rating {
+font-size: 10px;
+margin-top: 0;
+margin-bottom: 0;
+}
+td p {
+margin-top: 0;
+margin-bottom: 5px;
+}
+h1, h2, h3, h4 {
+font-family: helvetica,arial,verdana,sans-serif;
+}
+h1 {
+margin: 0 0 30px 0;
+}
+h2 {
+line-height: 1em;
+}
+h3 {
+}
+h4 {
+font-size: 12px;
+}
+h4+p {
+margin-top: 0;
+padding-top: 0;
+}
+
+hr {
+height: 1px;
+color: gray;
+}
+
+div.Document {
+width: 600px;
+}
+
+p.action {
+font-size: 11px;
+margin: 10px 0 10px 0;
+clear: both;
+color: gray;
+}
+p.action a {
+color: darkgreen;
+}
+p.action a:hover {
+color: red;
+text-decoration: underline;
+}
+
+legend {
+font-size: 10px;
+}
+fieldset {
+padding: 5px;
+border: 1px gray solid;
+}
+
+th {
+background: #dddddd;
+}
+td.day {
+height: 100px;
+border: 1px gray solid;
+}
+p.calday {
+font-size: 12px;
+font-weight: bold;
+text-align: right;
+}
+.today {
+color: red;
+}
+
+.pollbar {
+background: navy;
+}
+.recordset {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 9px;
+color: gray;
+}
+.sitename {
+font-weight: bold;
+font-size: larger;
+}
+.links {
+font-size: smaller;
+text-align: right;
+vertical-align: bottom;
+}
+.error {
+background: #dddddd;
+font-weight: bold;
+color: red;
+padding: 5px;
+margin-left: 10%;
+margin-right: 10%;
+margin-top: 24px;
+margin-bottom: 24px;
+}
+.event_date {
+white-space: nowrap;
+}
+.even{
+background: #eeeeee;
+}
+.infotablewrapper {
+text-align: center;
+}
+.infotable {
+border: 1px gray solid;
+width: 600px;
+margin-left: auto;
+margin-right: auto;
+}
+.infotable th {
+width: 150px;
+}
+.infotable tr {
+background: #eeeeee;
+}
+.infotable * {
+text-align: left;
+}
+/* links */
+a {
+text-decoration: none;
+color: navy;
+}
+a:hover {
+text-decoration: underline;
+color: red;
+}
+.sidebar {
+float:right;
+padding:10px;
+margin: 0 10px;
+}
+.formdiv {
+width:100%;
+margin:0;
+}
+div.subfolders {
+clear: right;
+}
+div.subfolder, div.picbox, div.picboxlong {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+line-height: 100%;
+width: 90px;
+height: 90px;
+overflow: auto;
+border: 1px gray solid;
+padding: 2px;
+margin: 2px;
+float: left;
+text-align: center;
+}
+div.picbox {
+width: 110px;
+height: 110px;
+}
+div.picboxlong {
+width: 110px;
+height: 150px;
+}
+div.path {
+color: gray;
+margin: 5px 0 5px 0;
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+}
+
+div.notices {
+border-right: 5px darkslateblue solid;
+padding-right: 10px;
+color: darkslategray;
+}
+div.notice {
+text-indent: 1em;
+}
+div.notice p {
+display: inline;
+}
+
+/* advertisements */
+div.ad {
+margin: 5px;
+border: 3px gray solid;
+padding: 5px;
+}
+div.adtitle {
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 12px;
+}
+div.adbody {
+font-family: times new roman,times,serif;
+font-size: 12pt;
+display: inline;
+}
+div.adbody p {
+display: inline;
+}
+div.adurl {
+font-family: verdana,arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 10px;
+}
+div.adowner {
+font-family: verdana,arial,helvetica,sans-serif;
+font-weight: normal;
+font-size: 9px;
+}
+
+div.path {
+font-family: arial,helvetica,sans-serif;
+font-size: 10px;
+margin: 0 0 20px 0;
+color: gray;
+}
+div.path a {
+color: black;
+}
+div.path a:hover {
+color: gray;
+}
+
+h2.date {
+font-size: 12px;
+color: gray;
+margin: 20px 0 10px 0;
+}
+h3.title {
+font-size: 18px;
+margin: 10px 0 5px 0;
+}
+
+.even { background: #dddddd; }
+.odd  { background: white; }

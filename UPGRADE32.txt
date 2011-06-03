@@ -1,0 +1,15 @@
+$Id: UPGRADE32.txt,v 1.1 2005/03/09 19:15:22 glen Exp $
+Copyright (c)2005, Glen Campbell. All rights reserved.
+
+UPGRADING FROM 3.1.x to 3.2.0
+
+1. BACKUP YOUR FILES AND DATA!
+
+2. Read #1, above.
+
+3. Upgrade your database using sql/upgrade31to32.sql
+
+4. Install the 3.2.0 files
+
+If there are problems, restore from one of the backups you made in
+steps 1 and 2 above.

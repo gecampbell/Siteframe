@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<theme>
+  <theme_name>Swiss</theme_name>
+  
+  <template>
+    <template_name>form</template_name>
+    <template_file>themes/Swiss/form.ihtml</template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-26 19:31:39</date_modified>
+    <template_body><![CDATA[<!-- $Id: Swiss.xml,v 1.4 2003/06/27 08:20:22 glen Exp $ -->
+<p>{form_instructions}</p>
+
+{!menu_item form_action '{folder_name}'
+  '{site_path}/folder.php?id={folder_id}'
+  '{folder_id}+0'!}
+{!menu_item form_action '{doc_folder_name}'
+  '{site_path}/folder.php?id={doc_folder_id}'
+  '{doc_folder_id}+0'!}
+{!menu_item form_action '{doc_title}'
+  '{site_path}/document.php?id={doc_id}'
+  '{doc_id}+0'!}
+<p class="action">
+{!menu form_action ' {sep} '!}
+</p>
+
+<form method="post" action="{form_action}" name="{form_name}" enctype="multipart/form-data">
+{BEGIN:input_form}
+{!if '"{input_form_type}"=="ignore"'
+  '{input_form_prompt}'
+  '<p class="prompt">{input_form_prompt}:</p>'
+!}
+{!if defined(input_form_doc) '<p class="doc">{input_form_doc}</p>'!}
+<p class="field">{input_form_field}</p>
+{END:input_form}
+<input type="hidden" name="submitted" value="1"/>
+{BEGIN:input_form_hidden}
+{hidden_form_field}
+{END:input_form_hidden}
+<input type="submit" value="Submit"/>
+<input type="reset"/>
+</form>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>page</template_name>
+    <template_file>themes/Swiss/page.ihtml</template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-26 19:31:39</date_modified>
+    <template_body><![CDATA[<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>{page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" href="{site_path}/themes/{theme}/swiss.css"/>
+{head_content}
+{rdf}
+</head>
+<body>
+
+{!menu_item topmenu 'Login' '{site_path}/login.php' '!({user_id}+0)'!}
+{!menu_item topmenu 'Register' '{site_path}/register.php' '!({user_id}+0)'!}
+{!menu_item topmenu 'Logout' '{site_path}/login.php' '{user_id}+0'!}
+{!menu_item topmenu 'My Page' '{site_path}/user.php?id={user_id}' '{user_id}+0'!}
+{!menu_item topmenu 'Prefs' '{site_path}/prefs.php' '{user_id}+0'!}
+
+<table id="top" width="96%" align="center">
+<tr>
+{!if defined(logo) '<td rowspan="2" id="logo"><a href="{site_url}" title="{site_name}"><img src="{logo}" alt="{site_name} logo"/></a></td>'!}
+<td width="99%">
+<p id="topmenu">{!menu topmenu ' &nbsp; &nbsp; '!}</p>
+<h1><a href="{site_url}">{site_name}</a></h1></td></tr>
+<tr><td class="sitedesc">
+{!if defined(folder_path) '{folder_path}' '{site_description}'!}
+</td></tr>
+</table>
+
+<table id="content">
+<tr>
+{!if defined(no_navigation) 
+  ''
+  '<td id="left">
+   <div class="menu">
+     <p class="title">Menu</p>
+     {navigation}
+   </div></td>
+'!}
+<td id="right">
+{!if defined(no_title) '' '<h1>{page_title}</h1>'!}
+{!if defined(error) '<p class="error">{error}</p>'!}
+{recordset}
+{body}
+</td></tr></table>
+
+<table id="footer" width="96%" align="center">
+<tr><td>{footer}</td></tr>
+</table>
+
+</body>
+</html>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>popup</template_name>
+    <template_file>themes/Swiss/popup.ihtml</template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-26 20:03:37</date_modified>
+    <template_body><![CDATA[<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>Control Panel - {page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" href="{site_path}/themes/{theme}/swiss.css"/>
+<style type="text/css">
+<!--
+body {
+background: ghostwhite;
+margin: 0;
+padding: 10px;
+font-family: arial,helvetica,verdana,sans-serif;
+}
+textarea {
+font-family: arial,helvetica,verdana,sans-serif;
+width: auto;
+}
+form {
+border: none;
+padding: 0;
+width: auto;
+}
+#top {
+border-bottom: 1px darkgreen solid;
+font-weight: bold;
+}
+.action {
+display: none;
+}
+-->
+</style>
+{head_content}
+</head>
+<body>
+<div id="top">
+{site_name}
+</div>
+
+<h3>{page_title}</h3>
+{!if defined(error) '<p class="error">{error}</p>'!}
+{recordset}
+{body}
+
+<div id="footer">
+{footer}
+</div>
+
+</body>
+</html>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>swiss.css</template_name>
+    <template_file>themes/Swiss/swiss.css</template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-27 01:19:49</date_modified>
+    <template_body><![CDATA[body {
+background: white;
+color: black;
+}
+body, td, th {
+font-family: arial,helvetica,sans-serif;
+font-size: 12px;
+}
+#top {
+margin-bottom: 20px;
+}
+#top h1 {
+border-bottom: 1px darkgreen solid;
+margin: 0;
+background: white;
+letter-spacing: 0;
+font-size: 18px;
+}
+#top h1 a, #top h1 a:visited, #top h1 a:active, #top h1 a:hover {
+color: black;
+text-decoration: none;
+}
+#logo {
+vertical-align: top;
+}
+#topmenu {
+float: right;
+margin: 0 5px 0 0;
+}
+.sitedesc {
+font-style: italic;
+}
+#content {
+width: 92%;
+margin: 0 4% 0 4%;
+line-height: 125%;
+}
+#footer {
+width: 96%;
+margin-top: 20px;
+border-top: 1px darkgreen solid;
+color: gray;
+text-align: center;
+}
+#footer td {
+color: gray;
+text-align: center;
+}
+#left {
+width: 20%;
+padding-right: 10px;
+}
+#right {
+width: 80%;
+font-family: times new roman, times, serif;
+font-size: small;
+}
+#right p {
+margin-top: 0;
+}
+.menu {
+background: #ccffcc;
+border: 2px darkgreen solid;
+padding: 15px;
+}
+.menu b {
+margin-top: 3px;
+}
+.menu p {
+margin: 0 0 10px 0;
+color: darkgreen;
+}
+.menu .title {
+font-weight: bold;
+color: darkgreen;
+text-align: center;
+}
+
+.popup {
+}
+.popup form, .popup textarea {
+width: auto;
+}
+
+#weblog, .Document, .Comments {
+width: 600px;
+margin-bottom: 15px;
+}
+
+/* hyperlinks */
+a {
+color: mediumblue;
+text-decoration: underline;
+}
+a:active {
+color: red;
+}
+a:visited {
+color: purple;
+}
+
+/* headings */
+h1,h2,h3,h4 {
+font-family: arial,helvetica,sans-serif;
+line-height: 120%;
+margin-bottom: 5px;
+}
+h1 {
+font-size: 24px;
+margin: 0 0 30px 0;
+letter-spacing: -1px;
+}
+h2 { font-size: 18px; }
+h3 { font-size: 15px; }
+h4 { font-size: 12px; }
+h2.date {
+color: darkgreen;
+font-size: 12px;
+letter-spacing: 2px;
+border-bottom: 1px gray solid;
+}
+h3.title {
+font-size: 18px;
+}
+
+/* tables */
+td {
+vertical-align: top;
+}
+th {
+font-weight: bold;
+background: ghostwhite;
+border-bottom: 1px gray solid;
+}
+.infotable {
+width: 600px;
+border: 2px darkgreen solid;
+}
+.infotable th, .intotable td {
+background: silver;
+}
+.infotable td, .infotable th, .list th, .list td, .inputform td {
+}
+.infotable th {
+text-align: right;
+vertical-align: top;
+width: 150px;
+border-right: 1px gray solid;
+}
+.list {
+border-top: 1px gray solid;
+border-bottom: 1px gray solid;
+padding: 2px 10px 2px 10px;
+margin: 10px 0 10px 0;
+}
+.list p {
+margin: 0 0 3px 0;
+}
+
+/* images */
+img { border: none; }
+
+/* input forms */
+form {
+line-height: 120%;
+width: 600px;
+border-top: 1px gray solid;
+border-bottom: 1px gray solid;
+padding: 10px 0 10px 0;
+}
+.prompt { 
+font-family: arial,helvetica,sans-serif;
+font-size: 13px;
+margin: 10px 0 2px 0; 
+font-weight: bold; 
+}
+.doc { 
+font-family: arial,helvetica,sans-serif;
+font-size: 12px;
+margin: 2px 0 2px 0; 
+color: darkgray; 
+}
+.field { 
+margin: 2px 0 10px 0; 
+}
+textarea {
+width: 500px;
+}
+
+/* various paragraphs */
+.info, .author, .recordset {
+font-family: arial,helvetica,sans-serif;
+color: gray;
+font-size: 12px;
+}
+.action {
+font-family: arial,helvetica,sans-serif;
+padding: 2px;
+text-align: center;
+clear: both;
+font-size: 12px;
+}
+.action a {
+margin: 0 3px 0 3px;
+}
+.error {
+font-family: arial,helvetica,sans-serif;
+color: red;
+clear: both;
+font-size: 12px;
+}
+.Comments {
+font-family: arial,helvetica,sans-serif;
+font-size: 12px;
+}
+.Comments p {
+margin-top: 0;
+margin-bottom: 10px;
+}
+.Comments .subject {
+font-weight: bold;
+font-size: 13px;
+margin-top: 10px;
+margin-bottom: 0;
+}
+
+/* folders and image boxes */
+.subfolders,.imageboxes {
+margin: 5px 0 5px 0;
+clear: both;
+}
+.subfolder,.picbox,.picboxlong {
+text-align:center;
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+line-height: 13px;
+margin: 2px;
+padding: 2px;
+border: 1px #eeeeee solid;
+float: left;
+}
+.subfolder {
+width: 90px;
+height: 90px;
+}
+.picbox {
+width: 110px;
+height: 110px;
+}
+.picboxlong {
+width: 110px;
+height: 140px;
+}
+
+.backnext {
+float:right;
+}
+
+/* division */
+.image {
+text-align: center;
+padding: 20px;
+background: ghostwhite;
+font-family: arial,helvetica,sans-serif;
+font-size: 12px;
+margin-bottom: 15px;
+}
+.description {
+text-align: left;
+}
+.path {
+font-style: normal;
+color: gray;
+}
+
+
+/* miscellaneous */
+.pollbar {
+background: darkgreen;
+}
+.odd {
+padding: 1px;
+}
+.even {
+background: ghostwhite;
+padding: 1px;
+}
+.messages {
+background: yellow;
+padding: 10px;
+text-align: center;
+line-height: 120%;
+margin: 10px 0 10px 0;
+}]]></template_body>
+  </template>
+  
+</theme>

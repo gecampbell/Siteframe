@@ -1,0 +1,29 @@
+<!-- $Id: form.ihtml,v 1.4 2003/06/05 05:37:35 glen Exp $ -->
+<p>{form_instructions}</p>
+<p class="action">
+{!if '{folder_id}+0'
+    '<a href="{site_path}/folder.php?id={folder_id}">{folder_name}</a>'
+!}
+{!if '{doc_folder_id}+0'
+    '<a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a>'
+!}
+{!if '{doc_id}+0'
+    '<a href="{site_path}/document.php?id={doc_id}">{doc_title}</a>'
+!}
+</p>
+<form method="post" action="{form_action}" enctype="multipart/form-data">
+{BEGIN:input_form}
+{!if '"{input_form_type}"=="ignore"'
+  '{input_form_prompt}'
+  '<p class="prompt">{input_form_prompt}:</p>'
+!}
+<p class="field">{input_form_field}</p>
+{!if defined(input_form_doc) '<p class="doc">{input_form_doc}</p>'!}
+{END:input_form}
+<input type="hidden" name="submitted" value="1"/>
+{BEGIN:input_form_hidden}
+ {hidden_form_field}
+{END:input_form_hidden}
+<input type="submit" value="{input_form_submit}"/>
+<input type="reset"/>
+</form>

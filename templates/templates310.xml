@@ -1,0 +1,3060 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<theme>
+  <theme_name>CONTENT</theme_name>
+  
+  <template>
+    <template_name>ad</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p class="info">
+This {doc_type_display} will be active from
+{!date '{site_date_format} {site_time_format}' '{notice_begin_date}'!}
+through {!date '{site_date_format} {site_time_format}' '{notice_end_date}'!}
+{!if defined(ad_url) '<br/>Click-through count: {ad_clicks:%d}'!}
+</p>
+<div class="ad" style="width:200px;">
+  <div class="adtitle">{doc_title}</div>
+  <div class="adbody">{doc_body}</div>
+  {!if defined(ad_url)
+  '<div class="adurl">{ad_url_link}</div>'
+  !}
+  <div class="adowner"><a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a></div>
+</div>
+{template:edit}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>article</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<div class="Document">
+    <p class="author">
+        {!date '{site_date_format}' '{doc_created}'!}<br/>
+        {!if defined(doc_author_override)
+            'by {doc_author_override}'
+            'by <a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>'
+        !}
+    </p>
+    {doc_body}
+{template:comment}
+</div>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>bug</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<div class="Document">
+    <p class="author"><a href="user.php?id={doc_user_id}">{doc_user_name}</a><br/>
+        {!date '{site_date_format}' '{doc_created}' !}
+        {!if defined(doc_folder_name)
+            '<br/>Folder: <a href="folder.php?id={doc_folder_id}">{doc_folder_name}</a>'
+        !}
+    </p>
+    <hr/>
+    <table cellpadding="0" cellspacing="2px" border="0">
+    <tr><td>Bug ID: </td><td><b>#{doc_id}</b></td></tr>
+    <tr><td>Status: </td><td><b>{bug_status}</b></td></tr>
+    <tr><td>Severity: </td><td><b>{bug_severity}</b></td></tr>
+    <tr><td>Reference: </td><td><b>{bug_url}</b></td></tr>
+    </table>
+    <hr/>
+    {!if defined(doc_summary)
+        '<blockquote>
+         <b>Summary:</b> {doc_summary}
+         </blockquote>'
+    !}
+    <p>{doc_body}</p>
+</div>
+{template:comment}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>bugs</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!set page_title "Bug Reports" !}
+<table cellspacing="2px" cellpadding="0" border="0">
+<tr><th>ID</th><th>Submitted By </th><th>Status </th><th>Severity </th><th>Subject </th></tr>
+{BEGIN:docs_of_type "Bug"}
+  <tr>
+    <td align="right">{doc_id}</td>
+    <td><a href="user.php?id={doc_owner_id}">{doc_user_name}</a></td>
+    <td>{bug_status} </td>
+    <td>{bug_severity} </td>
+    <td><a href="document.php?id={doc_id}"><b>{doc_title}</b></a></td>
+  </tr>
+{END:docs_of_type}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>category</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p>{category_description}</p>
+<ul>
+{BEGIN:category_docs category_id -r}
+<li>{!doclink '{doc_id}'!}</li>
+{END:category_docs}
+</ul>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>category_bar_text</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<div class="categorybar">
+Go to:
+{BEGIN:categories cat_bar_categories}
+|
+{!if '{page_category_id}=={category_id}'
+    '<b>{category_name}</b>'
+    '<a href="{site_path}/category.php?id={category_id}">
+    {category_name}</a>'
+!}
+{END:categories}
+</div>
+<p>This demonstrates the "category bar" for navigating between
+differrent categories</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>category_image</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{category_description}
+
+<div class="subfolders">
+{BEGIN:category_docs category_id -r}
+<div class="picboxlong">
+<a href="{site_path}/document.php?id={doc_id}"><img src="{doc_file_100}" border="0"/></a>
+<br/>
+<a href="{site_path}/document.php?id={doc_id}">{doc_title}</a>
+</div>
+{END:category_docs}
+</div>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>cfolder</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{template:cfolder_info}
+{folder_body}
+<form class="cfolder"
+      method="post"
+      action="{site_path}/folder.php"
+      enctype="multipart/form-data">
+<table class="list"><tr><th>Vote</th><th>Title </th><th>Info</th></tr>
+{BEGIN:competition_docs folder_id}
+<tr class="{row_class}">
+  <td style="white-space:nowrap;">{doc_competition_value}</td>
+  <td class="listdoc"><a href="{site_path}/document.php?id={doc_id}"><b>{doc_title}</b></a>
+  {doc_summary}</td>
+  <td class="listinfo">
+  {!date '{site_date_format} {site_time_format}' '{doc_created}'!}<br/>
+  <a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>
+</td></tr>
+{END:competition_docs}
+</table>
+{!if '{folder_voting}'
+'<input type="hidden" name="id" value="{folder_id}"/>
+<input type="hidden" name="submitted" value="1"/>
+<input type="submit" value="Submit"/>
+<input type="reset"/>'!}
+</form>
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>cfolder_image</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{template:cfolder_info}
+{folder_body}
+<form class="cfolder"
+      method="post"
+      action="{site_path}/folder.php"
+      enctype="multipart/form-data">
+<div class="imageboxes">
+{BEGIN:competition_docs folder_id}
+<div class="picboxlong" style="float:left;">
+  {doc_competition_value}<br/>
+  <a href="{site_path}/document.php?id={doc_id}"
+  ><img src="{doc_file_100}" border="0"
+        alt="{doc_title} by {doc_user_name}"
+        title="{doc_title} by {doc_user_name}"
+  /><br/>
+  <span>{doc_title}</span>
+  </a>
+  {!if '{doc_user_id}+0'
+  '<br/><a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>'
+  !}
+</div>
+{END:competition_docs}
+</div>
+<p style="clear:both;">&nbsp;</p>
+{!if '{folder_voting}'
+'<input type="hidden" name="id" value="{folder_id}"/>
+<input type="hidden" name="submitted" value="1"/>
+<input type="submit" value="Submit"/>
+<input type="reset"/>'!}
+</form>
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>cfolder_info</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p class="cfolderinfo">
+{!if '{folder_competition_active}'
+''
+'<b>This competition is no longer active.</b> <br/>'!}
+{!if '"{folder_competition_type}"=="max"' 'The total rating will determine the winner.'!}
+{!if '"{folder_competition_type}"=="maxavg"' 'The highest average rating will determine the winner.'!}
+{!if '"{folder_competition_type}"=="vote"' 'The most number of votes will determine the winner.'!}
+<br/>
+Submissions accepted from
+  {!date '{site_date_format}' '{folder_begin_date}'!} to
+  {!date '{site_date_format}' '{folder_end_date}'!}. <br/>
+Voting is permitted between
+  {!date '{site_date_format}' '{folder_begin_voting}'!} and
+  {!date '{site_date_format}' '{folder_end_voting}'!}. <br/>
+The folder owner is <a href="{site_path}/user.php?id={folder_user_id}">{folder_user_name}</a>{!user_indicators folder!}. <br/>
+Folder created on {!date '{site_date_format}' '{folder_created}'!}. <br/>
+Modified on {!date '{site_date_format}' '{folder_modified}'!}. <br/>
+{!if '{folder_user_limit}+0'
+'Members can submit up to {folder_user_limit:%d} {folder_limit_type_display}(s).'!}
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>comment</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $ !}
+{!#if '({allow_ratings}+0)&&(iseditor({doc_user_id})||{doc_rating_count}>4)'
+    '<p class="rating">Current rating: {doc_rating}/{doc_rating_count} &bull;
+     <a href="{site_path}/ratings.php?id={doc_id}">View all ratings</a> &bull;
+     <a href="{site_path}/deleterating.php?id={doc_id}">Delete my rating</a></p>'
+!}
+{!#if defined(doc_share_count)
+    '<p class="info">This {doc_type} has been shared {doc_share_count} time(s).</p>'
+!}
+<p class="action">
+{!if '{_COOKIE_hideinfo}+0&&("{doc_type}"=="Image")'
+  '<a href="{site_path}/document.php?id={doc_id}"
+      title="Show complete {doc_type_display} information"
+      onClick="setCookie(&#34;hideinfo&#34;,0);">{doc_type_display} Information</a> {sep}'
+!}
+{!if '({allow_comments}+0)&&({comment_inline}+0)'
+    '<a href="{site_path}/comment.php?id={doc_id}"
+        title="Add rating/comment to this {doc_type_display}">Comment/Rate</a> {sep}'
+!}
+{!if '({allow_comments}+0)&&(!{comment_inline}+0)'
+   '<a href="#"
+    title="Add rating/comment to this {doc_type_display}"
+    onClick="javascript:var x=screen.availWidth-420;
+            var f=&#34;left=&#34;+x+&#34;,top=20,width=400,height=500,toolbar=no,scrollbars=yes,status=no,copyhistory=no&#34;
+            window.open(&#34;{site_path}/comment.php?id={doc_id}&#34;,
+            &#34;comment_window&#34;,f)">
+    Comment/Rate</a> {sep}'
+!}
+<a href="{site_path}/email.php?id={doc_id}"
+   title="Send an email to someone about this {doc_type_display}">Share this {doc_type_display}</a>
+{!if '{subscription_enable}'
+  '{sep} <a href="{site_path}/subscribe.php?type=D&amp;obj={doc_id}">Subscribe</a>'
+!}
+{!if editor(doc_owner_id)
+    '{sep} <a href="{site_path}/edit.php?id={doc_id}">Edit {doc_type_display}</a>
+     {sep} <a href="{site_path}/delete.php?id={doc_id}">Delete {doc_type_display}</a>'
+!}
+</p>
+<div class="Comments">
+    {BEGIN:doc_comments doc_id}
+    {!bookmark "comment{comment_id}"!}
+    {!if defined(comment_subject) '<p class="subject">{comment_subject}</p>'
+     '<p class="subject">NO SUBJECT</p>'!}
+    <div class="comment">{comment_body}</div>
+    <p class="info">
+        {!if '{comment_owner_id}+0'
+            '<a href="{site_path}/user.php?id={comment_owner_id}">{comment_user_name}</a>'
+            '{comment_name} [<a href="{comment_url}">home</a>|<a href="mailto:{comment_email}">mail</a>]'
+        !}{!user_indicators comment!}
+        at {!date '{site_time_format}' '{comment_created}'!}
+        on {!date '{site_date_format}' '{comment_created}'!}
+        {!if editor({comment_owner_id})
+            '[<a href="{site_path}/delete.php?comment={comment_id}">Delete</a>]'
+        !}
+        {!if '({allow_comments}+0)&&({comment_inline}+0)'
+        '[<a href="{site_path}/comment.php?id={doc_id}&amp;reply={comment_id}">Reply</a>]'
+        !}
+        {!if '({allow_comments}+0)&&(!{comment_inline}+0)'
+        '[<a href="#"
+        onClick="javascript:var x=screen.availWidth-420;
+              var f=&#34;left=&#34;+x+&#34;,top=20,width=400,height=500,toolbar=no,scrollbars=yes,status=no,copyhistory=no&#34;
+              window.open(&#34;{site_path}/comment.php?id={doc_id}&amp;reply={comment_id}&#34;,
+              &#34;comment_window&#34;,f)"
+        >Reply</a>]'
+        !}
+    </p>
+    {END:doc_comments}
+    {!if '{trackback_enable}'
+        '<p class="info">The Trackback URL for this document is {trackback_url}</p>'
+    !}
+    {BEGIN:tb_pings doc_id}
+    {!if '{row_number}==1'
+        '<h3>Trackback pings received</h3>'!}
+    <p><a href="{tb_url}">{tb_title}</a><br/>
+    {tb_excerpt}<br/>
+    <small>From {tb_site} on {!date 'F j, Y h:ia' '{created}'!}</small></p>
+    {END:tb_pings}
+</div>
+{!#include 'templates/edit.ihtml'!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>comments</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!set footer ''!}
+<div class="Comments" style="width:auto;">
+{BEGIN:doc_comments doc_id}
+{!if defined(comment_subject) '<p class="subject">{comment_subject}</p>'!}
+{comment_body}
+<p class="info">by {comment_user_name}
+at {!date '{site_time_format}' '{comment_created}'!}
+on {!date '{site_date_format}' '{comment_created}'!}</p>
+{END:doc_comments}
+
+<p><a href="{site_path}/comment.php?id={doc_id}">New comment</a></p>
+
+</div>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>daily</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{site_name} Newsletter
+{!date '{site_date_format}'!}
+{site_url}
+================================================================================
+This newsletter is emailed every {report_days} day(s).
+Unsubscribe information is at the end of this page.
+
+--------------------------------------------------------------------------------
+UPCOMING EVENTS
+{BEGIN:upcoming_events report_days}
+{!date '{site_date_format}' '{event_begin}'!}: {doc_title}
+    {site_url}/document.php?id={doc_id}
+{END:upcoming_events}
+
+--------------------------------------------------------------------------------
+NEW USERS - last {report_days} day(s)
+{BEGIN:users_today report_days}
+{user_user_name} from {user_user_country_name}
+{END:users_today}
+
+--------------------------------------------------------------------------------
+NEW DOCUMENTS - last {report_days} day(s)
+{BEGIN:documents_today report_days}
+{doc_type_display} "{doc_title}"
+    {site_url}/document.php?id={doc_id}
+    by {doc_user_name}
+{END:documents_today}
+
+--------------------------------------------------------------------------------
+NEW FOLDERS - last {report_days} day(s)
+{BEGIN:folders_today report_days}
+{folder_name}
+    {site_url}/folder.php?id={folder_id}
+    by {folder_user_name}
+{END:folders_today}
+
+--------------------------------------------------------------------------------
+Copyright (c){!date 'Y'!}, {site_name}. All rights reserved.
+
+This report is provided as a free service to members of {site_name}.
+If you no longer wish to receive this report, point your browser to
+{site_url} and modify your Preferences.]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>daily_html</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<html>
+<head>
+  <title>{site_name} Newsletter</title>
+  <style type="text/css">
+  body {
+  font-family: georgia, times new roman, times, serif;
+  color: black;
+  background: lemonchiffon;
+  margin: 10px 50px 10px 50px;
+  }
+  .date,.footer {
+  font-family: verdana,arial,helvetica,sans-serif;
+  font-size: 11px;
+  color: gray;
+  }
+  .date {
+  margin-bottom: 20px;
+  }
+  .thumbnail {
+  float: left;
+  margin-right: 5px;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  border: 1px gray solid;
+  padding: 8px;
+  }
+  .safe {
+  clear: both;
+  margin-bottom: 10px;
+  }
+  h2 {
+  margin-top: 20px;
+  border-top: 1px gray solid;
+  clear: both;
+  color: gray;
+  }
+  p {
+  line-height: 150%;
+  }
+  a {
+  color: darkslateblue;
+  text-decoration: none;
+  }
+  a:hover {
+  color: lightslateblue;
+  }
+  </style>
+</head>
+<body>
+{!if defined(logo)
+'<img src="{site_url}/{logo}" alt="{site_name}" border="0"/>'
+'<h1>{site_name} Newsletter</h1>'
+!}
+<p>
+<a href="{site_url}">{site_url}</a><br/>
+<i>This newsletter is emailed every {report_days} day(s).
+Unsubscribe information is at the end of this page.</i>
+</p>
+
+<h2>Upcoming Events</h2>
+{BEGIN:upcoming_events report_days}
+<p><b>{!date '{site_date_format}' '{event_begin}'!}</b><br/>
+<a href="{site_url}/document.php?id={doc_id}">{doc_title}</a><br/>
+{doc_body}</p>
+{END:upcoming_events}
+
+<h2>New Users</h2>
+{BEGIN:users_today report_days}
+<p><a href="{site_url}/user.php?id={user_user_id}"><b>{user_user_name}</b></a><br/>
+from {user_user_country_name}<br/>
+<i>{user_user_description}</i></p>
+{END:users_today}
+
+<h2>New Documents</h2>
+{BEGIN:documents_today report_days}
+<div class="safe">
+{!if '"{doc_type}"=="Image"'
+    '<div class="thumbnail"><a href="{site_url}/document.php?id={doc_id}">
+    <img src="{site_url}/{doc_file_100}" alt="" border="0"/></a></div>'
+!}
+<p><a href="{site_url}/document.php?id={doc_id}"><i>{doc_title}</i></a>
+({doc_type_display})<br/>
+by <a href="{site_url}/user.php?id={doc_user_id}">{doc_user_name}</a></p>
+</div>
+{END:documents_today}
+
+<h2>New Folders</h2>
+{BEGIN:folders_today report_days}
+<p><a href="{site_url}/folder.php?id={folder_id}">{folder_name_display}</a>
+{!if '{folder_public}+0' '(Public)'!}
+<br/>
+by <a href="{site_url}/user.php?id={folder_user_id}">{folder_user_name}</a><br/>
+{folder_body}</p>
+{END:folders_today}
+
+<p><i>This report is provided as a free service to members of {site_name}.
+If you no longer wish to receive this report, point your browser to
+<a href="{site_url}">{site_url}</a> and modify your Preferences.</i></p>
+<p>Copyright &copy;{!date 'Y'!}, {site_name}. All rights reserved.</p>
+</body>
+</html>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>day</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $
+### Copyright (c)2001-2003, Broadpool, LLC. All rights reserved. See LICENSE.txt for details.
+### This template displays events for a given day.
+#!}
+{!set no_title 'si'!}
+<h2>{!date '{site_date_format}' '{day}'!}</h2>
+{BEGIN:all_events '{yearmonday}'}
+<p><b>{event_begin}-{event_end}</b>
+{doc_title}<br>
+{doc_body}</p>
+{END:all_events}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>docs</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<table class="list">
+<tr><th>Author </th><th>Title </th><th>Folder </th><th>Created </th></tr>
+{BEGIN:all_documents -r}
+<tr class="{row_class}">
+<td style="white-space:nowrap;"><a href="{site_path}/user.php?id={doc_owner_id}">{doc_user_name}</a></td>
+<td><a href="{site_path}/document.php?id={doc_id}">{doc_title}</a>
+{doc_summary}</td>
+<td><a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a></td>
+<td style="white-space:nowrap;">{!date '{site_date_format}' '{doc_created}'!}</td>
+</tr>
+{END:all_documents}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>edit</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $
+### Copyright (c)2001-2003, Broadpool, LLC. All rights reserved. See LICENSE.txt for details.
+### This stuff generates material for editing a page; it is only
+### generated if the current user is an editor of the document
+### it generates nothing otherwise.
+#!}
+{!if editor(doc_owner_id)
+    '<div class="edit">
+     <p class="editor">
+        <a href="{site_path}/edit.php?id={doc_id}">Edit {doc_type_display}</a>
+        {sep} <a href="{site_path}/delete.php?id={doc_id}">Delete {doc_type_display}</a>
+     </p>
+     </div>'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>editfolder</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!menu_item folder_action 'Share'
+  '{site_path}/emailfolder.php?id={folder_id}'!}
+{!menu_item folder_action 'New {folder_limit_type}'
+  '{site_path}/edit.php?folder={folder_id}&class={folder_limit_type}'
+  '("{folder_limit_type}"!="")&&("{folder_limit_type}"!="none")'!}
+{!menu_item folder_action 'New document'
+  '{site_path}/edit.php?folder={folder_id}'
+  '"{folder_limit_type}"==""'!}
+{!menu_item folder_action 'Upload Multiple'
+  '{site_path}/multiload.php?folder={folder_id}'
+  '{multi_file_upload}&&(("{folder_limit_type}"=="Image")||("{folder_limit_type}"=="DocFile")||("{folder_limit_type}"==""))'!}
+{!menu_item folder_action 'Subfolder'
+  '{site_path}/editfolder.php?parent={folder_id}'
+  '{folder_children}+0'!}
+{!menu_item folder_action 'Subscribe'
+  '{site_path}/subscribe.php?type=F&amp;obj={folder_id}'
+  '({subscription_enable}+0)&&({user_id}+0)!}
+{!menu_item folder_action 'Permissions'
+  '{site_path}/permissions.php?id={folder_id}&amp;class=folder'
+  'editor(folder_id,folder)'!}
+{!menu_item folder_action 'Edit'
+  '{site_path}/editfolder.php?id={folder_id}'
+  'editor(folder_id,folder)'!}
+{!menu_item folder_action 'Delete'
+  '{site_path}/deletefolder.php?id={folder_id}'
+  'editor(folder_id,folder)'!}
+<p class="action">
+{!menu folder_action ' {sep} '!}
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>edituser</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p class="action">
+{!menu_item user_action
+  'E-mail'
+  '{site_path}/mailto.php?id={user_user_id}'!}
+{!menu_item user_action
+  'Note'
+  '{site_path}/message.php?id={user_user_id}'
+  '({user_id}+0)&&({subscription_enable}+0)'!}
+{!menu_item user_action
+  'Edit'
+  '{site_path}/edituser.php?id={user_user_id}'
+  'editor(user_user_id)'!}
+{!menu_item user_action
+  'Delete'
+  '{site_path}/deleteuser.php?id={user_user_id}'
+  'editor(user_user_id)'!}
+{!menu_item user_action
+  'Subscriptions'
+  '{site_path}/subscriptions.php?id={user_user_id}'
+  'editor(user_id)&&({subscription_enable}+0)'!}
+{!menu_item user_action
+  'Notifications'
+  '{site_path}/notifications.php?id={user_user_id}'
+  'editor(user_id)&&{subscription_enable}'!}
+{!menu user_action ' {sep} '!}
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{user_name} would like for you to {!if '"{doc_type}"=="Image"' 'see' 'read'!} "{doc_title}"
+Click here: {site_url}/document.php?id={doc_id}
+
+{email_body}
+
+===========================================================
+This message was sent from {site_name}
+{site_url}
+===========================================================]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_ascii</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{email_body}
+
+_______________________________________________________________
+
+Sent from {site_name}
+{site_url}
+{email_created}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_ascii_comment</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[There is a new comment on "{doc_title}"
+{site_url}/document.php?id={doc_id}
+by {doc_user_name}
+
+Subject: {comment_subject}
+
+{comment_body}
+
+-- {comment_user_name}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_ascii_confirm</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[CONFIRMATION OF EMAIL SUBMISSION
+{site_name}
+{site_url}
+
+STATUS MESSAGES
+{status}
+
+{errcount} ERROR(S)
+{errors}
+
+Your original message appears below:
+
+_______________________________________________________________
+
+{body}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_ascii_daily</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{site_name} Newsletter
+{!date '{site_date_format}'!}
+{site_url}
+================================================================================
+This newsletter is emailed every {report_days} day(s).
+Unsubscribe information is at the end of this page.
+
+--------------------------------------------------------------------------------
+PLEASE NOTE
+{BEGIN:active_notices}
+{doc_title}
+    {doc_body}
+{END:active_notices}
+
+--------------------------------------------------------------------------------
+UPCOMING EVENTS
+{BEGIN:upcoming_events report_days}
+{!date '{site_date_format}' '{event_begin}'!}: {doc_title}
+    {site_url}/document.php?id={doc_id}
+{END:upcoming_events}
+
+--------------------------------------------------------------------------------
+NEW USERS - last {report_days} day(s)
+{BEGIN:users_today report_days}
+{user_user_name} from {user_user_country_name}
+{END:users_today}
+
+--------------------------------------------------------------------------------
+NEW DOCUMENTS - last {report_days} day(s)
+{BEGIN:documents_today report_days}
+{doc_type_display} "{doc_title}"
+    {site_url}/document.php?id={doc_id}
+    by {doc_user_name}
+{END:documents_today}
+
+--------------------------------------------------------------------------------
+NEW FOLDERS - last {report_days} day(s)
+{BEGIN:folders_today report_days}
+{folder_name}
+    {site_url}/folder.php?id={folder_id}
+    by {folder_user_name}
+{END:folders_today}
+
+--------------------------------------------------------------------------------
+Copyright (c){!date 'Y'!}, {site_name}. All rights reserved.
+
+This report is provided as a free service to members of {site_name}.
+If you no longer wish to receive this report, point your browser to
+{site_url} and modify your Preferences.]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_ascii_mailto</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{email_body}
+
+{user_name}
+{!date '{site_date_format} {site_time_format}'!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_ascii_share</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{user_name} wants you to {!if '"{doc_type}"=="Image"' 'see' 'read'!} "{doc_title}"
+by {doc_user_name}
+Click here: {site_url}/document.php?id={doc_id}
+
+{email_body}
+
+{user_name}
+{!date '{site_date_format} {site_time_format}'!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_ascii_sharefolder</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{user_name} wants you to see "{folder_name}"
+by {folder_user_name}
+Click here: {site_url}/folder.php?id={folder_id}
+
+{email_body}
+
+{user_name}
+{!date '{site_date_format} {site_time_format}'!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_html</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<html>
+<head>
+<title>{email_subject}</title>
+<style type="text/css">
+body {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 12px;
+background: white;
+color: black;
+margin: 5px 10px 5px 10px;
+}
+#logo {
+clear:both;
+}
+.footer {
+font-size: 11px;
+color: gray;
+border-top: 1px black solid;
+margin-top: 20px;
+clear: both;
+}
+.thumbnail {
+float: left;
+margin-right: 5px;
+width: 120px;
+height: 120px;
+text-align: center;
+border: 1px gray solid;
+padding: 8px;
+}
+.safe {
+clear: both;
+margin-bottom: 10px;
+}
+h2 {
+margin-top: 20px;
+border-top: 1px gray solid;
+clear: both;
+color: gray;
+}
+p {
+line-height: 150%;
+}
+a {
+color: navy;
+text-decoration: none;
+}
+a:hover {
+color: red;
+text-decoration: underline;
+}
+</style>
+</head>
+<body>
+{!if '"{logo}"!=""'
+'<div id="logo"><img src="{site_url}/{logo}" alt="{site_name}" border="0"/></div>'
+!}
+<div class="email">
+{email_body}
+</div>
+<div class="footer">
+<p>If you prefer to receive text-only email (instead of HTML),
+you can login to <a href="{site_url}">{site_name}</a> and change your
+user Preferences. If you are not already a member of {site_name},
+then <a href="{site_url}/register.php">click here to register</a>.</p>
+<p>Sent from {site_name} |
+<a href="{site_url}">{site_url}</a> |
+{email_created} | Siteframe {siteframe_version}</p>
+</div>
+</body>
+</html>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_html_comment</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p><i>There is a new comment on
+"<a href="{site_url}/document.php?id={comment_doc_id}">{doc_title}</a>"<br/>
+by {doc_user_name}</i></p>
+
+<p><b>Subject:</b> {comment_subject}</p>
+
+<p>{comment_body}</p>
+
+<p><i>{comment_user_name}</i></p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_html_confirm</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p><b>Confirmation of email submission</b><br/>
+{site_name}<br/>
+<a href="{site_url}">{site_url}</a></p>
+
+<p>Status Messages:<br/>
+{status}</p>
+<p>{errcount} Error(s):<br/>
+{errors}</p>
+
+<p>Your original message appears below:</p>
+<p><i>{body}</i></p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_html_daily</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<h1>{site_name} Newsletter</h1>
+<p><a href="{site_url}">{site_url}</a><br/>
+<i>This newsletter is emailed every {report_days} day(s).
+Unsubscribe information is at the end of this page.</i>
+</p>
+
+<h2>Please Note</h2>
+{BEGIN:active_notices}
+<div style="margin-bottom:10px;"><b>{doc_title}</b>{doc_body}</div>
+{END:active_notices}
+
+<h2>Upcoming Events</h2>
+{BEGIN:upcoming_events report_days}
+<p><b>{!date '{site_date_format}' '{event_begin}'!}</b><br/>
+<a href="{site_url}/document.php?id={doc_id}">{doc_title}</a><br/>
+{doc_body}</p>
+{END:upcoming_events}
+
+<h2>New Users</h2>
+{BEGIN:users_today report_days}
+<p><a href="{site_url}/user.php?id={user_user_id}"><b>{user_user_name}</b></a><br/>
+from {user_user_country_name}<br/>
+<i>{user_user_description}</i></p>
+{END:users_today}
+
+<h2>New Documents</h2>
+{BEGIN:documents_today report_days}
+<div class="safe">
+{!if '"{doc_type}"=="Image"'
+    '<div class="thumbnail"><a href="{site_url}/document.php?id={doc_id}">
+    <img src="{site_url}/{doc_file_100}" alt="" border="0"/></a></div>'
+!}
+<p><a href="{site_url}/document.php?id={doc_id}"><i>{doc_title}</i></a>
+({doc_type_display})<br/>
+by <a href="{site_url}/user.php?id={doc_user_id}">{doc_user_name}</a></p>
+{!if '"{doc_type}"=="Article"'
+'<p>{doc_summary}</p>'
+'{doc_body}'
+!}
+</div>
+{END:documents_today}
+
+<h2>New Folders</h2>
+{BEGIN:folders_today report_days}
+<p><a href="{site_url}/folder.php?id={folder_id}">{folder_name_display}</a>
+{!if '{folder_public}+0' '(Public)'!}
+<br/>
+by <a href="{site_url}/user.php?id={folder_user_id}">{folder_user_name}</a><br/>
+{folder_body}</p>
+{END:folders_today}
+
+<p><i>This report is provided as a free service to members of {site_name}.
+If you no longer wish to receive this report, point your browser to
+<a href="{site_url}">{site_url}</a> and modify your Preferences.</i></p>
+<p>Copyright &copy;{!date 'Y'!}, {site_name}. All rights reserved.</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_html_mailto</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p>{email_body}</p>
+<p><i><a href="{site_url}/user.php?id={user_id}">{user_name}</a></i><br/>
+{!date '{site_date_format} {site_time_format}'!}</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_html_share</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p><i>{user_name} would like you to
+{!if '"{doc_type}"=="Image"' 'see' 'read'!}
+"<a href="{site_url}/document.php?id={doc_id}">{doc_title}</a>"<br/>
+by {doc_user_name}<br/>
+at <a href="{site_url}">{site_name}</a></i></p>
+{!if '"{doc_type}"=="Image"'
+'<div style="float:right;">
+<a href="{site_url}/document.php?id={doc_id}">
+<img src="{site_url}/{doc_file_100}" alt="{doc_title}" border="0"/>
+</a></div>'
+!}
+<p>{email_body}</p>
+<p><i><a href="{site_url}/user.php?id={user_id}">{user_name}</a></i><br/>
+{!date '{site_date_format} {site_time_format}'!}</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>email_html_sharefolder</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p><i>{user_name} would like you to see
+"<a href="{site_url}/folder.php?id={folder_id}">{folder_name}</a>"<br/>
+by {folder_user_name}<br/>
+at <a href="{site_url}">{site_name}</a></i></p>
+<p>{email_body}</p>
+<p><i><a href="{site_url}/user.php?id={user_id}">{user_name}</a></i><br/>
+{!date '{site_date_format} {site_time_format}'!}</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>error</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<!-- error-handler template -->
+{!set no_title 1!}
+<div style="font-size:150px;color:gray;line-height:150px;margin-bottom:40px;
+     text-align:right;
+     font-family:georgia,times new roman,times,serif;">{errorcode}</div>
+<p>
+{!case '{errorcode}'
+
+401     'This part of the website requires authorization, and, sadly, you
+         do not seem to have it. If you're a h4x0r, then try something
+         else. If you think you are supposed to be here, then ask your
+         site administrator about how to get authorization.'
+
+404     'The file you tried to reach, "{error_REQUEST_URI}", does not seem
+         to exist. Check the spelling, or check the link that sent you here.
+         If you really think that the file should exist, then talk to someone.
+         Probably not your site administrator, because he or she will only
+         laugh at you. Maybe a professional psychologist or a member of the
+         clergy. Someone who will nod their head sympathetically when you
+         try to explain why you thought this file should exist.'
+
+500     'This error code means INTERNAL SERVER ERROR. However, it&squot;s really
+         a generic code that means something like "there is a problem, but
+         I have no idea what might have caused it." Your site administrator
+         will probably need to check the server logs to determine what might
+         have happened.'
+
+        'You have reached this page because an error occurred.
+         The HTTP error code is displayed at the top of the page.
+         I am very sorry that I cannot give you more details, but
+         my contract will not allow it.'
+!}</p>
+<p>{error_SERVER_SIGNATURE}<br/>
+Your IP address: {error_REMOTE_ADDR}<br/>
+Your user agent: {error_HTTP_USER_AGENT}
+</p>
+<!--
+{server}
+-->]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>event</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!set no_title 'Yes'!}
+<div class="Document">
+<h2>{!date '{site_date_format}' '{event_begin}'!}: {doc_title}</h2>
+{doc_body}
+<p class="info"><a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a> |
+    {!if '{doc_folder_id}!=0'
+        '<a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a> |'
+    !}
+    {!date '{site_date_format}' '{doc_created}' !}
+</p>
+{template:comment}
+</div>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>exportmt</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{BEGIN:docs_of_type "Article"}
+AUTHOR: {doc_user_firstname}
+TITLE: {doc_title}
+CATEGORY: {!if '{doc_folder_id}+0' '{doc_folder_name}'!}
+DATE: {!date 'm/d/Y h:i:00 a' '{doc_created}'!}
+-----
+BODY:
+{!if defined(doc_summary) 
+   '{doc_summary}'
+   '{doc_body}'
+!}
+-----
+EXTENDED BODY:
+{!if defined(doc_summary)
+   '{doc_body}'
+!}
+--------
+{END:docs_of_type}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>file</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<table class="infotable">
+<tr><th>File:  </th><td><a href="{site_path}/download.php?id={doc_id}">{doc_file}</a>
+       (click to download)</td></tr>
+<tr><th>Description: </th><td>{doc_body}</td></tr>
+<tr><th>Type:  </th><td>{doc_file_mime_type}</td></tr>
+<tr><th>Size:  </th><td>{!format '{doc_file_size}'!} bytes</td></tr>
+<tr><th>Downloaded: </th><td>{doc_file_download_count:%d} time(s)</td></tr>
+<tr><th>Owner: </th>
+  <td><a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>{!user_indicators doc!} </td></tr>
+<tr><th>Folder: </th>
+  <td>{!if defined(doc_folder_name)
+        '<a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a>'
+    !}</td></tr>
+<tr><th>Created: </th>
+  <td>{!date '{site_date_format}' '{doc_created}'!}</td></tr>
+<tr><th>Updated: </th>
+  <td>{!date '{site_date_format}' '{doc_modified}'!}</td></tr>
+</table>
+{template:comment}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>folder</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{folder_body}
+<p class="info"><a href="{site_path}/user.php?id={folder_user_id}">{folder_user_name}</a>{!user_indicators folder!}
+{!date '{site_date_format}' '{folder_created}'!}</p>
+{template:subfolders}
+<table class="list"><tr><th>Title </th><th>Info</th></tr>
+{BEGIN:folder_docs folder_id xdo}
+<tr class="{row_class}">
+  <td class="listdoc"><a href="{site_path}/document.php?id={doc_id}"><b>{doc_title}</b></a>
+  {doc_summary}</td>
+  <td class="listinfo"><a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>{!user_indicators doc!}<br/>
+  {!date '{site_date_format} {site_time_format}' '{doc_created}'!}
+</td></tr>
+{END:folder_docs}
+</table>
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>folderlist</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<table style="border:none;" cellpadding="0" cellspacing="0">
+{BEGIN:folder_subfolders 0}
+<tr><td style="text-align:right; padding:10px;">
+ <a href="{site_path}/folder.php?id={folder_id}"><img src="{folder_image}" alt="{folder_name}"/></a>
+</td><td style="border-left:1px gray solid; padding:10px;">
+ <h3><a href="{site_path}/folder.php?id={folder_id}">{folder_name_display}</a></h3>
+ {folder_body}
+</td></tr>
+{END:folder_subfolders}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>folders</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<table border="0">
+<tr><th>Folder </th><th>Owner </th><th>Limit Type </th><th>Public? </th><th>Created </th></tr>
+{BEGIN:all_folders -r}
+<tr class="{row_class}">
+<td><a href="{site_path}/folder.php?id={folder_id}">{folder_name_display}</a></td>
+<td><a href="{site_path}/user.php?id={folder_owner_id}">{folder_user_name}</a>{!user_indicators folder!}</td>
+<td>{folder_limit_type_display}</td>
+<td>{!if '{folder_public}+0' 'Yes' '-'!}</td>
+<td nowrap>{!date '{site_date_format}' '{folder_created}'!}</td>
+</tr>
+{END:all_folders}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>folder_ad</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{folder_body}
+<p class="info"><a href="{site_path}/user.php?id={folder_user_id}">{folder_user_name}</a>{!user_indicators folder!}
+{!date '{site_date_format}' '{folder_created}'!}</p>
+{template:subfolders}
+<table class="ads">
+{BEGIN:active_ads folder_id}
+{!if '{row_number}%4==1' '<tr>'!}
+<td style="width:25%;">
+<div class="ad" style="width:150px;">
+  <div class="adtitle">{doc_title}</div>
+  <div class="adbody">{doc_body}</div>
+  {!if defined(ad_url)
+    '<div class="adurl">{ad_url_link}</a></div>'
+  !}
+  <div class="adowner"><a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a> |
+  <a href="{site_path}/document.php?id={doc_id}">link</a></div>
+</div>
+</td>
+{!if '{row_number}%4==0' '</tr>'!}
+{END:active_ads}
+</table>
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>folder_events</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{folder_body}
+<p class="action">
+    <a href="{site_path}/emailfolder.php?id={folder_id}">Share this folder</a>
+    {sep}
+    {!if defined(folder_limit_type)
+        '<a href="{site_path}/edit.php?folder={folder_id}&class={folder_limit_type}">Add {folder_limit_type}</a>'
+        '<a href="{site_path}/edit.php?folder={folder_id}">Add document</a>'
+    !}
+</p>
+
+<table class="list">
+<tr>
+  <th>Date </th>
+  <th>Event </th>
+</tr>
+{BEGIN:folder_doc_events folder_id -r}
+<tr class="{row_class}">
+    <td style="white-space:nowrap;"><b>{!date '{site_date_format}' '{event_begin}'!}</b> </td>
+    <td><a href="{site_path}/document.php?id={doc_id}">{doc_title}</a><br/>
+    {doc_body}</td>
+</tr>
+{END:folder_doc_events}
+</table>
+<p class="info">
+    <a href="{site_path}/user.php?id={folder_user_id}">{folder_user_name}</a>{!user_indicators folder!} |
+    {!date '{site_date_format}' '{folder_created}'!}
+</p>
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>folder_image</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p class="action" style="text-align:center;">
+<a href="#" title="click to view slideshow"
+   onClick="javascript:window.open('{site_path}/slideshow.php?id={folder_id}',
+        'rating_chart',
+        'width=618,height=665,toolbar=no,scrollbar=no')"
+>View as Slideshow</a></p>
+
+{folder_body}
+<p class="info">
+  <a href="{site_path}/user.php?id={folder_user_id}">{folder_user_name}</a>{!user_indicators folder!}
+  {!date '{site_date_format}' '{folder_created}'!}
+</p>
+{template:subfolders}
+<div class="imageboxes">
+{BEGIN:folder_docs folder_id xdo}
+{!if '{folder_group_break}&&"{folder_sorted}"=="user"'
+'<h3 style="clear:both;">{doc_user_name}</h3>'
+!}
+<div class="picboxlong" style="float:left;">
+  <a href="{site_path}/document.php?id={doc_id}"
+  ><img src="{doc_file_100}" border="0"
+        alt="{doc_title} by {doc_user_name}"
+        title="{doc_title} by {doc_user_name}"
+  /><br/>
+  <span>{doc_title}</span>
+  </a>
+</div>
+{END:folder_docs}
+</div>
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>folder_none</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{folder_body}
+{template:subfolders}
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>Footer - Navigation</template_name>
+    <template_file></template_file>
+    <template_type>3</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# this footer displays a set of alternate navigation selections !}
+Copyright &copy;{!date 'Y'!}, {site_name}. All rights reserved.
+<br/>
+[<a href="{site_path}/users.php">Users</a>]
+[<a href="{site_path}/groups.php">Groups</a>]
+[<a href="{site_path}/docs.php">Documents</a>]
+[<a href="{site_path}/folders.php">Folders</a>]]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>Footer - Simple</template_name>
+    <template_file></template_file>
+    <template_type>3</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# This is a simple footer that displays a site copyright notice !}
+Copyright &copy;{!date 'Y'!}, {site_name}. All rights reserved.]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>frontimage</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<div class="image">
+   <p class="imageframe">
+    <a href="document.php?id={doc_id}"
+    ><img src="{doc_file_600}" border="0"
+       alt="{doc_title}" title="{doc_title}"/></a>
+    <br/><small>
+    Copyright &copy;{!date 'Y' '{doc_created}'!},
+    {!if defined(image_copyright)
+        '{image_copyright}'
+        '{doc_user_name}'
+    !}.
+    All Rights Reserved.
+    </small>
+    </p>
+    <div class="description">
+    {doc_body}
+    </div>
+    <p><small>TECHNICAL INFO:
+Model release? {!if '{image_model_release}+0' 'Yes' 'No'!} &bull;
+{!if defined(image_camera) 'Camera: {image_camera} &bull;'!}
+{!if defined(image_lens) 'Lens: {image_lens} &bull;'!}
+{!if defined(image_film) 'Film: {image_film} &bull;'!}
+{!if defined(image_exposure) 'Exposure: {image_exposure} &bull;'!}
+Flash: {!if '{image_flash}+0' 'Yes' 'No'!} &bull;
+{!if defined(image_filter) 'Filtration: {image_filter} &bull;'!}
+{!if defined(image_adjustment) 'Adjustments: {image_adjustment) &bull;'!}
+Support: {image_support}
+    </small></p>
+</div>
+
+{template:comment}
+{!if '{copying_allowed}+0'
+    '<form id="shutterfly" name="sflyc4p" action="http://www.shutterfly.com/c4p/UpdateCart.jsp" method="post">
+      <input type="hidden" name="addim" value="1">
+      <input type="hidden" name="protocol" value="SFP,100">
+      <input type="hidden" name="pid" value="C4P">
+      <input type="hidden" name="psid" value="AFFL">
+      <input type="hidden" name="referid" value="a2iXxMnVb">
+      <input type="hidden" name="offerid" value="34049">
+      <input type="hidden" name="returl" value="{site_url}/document.php?id={doc_id}">
+      <input type="hidden" name="imraw-1" value="{site_url}/{doc_file}">
+      <input type="hidden" name="imrawheight-1" value="{image_height}">
+      <input type="hidden" name="imrawwidth-1" value="{image_width}">
+      <input type="hidden" name="imthumb-1" value="{site_url}/{doc_file_150}">
+      <input type="hidden" name="imbkprntb-1" value="Hi">
+    </form>'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>group</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{group_body}
+<table class="list">
+<tr><th>Member Name </th><th>Date Added </th></tr>
+{BEGIN:group group_id}
+<tr class="{row_class}">
+<td><a href="{site_path}/user.php?id={group_user_id}">{group_user_nickname}</a></td>
+<td>{!date '{site_date_format}' '{date_added}'!}</td>
+</tr>
+{END:group}
+</table>
+<p class="action">
+<a href="{site_path}/groups.php">All groups</a>
+{!if 'editor(group_id,group)||({group_type}==0)'
+ '{sep} <a href="{site_path}/joingroup.php?id={group_id}">Join this group</a>'
+!}
+{!if defined(user_id)
+  '{sep} <a href="{site_path}/subscribe.php?type=G&amp;obj={group_id}">Subscribe</a>'!}
+{!if member(group_id)
+ '{sep} <a href="{site_path}/mailto.php?group={group_id}">Send e-mail to group</a>
+  {sep} <a href="{site_path}/leavegroup.php?id={group_id}">Leave this group</a>'
+!}
+{!if submittor(group_id,group)
+ '{sep} <a href="{site_path}/editmembers.php?id={group_id}">Add/remove members</a>'
+!}
+{!if editor(group_id,group)
+ '{sep} <a href="{site_path}/permissions.php?id={group_id}&amp;class=group">Change permissions</a>
+  {sep} <a href="{site_path}/editgroup.php?id={group_id}">Edit</a>
+  {sep} <a href="{site_path}/deletegroup.php?id={group_id}">Delete</a>'
+!}
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>groups</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<!-- displays all groups -->
+
+<table class="list">
+<tr><th>Group Name </th><th>Group Owner </th><th>Created </th></tr>
+{BEGIN:all_groups}
+<tr><td><a href="{site_path}/group.php?id={group_id}"><b>{group_name}</b></a>
+{group_body}</td>
+<td><a href="{site_path}/user.php?id={group_owner_id}">{group_user_name}</a></td>
+<td>{!date '{site_date_format}' '{group_created}'!}</td>
+</tr>
+{END:all_groups}
+</table>
+
+{!if defined(user_id)
+ '<p class="action"><a href="{site_path}/editgroup.php">Create a new group</a></p>'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>Home Page - Folders</template_name>
+    <template_file></template_file>
+    <template_type>1</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# This page layout displays a list of folders !}
+
+<p> add a general site description at the top of the page </p>
+
+{template:folderlist} {!# this template displays all folders !}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>Home Page - Weblog</template_name>
+    <template_file></template_file>
+    <template_type>1</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# generic index.php template - weblog format !}
+{!set no_title TRUE!} {!# this turns off the front page title !}
+
+<div id="weblog">
+{BEGIN:doc_days 14}
+<h2 class="date">{!date '{site_date_format}' '{day}'!}</h2>
+
+  {BEGIN:day_docs day}
+  <h3 class="title">{doc_title}</h3>
+  {!case '{doc_type}'
+
+    'Image'   '<a href="{site_path}/document.php?id={doc_id}"
+              ><img src="{doc_file_400}" alt="{doc_title}"/></a>'
+
+    'Poll'    '{poll_display}'
+
+    'Link'    'Link: <a href="{link_url}">{link_url}</a>'
+
+  !}
+  {!if defined(doc_summary)
+    '{doc_summary}
+     <p>&raquo;&nbsp;<a href="{site_path}/document.php?id={doc_id}">Click 
+     here for entire document</a></p>'
+    '{doc_body}'
+  !}
+  <p class="info">
+  Posted by {!user '{doc_user_id}'!}
+  at {!date '{site_time_format}' '{doc_created}'!}
+  {!if '{doc_folder_id}'
+    'in <a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a>'
+  !}
+  {sep}
+  <a href="{site_path}/document.php?id={doc_id}">permanent link</a>
+  {!if '{allow_comments}+0'
+    '{sep} <a href="#" onClick="window.open(&#34;{site_path}/comments.php?id={doc_id}&#34;, &#34comments&#34;, &#34;height=500,width=350,scrollbars=yes&#34;);">{doc_comment_count:%d} comment(s)</a>'
+  !}
+  </p>
+  {END:day_docs}
+
+{END:doc_days}
+</div><!-- weblog -->
+
+<a href="http://siteframe.org"><img src="{site_path}/images/siteframepower.gif" alt="Siteframe {siteframe_version}"/></a>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>image</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# special head_content - this defines styles used for the close box
+    as well as the JavaScript necessary to maintain the cookie which
+    indicates whether the imageinfo box is hidden or displayed
+#!}
+{!set head_content '
+<style type="text/css">
+.xbutton {
+float:right;
+height:13px;
+width:12px;
+font-family:arial,helvetica,sans-serif;
+font-size:12px;
+font-weight:bold;
+text-align:center;
+border-top:1px silver solid;
+border-left:1px silver solid;
+border-right:1px black solid;
+border-bottom:1px black solid;
+background:gray;
+color:silver;
+}
+.xbutton a,.xbutton a:visited {
+color:silver;
+text-decoration:none;
+}
+.xbutton a:hover {
+text-decoration:none;
+color:white;
+}
+.xbutton a:active {
+color:black;
+}
+</style>
+<script language="JavaScript">
+function setCookie(name,value)
+{
+  var nextyear = new Date();
+  nextyear.setFullYear(nextyear.getFullYear()+1);
+  document.cookie = escape(name)+"="+escape(value)+";path={site_path}/;expires="+nextyear.toGMTString();
+}
+</script>' 1!}
+
+
+<div class="backnext">
+<table>
+<tr><td width="50%" align="right">
+{!if defined(prev_id)
+    '<b><a href="{site_path}/document.php?id={prev_id}">&larr;<span>Back</span></a></b>&nbsp;'
+    '&nbsp;'
+!}
+</td><td>
+{!if defined(next_id)
+  '&nbsp;<b><a href="{site_path}/document.php?id={next_id}"><span>Next</span>&rarr;</a></b>'
+  '&nbsp;'
+!}
+</td></tr></table>
+</div>
+<div class="image">
+    <p class="imageframe">
+    {!if defined(image_full_size)
+        '<img src="{doc_file}" border="0" alt="{doc_title}" title="{doc_title}"/>'
+        '<a href="{site_path}/document.php?id={doc_id}&full=1"><img {doc_image_default} border="0"
+            alt="{doc_title}" title="{doc_title}"/></a>'
+    !}
+    <br/>
+    Copyright &copy;{!date 'Y' '{doc_created}'!}, {!if defined(image_copyright) '{image_copyright}' '{doc_user_name}'!}
+    </p>
+    <div class="description">
+    {doc_body}
+    </div>
+</div>
+
+<div class="infotablewrapper">
+<table class="infotable" {!if '{_COOKIE_hideinfo}+0' 'style="display:none;"'!}>
+    <tr><th>Photographer: </th>
+        <td>
+        {!if '{_COOKIE_hideinfo}+0'
+        ''
+        '<div class="xbutton"><a href="{site_path}/document.php?id={doc_id}"
+            title="Click to hide image information box"
+            onClick="setCookie(&#34;hideinfo&#34;,1);">X</a></div>'
+        !}
+        <a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>
+        {!user_indicators doc!}
+        </td>
+        </tr>
+    <tr><th>Folder: </th>
+        <td>{!if '{doc_folder_id}'
+        '<a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a>'
+        !} </td>
+        </tr>
+    <tr><th>Uploaded: </th>
+        <td>{!date '{site_date_format} {site_time_format}' '{doc_created}'!} </td>
+        </tr>
+{!if '({allow_ratings}+0)&&(iseditor({doc_user_id})||{doc_rating_count}>4)'
+    '<tr><th>Current Rating: </th>
+     <td>{doc_rating:%.2f}/{doc_rating_count:%d}<br/>
+     <a href="{site_path}/ratings.php?id={doc_id}">View all ratings</a><br/>
+     <a href="{site_path}/deleterating.php?id={doc_id}">Delete my rating</a>
+     </td></tr>'
+!}
+{!if defined(doc_share_count)
+    '<tr><th>Sharing: </th>
+     <td>{doc_share_count:%d} time(s).
+     </td></tr>'
+!}
+    <tr><th>Copying allowed: </th>
+        <td>{!if '{copying_allowed}+0' 'Yes' 'No'!}
+            {!if '{copying_allowed}+0'
+                '<a href="#" onClick="document.sflyc4p.submit();return false;">
+                    Print this photo on Shutterfly</a>'
+            !}
+        </td>
+        </tr>
+    <tr><th>Model release available: </th>
+        <td>{!if '{image_model_release}+0' 'Yes' 'No'!}</td>
+        </tr>
+    <tr><th>Camera: </th>
+        <td>{image_camera}</td>
+        </tr>
+    <tr><th>Lens: </th>
+        <td>{image_lens}</td>
+        </tr>
+    <tr><th>Film: </th>
+        <td>{image_film}</td>
+        </tr>
+    <tr><th>Exposure: </th>
+        <td>{image_exposure}</td>
+        </tr>
+    <tr><th>Flash: </th>
+        <td>{!if '{image_flash}+0' 'Yes' 'No'!}</td>
+        </tr>
+    <tr><th>Support: </th>
+        <td>{image_support}</td>
+        </tr>
+    <tr><th>Filtration: </th>
+        <td>{image_filter}</td>
+        </tr>
+    <tr><th>Adjustments (digital/darkroom): </th>
+        <td>{image_adjustment}</td>
+        </tr>
+    <tr><th>Scan resolution: </th>
+        <td>{image_height}x{image_width}</td>
+        </tr>
+</table>
+</div>
+
+{template:comment}
+
+{!if '{copying_allowed}+0'
+    '<form id="shutterfly" name="sflyc4p" action="http://www.shutterfly.com/c4p/UpdateCart.jsp" method="post">
+      <input type="hidden" name="addim" value="1">
+      <input type="hidden" name="protocol" value="SFP,100">
+      <input type="hidden" name="pid" value="C4P">
+      <input type="hidden" name="psid" value="AFFL">
+      <input type="hidden" name="referid" value="a2iXxMnVb">
+      <input type="hidden" name="offerid" value="34049">
+      <input type="hidden" name="returl" value="{site_url}/document.php?id={doc_id}">
+      <input type="hidden" name="imraw-1" value="{site_url}/{doc_file}">
+      <input type="hidden" name="imrawheight-1" value="{image_height}">
+      <input type="hidden" name="imrawwidth-1" value="{image_width}">
+      <input type="hidden" name="imthumb-1" value="{site_url}/{doc_file_150}">
+      <input type="hidden" name="imbkprntb-1" value="Hi">
+    </form>'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>index</template_name>
+    <template_file></template_file>
+    <template_type>1</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# generic index.php template - weblog format !}
+{!set no_title TRUE!} {!# this turns off the front page title !}
+<img src="{site_path}/images/siteframepower.gif" alt="Siteframe {siteframe_version}" align="right"/>
+
+<h1>Welcome to Siteframe {siteframe_version}</h1>
+<p>This is the default home page for a 
+<a href="http://siteframe.org">Siteframe</a>-powered website. 
+You should replace this with a home page of your own choosing, 
+or you can modify this page to suit your needs.</p>
+<h2>Changing the home page</h2>
+<p>To edit this page, navigate to 
+<a href="{site_path}/admin/">Control Panel</a> 
+&rarr; Maintain content templates, and click on "index".</p>
+<p>To select another home page template, navigate to 
+<a href="{site_path}/admin/">Control Panel</a> 
+&rarr; Extended properties, and choose another template 
+from the drop-down menu by HOME_PAGE.</p>
+<p>To create your own home page template:</p>
+<ol>
+<li>Navigate to <a href="{site_path}/admin/">Control Panel</a> 
+&rarr; Maintain content templates.</li>
+<li>Select "Create a new template."</li>
+<li>Set the template type to "Home Page" and enter any desired 
+home page text, then press Save.</li>
+<li>Go to <a href="{site_path}/admin/">Control Panel</a> 
+&rarr; Extended properties, then choose your new template 
+from the HOME_PAGE drop-down list.</li>
+</ol>
+<p>It is recommend that you do <em>not</em> modify one of the
+existing templates, since your changes may be lost in a future software
+upgrade. Either use an existing template unchanged, or create a copy of
+an existing template to modify.</p>
+
+<h2>Administrative user account</h2>
+<p>During the installation process, you should have created at least one
+administrative user account. If you did not, you will be unable to maintain
+and manage this website.</p>
+<p>To create a new administrative user,
+<a href="{site_path}/admin/newadmin.php">click here</a>.</p>
+<p>If your site already has an administrative user, you are required to
+login before using the Control Panel.</a>
+
+<h2>Configuring your site</h2>
+<p>If you're seeing this page, then you have already completed at least the 
+first stage in your site configuration. You can also visit the 
+<a href="{site_path}/admin/properties.php">Extended properties</a>
+page for other configuration options.</p>
+
+<h2>Site Statistics</h2>
+<p>The <a href="{site_path}/admin/">Control Panel</a> contains
+links to a number of useful reports about your site, including the numbers
+of unique visitors per day, lists of referrers, and the most recent visitors
+to your site.</p>
+
+<h2>Further support</h2>
+<p>More documentation is available at the Siteframe website
+(<a href="http://siteframe.org">http://siteframe.org</a>). 
+In addition, there are a number of mailing lists that Siteframe administrators
+use to assist each other with configuring and maintaining their sites.
+You can find more information about these at the Siteframe website.</p>
+<p>If you have specific problems or questions, you can contact Siteframe
+technical support at:</p>
+<blockquote><a href="mailto:support@siteframe.org">support@siteframe.org</a></blockquote>
+<p>You can submit feedback to the Siteframe development team via your
+<a href="{site_path}/admin/feedback.php">Control Panel feedback page</a>.
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>inlcomment</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $
+### Copyright (c)2001-2003, Broadpool, LLC. All rights reserved. See LICENSE.txt for details.
+### this file defines an inline form that can be used
+### for adding comments to a document !}
+{!if defined(user_id)
+'<form method="post" 
+       action="{site_path}/comment.php" 
+       enctype="multipart/form-data" >
+    <p class="prompt">Subject:</p>
+    <p class="field">
+        <input type="text" name="comment_subject" />
+    </p>
+    <p class="prompt">Comment:</p>
+    <p class="field">
+        <textarea name="comment_body" class="inputbox" rows="5" cols="50"></textarea>
+    </p>
+    <p class="prompt">Send comment to:</p>
+    <input type="hidden" name="send_email" value="1"/>
+    <input type="hidden" name="submitted" value="1"/>
+    <input type="hidden" name="comment_reply_to" value=""/>
+    <input type="hidden" name="comment_owner_id" value="{user_id}"/>
+    <input type="hidden" name="comment_doc_id" value="{doc_id}"/>
+    <input type="submit" value="Submit"/>
+    <input type="reset"/>
+</form>'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>link</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p>Link: <a href="{doc_link_url}">{doc_link_url}</a></p>
+<p>{doc_body}</p>
+<p class="info">
+    <a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>
+    {!if defined(doc_folder_name)
+        '| <a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a>'
+    !}
+    | {!date '{site_date_format}' '{doc_created}'!}
+</p>
+{template:comment}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>macros</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# Siteframe Macro Library
+### Copyright (c)2001, Broadpool, LLC. All rights reserved.
+#!}
+{!set macro_library_version '$Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $'!}
+{!# ---------------------------------------------------------------------------
+### user - generates a hyperlinked reference to a user
+### syntax:
+###   !user N
+### example:
+###   !user 371
+#!}
+{!define user
+    '{BEGIN:user $1 user$1}<a href="{site_path}/user.php?id={user_user_id}"
+    >{user_user_name}</a>{END:user}'
+!}
+{!# ---------------------------------------------------------------------------
+### doclink - generates a hyperlinked reference to a document
+### n.b. name changed from 'document', which is an internal macro that inserts
+### the entire contents of a document at the macro location
+### syntax:
+###   !doclink N
+### example:
+###   !doclink 132
+#!}
+{!define doclink
+    '{BEGIN:document $1 doc$1}<a href="{site_path}/document.php?id={doc_id}"
+    >{doc_title}</a>{END:document}'
+!}
+{!# ---------------------------------------------------------------------------
+### folder - generates a hyperlinked reference to a folder
+### syntax:
+###   !folder N
+### example:
+###   !folder 132
+#!}
+{!define folder
+    '{BEGIN:folder $1 folder$1}<a href="{site_path}/folder.php?id={folder_id}"
+    >{folder_name_display}</a>{END:folder}'
+!}
+{!# ---------------------------------------------------------------------------
+### thumbnail - generates a clickable thumbnail
+### syntax:
+###   !thumbnail doc_id [options]
+### example:
+###   !thumbnail 242 'align="right"'
+### if you want thumbnails to be a different size, then change
+### {doc_file_150} to reference a different thumbnail size
+#!}
+{!define thumbnail
+    '{BEGIN:document $1 thumb$1}
+     <a href="{site_path}/document.php?id={doc_id}"
+     ><img src="{doc_file_150}" alt="{doc_title}" border="0"
+          title="{doc_title}" $2
+     /></a>
+     {END:document}'
+!}
+{!# ---------------------------------------------------------------------------
+### link - generates a hyperlink
+### syntax:
+###   !link text href
+### example:
+###   !link 'The Contax G Pages' 'http://www.contaxg.com'
+#!}
+{!define link
+    '<a href="$2">$1</a>'
+!}
+{!# ---------------------------------------------------------------------------
+### bookmark - similar to the above, but generates a named bookmark
+### syntax:
+###   !bookmark 'name'
+#!}
+{!define bookmark
+    '<a name="$1"></a>'
+!}
+{!# ---------------------------------------------------------------------------
+### icon definitions
+#!}
+{!define icon
+    '{site_path}/images/$1.gif'
+!}
+{!# ---------------------------------------------------------------------------
+### powered_by_siteframe
+### generates a link to the "Powered by Siteframe" image
+###
+### powered_by_siteframe_graphic
+### generates a link with a graphic image
+#!}
+{!define powered_by_siteframe
+    '<a href="http://siteframe.org">Powered by Siteframe</a>'
+!}
+{!define powered_by_siteframe_graphic
+    '<div $1><a href="http://siteframe.org"
+    ><img src="http://siteframe.org/siteframepower.gif"
+          alt="Powered by Siteframe"
+          title="a .COMmunity powered by Siteframe"
+    /></a></div>'
+!}
+{!# ---------------------------------------------------------------------------
+#!}
+{!set siteframe_credits
+    'Many thanks to the following people whose contributions helped to make
+     this a great product: Richard Sintchak, Knut Skjaerven, Lincoln Michaud,
+     Charez Golvalez,
+     Vish Vishvanath, Anita Campbell, Ted Campbell, Ted Pecot,
+     Dennis Adams, Barbara Adams, Bob Cousins, Steve Moorey, Christopher Chen,
+     and Rich Preston &bull; Thanks to Nikon for making great cameras &bull;
+     Thanks to Contax for making great cameras and for inspiring this work
+     &bull; Special thanks to Elam for teaching me that baseball is more
+     important than software &bull; Mountain Dew / Code Red &bull; FreeBSD
+     &bull; SuSE Linux'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>month</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $
+### generates (hopefully) a calendar of events
+#!}
+{!set no_title 'Yes'!}
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr><td>
+&lt;&lt;<a href="{site_path}/month.php?y={prev_year}&amp;m={prev_month}">{!date
+    'F Y' '{prev_year}-{prev_month}-1'!}</a>
+</td>
+<td align="center">
+<h2>{month} {year}</h2>
+</td>
+<td align="right">
+<a href="{site_path}/month.php?y={next_year}&amp;m={next_month}">{!date
+    'F Y' '{next_year}-{next_month}-1'!}</a>&gt;&gt;
+</td>
+</tr></table>
+<table class="calendar" width="100%" align="center">
+<tr>
+    <th width="12%">Sunday</th>
+    <th width="15%">Monday</th>
+    <th width="15%">Tuesday</th>
+    <th width="15%">Wednesday</th>
+    <th width="15%">Thursday</th>
+    <th width="15%">Friday</th>
+    <th width="12%">Saturday</th>
+</tr>
+{BEGIN:month_days yearmon}
+{!if '({mday}==1)&&({wday}!=0)'
+    '<td colspan="{wday}">&nbsp;</td>'
+!}
+{!if '{wday}==0'
+    '<tr>'
+!}
+<td class="day"><p class="calday">
+    {!if '(({mday}+0)==({thisday}+0))&&(({mon}+0)==({thismonth}+0))&&({year}=={thisyear})'
+        '<span class="today">{mday}</span>'
+        '{mday}'
+    !}</p>
+    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+    {BEGIN:day_events}
+    <tr>
+    <td style="font-size:9px;">{!if '{hours}' '{hours:%02d}:{minutes:%02d}'!}
+        <a href="{site_path}/document.php?id={doc_id}">{doc_title}</a>
+    </td></tr>
+    {END:day_events}
+    </table>
+{!if '{wday}==6'
+    '</tr>'
+!}
+{END:month_days}
+{!if '{wday}!=6'
+    '</tr>'
+!}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>Navigation - Simple</template_name>
+    <template_file></template_file>
+    <template_type>2</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# This is a simple navigation menu for personal sites!}
+<a href="{site_path}/">Home</a><br/>
+<a href="{site_path}/register.php">Register</a><br/>
+<a href="{site_path}/login.php">Login</a><br/>
+<a href="{site_path}/search.php">Search</a><br/>
+<a href="{site_path}/user.php">My Page</a><br/>
+<a href="{site_path}/prefs.php">Preferences</a><br/>
+{!if admin(user_id) '<a href="{site_path}/admin">Control Panel</a><br/>'!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>Navigation - Standard</template_name>
+    <template_file></template_file>
+    <template_type>2</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# This is a standard navigation menu !}
+<a href="{site_path}/">Home</a><br/>
+<a href="{site_path}/register.php">Register</a><br/>
+<a href="{site_path}/login.php">Login</a><br/>
+<a href="{site_path}/search.php">Search</a><br/>
+<a href="{site_path}/user.php">My Page</a><br/>
+<a href="{site_path}/prefs.php">Preferences</a><br/>
+<a href="{site_path}/edit.php">New Document</a><br/>
+<a href="{site_path}/editfolder.php">New Folder</a><br/>
+<a href="{site_path}/folders.php">List Folders</a><br/>
+<a href="{site_path}/docs.php">List Documents</a><br/>
+<a href="{site_path}/groups.php">List Groups</a><br/>
+<a href="{site_path}/users.php">List Users</a><br/>
+{!if admin(user_id) '<a href="{site_path}/admin">Control Panel</a><br/>'!}
+{!# the "default" menu adds folders and categories here !}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notice</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p class="info">
+Begins: {!date '{site_date_format}' '{notice_begin_date}'!}
+Ends: {!date '{site_date_format}' '{notice_end_date}'!}
+</p>
+{doc_body}
+{template:edit}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notices</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<h3>All Notices</h3>
+<table class="list">
+<tr><th>Notice </th><th>Begin </th><th>End </th></tr>
+{BEGIN:all_notices}
+<tr class="{row_class}">
+<td><div class="notices">
+    <a href="{site_path}/document.php?id={doc_id}"><b>{doc_title_display}</b></a>
+    {doc_body}</div></td>
+<td style="white-space:nowrap;">
+  {!date '{site_date_format}' '{notice_begin_date}'!}</td>
+<td style="white-space:nowrap;">
+  {!date '{site_date_format}' '{notice_end_date}'!}</td>
+</tr>
+{END:all_notices}
+</table>
+
+<h3>Active Notices</h3>
+<table class="list">
+<tr><th>Notice </th><th>Begin </th><th>End </th></tr>
+{BEGIN:active_notices}
+<tr class="{row_class}">
+<td><div class="notices">
+    <a href="{site_path}/document.php?id={doc_id}"><b>{doc_title_display}</b></a>
+    {doc_body}</div></td>
+<td style="white-space:nowrap;">
+  {!date '{site_date_format}' '{notice_begin_date}'!}</td>
+<td style="white-space:nowrap;">
+  {!date '{site_date_format}' '{notice_end_date}'!}</td>
+</tr>
+{END:active_notices}
+</table>
+
+<p class="action">&bull;
+  <a href="{site_path}/edit.php?class=Notice">Create a new Notice</a>
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notification</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[Notification of new {notify_type}
+{notify_title} {!if '"{notify_type}"=="document"' '({doc_type_display})'!}
+{site_url}/{notify_program}?id={notify_id}
+
+You are receiving this message because you requested to be notified about any new {notify_type}s at {site_name}. If you no longer wish to receive these notifications, you can also your settings at {site_url}/prefs.php]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notifications</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<p>To delete a notification, click the checkbox beside it and
+press the <b>Delete Checked</b> button. Click on the "Toggle All" link to turn
+checkboxes on and off.</p>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function CheckAll() {
+  for (var i = 0; i < document.noteform.elements.length; i++) {
+    if(document.noteform.elements[i].type == 'checkbox'){
+      document.noteform.elements[i].checked = !(document.noteform.elements[i].checked);
+    }
+  }
+}
+//-->
+</script>
+
+<form method="post" name="noteform" action="{site_path}/notifications.php?id={user_user_id}">
+<table class="list">
+<tr>
+  <th>Created</th>
+  <th>Delivered</th>
+  <th>Message</th>
+  <th>Del</th>
+</tr>
+{BEGIN:all_notifications user_user_id}
+<tr class="{row_class}">
+  <td>{!date '{site_date_format} {site_time_format}' '{note_created}'!}</td>
+  <td align="center">{!if defined(note_sent) 'Yes' '-'!}</td>
+  <td>
+<b>{note_message}</b>
+{!if defined(note_url)
+  '<br/><a href="{note_url}">{note_url}</a>'!}
+{!if defined(note_body) '<br/>{note_body:nohtml}'!}
+{!if defined(note_from_id)
+  '<br/><small>from <a href="{site_path}/user.php?id={note_from_id}">{note_from}</a></small>'
+!}
+  </td>
+  <td align="center">
+    <input type="checkbox" name="remove[]" value="{note_id}"/>
+  </td>
+</tr>
+{END:all_notifications}
+<tr><td colspan="4" align="right">
+  [<a href="#" onClick="javascript:CheckAll();">Toggle All</a>]
+</td></tr>
+</table>
+<input type="hidden" name="submitted" value="1"/>
+<input type="submit" value="Delete Checked"/>
+<input type="reset"/>
+</form>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notify_ascii</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[{!# template generates ASCII e-mail notifications !}
+{site_name} Subscription Notifications
+{user_name}
+{!date '{site_date_format} {site_time_format}'!}
+
+{notify_frequency_display} notifications
+
+-----------------------------------------------------------------------------
+
+{BEGIN:subscr_notifications user_id asciiversion}
+{!date '{site_date_format} {site_time_format}' '{note_created}'!}
+  {note_message}
+  {note_url}
+  {note_body:nohtml}
+{END:subscr_notifications}
+
+-----------------------------------------------------------------------------
+
+This message is sent from {site_name}
+{site_url}
+You can edit your subscriptions at {site_url}/subscriptions.php?id={user_id}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notify_html</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:46</date_modified>
+    <template_body><![CDATA[<div style="text-align:center; font-size:smaller; text-transform:uppercase; border-bottom: 1px black solid; margin-bottom: 40px;">{site_name}</div>
+<h1>Subscription Notifications</h1>
+<p class="info">{user_name}<br/>
+{!date '{site_date_format} {site_time_format}'!}</>
+
+<p><i>{notify_frequency_display} notifications</i></p>
+
+<hr/>
+
+<dl>
+{BEGIN:subscr_notifications user_id htmlversion}
+<dt>{!date '{site_date_format} {site_time_format}' '{note_created}'!}</dt>
+<dd><b>{note_message}</b><br/>
+<a href="{note_url}">{note_url}</a>
+{!if defined(note_body) '<blockquote><i>{note_body:nohtml}</i></blockquote>'!}
+</dd>
+{END:subscr_notifications}
+</dl>
+
+<hr/>
+
+<p class="info">
+This message is sent from {site_name}<br/>
+<a href="{site_url}">{site_url}</a><br/>
+You can edit your subscriptions at
+<a href="{site_url}/subscriptions.php?id={user_id}">{site_url}/subscriptions.php?id={user_id}</a>
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notify_immediate</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!date '{site_date_format} {site_time_format}' '{note_created}'!}
+{note_message}
+{note_url}
+
+{note_body}
+
+----------------------------------------------------------------------
+You can edit the subscription that generated this notification at:
+{site_url}/subscribe.php?id={note_subscr_id}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>notify_online</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!# notify - this template is used to generate popup subscription notifications
+## since the popup is intended to be a fairly small window, this template generates
+## the entire page, and not just the body. !}
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>{page_title}</title>
+<style type="text/css">
+body { font-family: verdana, arial, helvetica, sans-serif; font-size:12px; }
+#banner {
+font-family: georgia, times new roman, times, serif;
+font-size: 16px;
+font-weight: bold;
+color: navy;
+border-bottom: 1px gray solid;
+margin-bottom: 5px;
+padding-bottom: 2px;
+text-align:right;
+}
+h3 { color: gray; }
+blockquote { font-style:italic; margin:5px; }
+.item {
+border-bottom: 1px gray solid;
+padding-bottom: 5px;
+margin-bottom: 5px;
+}
+.info { text-align: right; font-size: smaller; }
+</style>
+{head_content}
+</head>
+<body>
+<div id="banner">{site_name}</div>
+<h3>{page_title}</h3>
+{BEGIN:active_notifications user_id}
+<div class="item">
+<p>{!date '{site_date_format} {site_time_format}' '{note_created}'!}<br/>
+<b>{note_message}</b><br/>
+<a href="#" onClick="opener.location.href='{note_url}';">{note_url}</a></p>
+{!if defined(note_body) '<blockquote>{note_body:nohtml}</blockquote>'!}
+{!if defined(note_from_id)
+  '<p class="info">From <a href="{site_path}/user.php?id={note_from_id}">{note_from}</a> [<a href="#" onClick="window.open(&#34;{site_path}/message.php?id={note_from_id}&#34;,&#34;reply&#34;)">Reply</a>]'
+!}
+</div>
+{END:active_notifications}
+<form method="post" action="">
+<input type="hidden" name="submitted" value="1"/>
+<input type="submit" value="Acknowledge"/>
+</form>
+</body>
+</html>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>photo_gallery</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!# this template creates a photo gallery of the most recent 25 images on the site !}
+
+<div class="images">
+{BEGIN:recent_images 25}
+ <div class="picbox">
+  <a href="{site_path}/document.php?id={doc_id}"
+  ><img src="{doc_file_100}" alt="{doc_title}"/></a>
+ </div>
+{END:recent_images}
+</div><!-- images -->]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>poll</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<div class="Poll">
+    {!if defined(doc_body) '<p>{doc_body}</p>'!}
+    {poll_display}
+</div>
+<p class="info">
+by <a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>{!user_indicators doc!}
+</p>
+{template:comment}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>pollfolder</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $
+### Copyright (c)2001-2003, Broadpool, LLC. All rights reserved. See LICENSE.txt for details.
+### pollfolder - display a folder of polls
+#!}
+<p>{folder_body}</p>
+<h3>Contents</h3>
+<ul>
+{BEGIN:folder_docs folder_id x1}
+<li><a href="#poll{doc_id}">{doc_title}</a></li>
+{END:folder_docs}
+</ul>
+
+<hr/>
+<p class="action"><a href="{site_path}/edit.php?folder={folder_id}&class=Poll">
+Add Poll to folder</a></p>
+
+<table border="0" width="100%">
+{BEGIN:folder_docs folder_id x2}
+{!if '"{row_class}"=="odd"'
+    '<tr>'
+!}
+<td width="50%">
+    <h3>{!bookmark "poll{doc_id}"!}{doc_title}</h3>
+    <p>{doc_body}</p>
+    {poll_display}
+    <p class="info">by
+    <a href="{site_path}/user.php?id={doc_owner_id}">{doc_user_name}</a>{!user_indicators doc!}
+    </p>
+</td>
+{!if '"{row_class}"!="odd"'
+    '</tr>'
+!}
+{END:folder_docs}
+</table>
+<p class="info">
+    folder owned by
+    <a href="{site_path}/user.php?id={folder_user_id}">{folder_user_name}</a>{!user indicators folder!}
+</p>
+{!if editor(folder_owner_id)
+'<div class="edit"><p class="editor">
+ <a href="{site_path}/editfolder.php?id={folder_id}">Edit</a>
+ <a href="{site_path}/deletefolder.php?id={folder_id}">Delete</a>
+ </p></div>'
+!}
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>ratings</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $
+### Copyright (c)2001-2003, Broadpool, LLC. All rights reserved. See LICENSE.txt for details.
+### displays ratings
+#!}
+{!set page_title '{doc_title:Ratings for "%s"}'!}
+<p class="info">
+<a href="{site_path}/document.php?id={doc_id}">{!if '"{doc_type}"=="Image"'
+    '<img src="{doc_file_150}" border="0" alt="" title="{doc_title}">'
+    'Return to {doc_type}'
+!}
+</a></p>
+<p>Current rating: {doc_rating:%1.1f}/{doc_rating_count}</p>
+<h3>Distribution</h3>
+<table border="0">
+<tr>
+    <th>Rating</th>
+    <th width="40px">#</th>
+    <th width="40px">%</th>
+    <th>Graph</th>
+</tr>
+{BEGIN:ratings}
+<tr>
+    <td align="right">{rating}</td>
+    <td align="right">{rating_count}</td>
+    <td align="right">{rating_percent:%5.1f}%</td>
+    <td><span class="pollbar">{rating_bar}</span></td>
+</tr>
+{END:ratings}
+</table>
+<h3>Ratings</h3>
+<table border="0">
+<tr>
+    <th>User</th>
+    <th>Rating</th>
+</tr>
+{BEGIN:rating_users}
+<tr class="{row_class}">
+    <td><a href="{site_path}/user.php?id={rating_user_id}">{rating_user_name}</a></td>
+    <td align="right">{user_rating}</td>
+</tr>
+{END:rating_users}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>related_articles</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!# related_articles.ihtml
+### displays other articles in the current folder
+### only works from /document.php
+### this will also not work on pages that include another document
+### iteration (such as a BEGIN:all_docs autoblock
+#!}
+<div class="sidebar">
+<b>Related Articles</b><br/>
+{BEGIN:folder_docs doc_folder_id}
+{!if '({main_doc_id}+0)==({doc_id}+0)'
+  '&gt; <b>{doc_title}</b>'
+  '&bull; <a href="/document.php?id={doc_id}">{doc_title}</a>'
+!}
+<br/>
+{END:folder_docs}
+</div>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>results</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<table cellpadding="0" cellspacing="2px" class="inputform">
+{BEGIN:poll_results}
+<tr><td>{poll_option}</td>
+    <td align="right">&nbsp;{poll_votes}</td>
+    <td align="right">&nbsp;{poll_percent}%</td>
+    <td>&nbsp;<span class="pollbar">{poll_bar}</span></td>
+</tr>
+{END:poll_results}
+</table>
+<p>{poll_total} votes have been cast<br>
+<a href="{site_path}/document.php?id={doc_id}&revote=1">Click here to change your vote</a>
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>rss</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- name="generator" content="siteframe/{siteframe_version}" -->
+<rss version="0.92">
+  <channel>
+    <title>{site_name}</title>
+    <link>{site_url}</link>
+    <copyright>Copyright {!date 'Y'!}, {site_name}. All Rights Reserved.</copyright>
+    <managingEditor>{site_email}</managingEditor>
+    <lastBuildDate>{!date 'F j, Y h:ia T'!}</lastBuildDate>
+    <docs>http://backend.userland.com/rss092</docs>
+  {!if defined(site_description)
+    '<description>{site_description:nohtml}</description>'
+  !}
+  {!if defined(logo)
+    '<image>
+        <url>{site_url}/{logo}</url>
+        <title>{site_name:nohtml}</title>
+        <link>{site_url}</link>
+     </image>'
+  !}
+  {BEGIN:recent_docs num_rss _rdx}
+    <item>
+        <title>{doc_title:nohtml}</title>
+        <link>{site_url}/document.php?id={doc_id}</link>
+        <description>
+        {!if defined(doc_summary)
+        '{doc_summary:nohtml}'
+        '{doc_body:nohtml}'
+        !}
+        </description>
+        {!if '("{doc_type}"=="Image")||("{doc_type}"=="File")'
+        '<enclosure url="{site_url}/{doc_file_100}" type="{doc_file_mime_type}"/>'
+        !}
+    </item>
+  {END:recent_docs}
+  </channel>
+</rss>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>search</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{form_instructions}
+<form action="{form_action}" method="post">
+    <input type="text" maxsize="250" name="searchfor" value="{searchfor}"/>
+    <input type="submit" value="Go"/>
+    <input type="hidden" name="submitted" value="1"/>
+    <br/><br/>
+    Search only:<br/><br/>
+    <input type="checkbox" name="search_users" value="1" {!if defined(search_users) 'checked'!}> Users &nbsp;
+    <input type="checkbox" name="search_documents" value="1" {!if defined(search_documents) 'checked'!}> Documents &nbsp;
+    <input type="checkbox" name="search_folders" value="1" {!if defined(search_folders) 'checked'!}> Folders &nbsp;
+    <input type="checkbox" name="search_comments" value="1" {!if defined(search_comments) 'checked'!}> Comments &nbsp;
+</form>
+
+<ul>
+{BEGIN:search_results}
+    <li>{search_result_type}: <a href="{search_url}">{search_name}</a></li>
+{END:search_results}
+</ul>
+{!if defined(num_results)
+    '<p>{num_results} item(s) found</p>'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>sfolder</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{folder_body}
+
+<p class="action">
+    <a href="edit.php?folder={folder_id}&class={folder_limit_type}">Add document</a> {sep}
+    <a href="#schedule">Schedule</a>
+</p>
+
+{template:subfolders}
+
+{BEGIN:current folder_id current}
+    <h3>{doc_title}</h3>
+    {!document '{doc_id}'!}
+{END:current}
+
+<h3>Schedule</h3>
+<a name="schedule"/>
+<table cellpadding="0" cellspacing="2px" border="0">
+<tr><th>Owner</th><th>Title </th><th>Begin </th><th>End </th></tr>
+{BEGIN:schedule folder_id schedule}
+<tr class="{row_class}">
+<td><a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a> </td>
+<td><a href="{site_path}/document.php?id={doc_id}">{doc_title}</a> </td>
+<td nowrap>{!date '{site_date_format} {site_time_format}' '{folder_begin_date}'!} </td>
+<td nowrap>{!date '{site_date_format} {site_time_format}' '{folder_end_date}'!} </td>
+</tr>
+{END:schedule}
+</table>
+{template:editfolder}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>slideshow</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>{folder_name}</title>
+<style type="text/css">
+<!--
+    body {
+    background: black;
+    color: white;
+    margin: 2px;
+    }
+    p { margin: 0 0 2px 0; }
+    .heading {
+    font-family: arial,helvetica,sans-serif;
+    background: white;
+    color: black;
+    padding: 3px;
+    }
+    a { color: gray; text-decoration: none; }
+    .close {
+    font-size: 10px;
+    font-weight: bold;
+    float: right;
+    }
+    #title {
+    font-size: 18px;
+    font-weight: bold;
+    }
+    #author {
+    font-size: 12px;
+    color: gray;
+    }
+    table {
+    text-align:center;
+    }
+    td {
+    height:610px;
+    width:610px;
+    text-align:center;
+    vertical-align:middle;
+    background: black;
+    padding: 5px;
+    }
+-->
+</style>
+<script>
+// (C) 2000 www.CodeLifter.com
+// http://www.codelifter.com
+// Free for all users, but leave in this  header
+// NS4-6,IE4-6
+// Fade effect only in IE; degrades gracefully
+
+// =======================================
+// set the following variables
+// =======================================
+
+// Set slideShowSpeed (milliseconds)
+var slideShowSpeed = 5000
+
+// Duration of crossfade (seconds)
+var crossFadeDuration = 3
+
+// Specify the image files
+var Pic = new Array() // do not touch this
+var Title = new Array()
+var Author = new Array()
+// to add more images, just continue
+// the pattern, adding to the array below
+
+{BEGIN:folder_docs folder_id fd}
+Pic[{row_number}] = "{doc_file_600}"
+Title[{row_number}] = "{doc_title:noquote}"
+Author[{row_number}] = "{doc_user_name}"
+{END:folder_docs}
+
+// =======================================
+// do not edit anything below this line
+// =======================================
+
+var t
+var j = 1
+var p = Pic.length
+
+var preLoad = new Array()
+for (i = 1; i <= p; i++){
+   preLoad[i] = new Image()
+   preLoad[i].src = Pic[i]
+}
+var title = document.all.item("title")
+var author = document.all.item("author")
+
+function runSlideShow(){
+   if (document.all){
+      document.images.SlideShow.style.filter="blendTrans(duration=2)"
+      document.images.SlideShow.style.filter="blendTrans(duration=crossFadeDuration)"
+      document.images.SlideShow.filters.blendTrans.Apply()
+   }
+   document.images.SlideShow.src = preLoad[j].src
+   document.title = "{folder_name} - "+Title[j]
+   document.getElementById("title").innerHTML=Title[j]
+   document.getElementById("author").innerHTML=Author[j]
+   if (document.all){
+      document.images.SlideShow.filters.blendTrans.Play()
+   }
+   j = j + 1
+   if (j > (p-1)) j=1
+   t = setTimeout("runSlideShow()", slideShowSpeed)
+}
+</script>
+</head>
+<body onload="runSlideShow()">
+<div class="heading">
+<p class="close">[<a href="#" onClick="javascript:self.close();">Close</a>]</p>
+<p id="title">Slideshow</p>
+<p id="author">Please wait while images load...</p>
+</div>
+<table><tr><td>
+<img src="{site_path}/images/film.gif" name='SlideShow' alt="slideshow image"/>
+</td></tr></table>
+</body>
+</html>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>subfolders</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $
+### lists subfolders of current folder !}
+{!if '{folder_children}+0'
+'<div class="subfolders">
+{BEGIN:folder_subfolders folder_id subfolders}
+{!if '{folder_group_break}&&"{parent_folder_sorted}"=="user"'
+'<h3 style="clear:both;">{folder_user_name}</h3>'
+!}
+<div class="subfolder">
+<a href="{site_path}/folder.php?id={folder_id}"><img src="{folder_image}"
+border="0" alt="{folder_name}"/></a><br>
+<a href="{site_path}/folder.php?id={folder_id}">{folder_name_display}</a>
+</div>
+{END:folder_subfolders}
+</div>'
+!}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>subscriptions</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<p>Your currently-active subscriptions are displayed below.
+From this page, you can choose to edit or remove any of your existing
+subscriptions.</p>
+<ul>
+<li>To create a new subscription, navigate to the
+document, folder, or group you wish to subscribe to, then click
+on the "Subscribe" link.</li>
+<li>To modify a subscription, click on the <b>Title</b>.</li>
+<li>To delete one or more subscriptions, check the box in the <b>Del</b> column,
+then press <b>Delete Checked Subscriptions</b>.</li>
+</ul>
+
+<form method="post" action="{site_path}/subscriptions.php?id={subscr_user_id}" enctype="multipart/form-data">
+<table class="list">
+<tr>
+  <th>Type</th>
+  <th>Title</th>
+  <th>Add</th>
+  <th>Mod</th>
+  <th>Notification</th>
+  <th>Frequency</th>
+  <th>Del</th>
+</tr>
+{BEGIN:all_subscriptions subscr_user_id}
+<tr class="{row_class}">
+  <td>{subscr_obj_type_display}</td>
+  <td><a href="{site_path}/subscribe.php?id={subscr_id}">{subscr_obj_title}</a></td>
+  <td align="center">{!if '{subscr_notify_add}' 'Y' 'N'!}</td>
+  <td align="center">{!if '{subscr_notify_mod}' 'Y' 'N'!}</td>
+  <td>{subscr_notify_type_display}</td>
+  <td>{subscr_notify_frequency_display}</td>
+  <td align="center">
+    <input type="checkbox" name="remove[]" value="{subscr_id}"/>
+  </td>
+</tr>
+{END:all_subscriptions}
+</table>
+<p class="doc">Click the <b>Del</b> checkbox and press <b>Delete Checked
+Subscriptions</b> to remove one or more subscriptions. Deletion is immediate;
+there is no confirmation.</p>
+<input type="hidden" name="submitted" value="1"/>
+<input type="submit" value="Delete Checked Subscriptions"/>
+<input type="reset"/>
+</form>
+
+{!menu_item subscr_action 'documents'
+  '{site_path}/subscribe.php?type=D' '{subscr_all_objects}'!}
+{!menu_item subscr_action 'folders'
+  '{site_path}/subscribe.php?type=F' '{subscr_all_objects}'!}
+{!menu_item subscr_action 'groups'
+  '{site_path}/subscribe.php?type=G' '{subscr_all_objects}'!}
+{!menu_item subscr_action 'users'
+  '{site_path}/subscribe.php?type=U' '{subscr_all_objects}'!}
+<p class="action">{!if '{subscr_all_objects}' 'Subscribe to all:'!}
+{!menu subscr_action ' {sep} '!}
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{template:user_common}
+
+{!if defined(user_user_selfportrait)
+    '<img src="{user_user_selfportrait}"
+    alt="self-portrait of {user_user_name}"
+    title="{user_user_name}"/>'
+!}
+<table class="infotable">
+  <tr><th>Nickname: </th><td>{user_user_nickname} </td>
+      <td rowspan="9">{user_user_description}</td>
+  </tr>
+  <tr><th>Location: </th><td>{user_user_country_name}</td>
+  </tr>
+  <tr><th>Created: </th><td nowrap>{!date '{site_date_format}' '{user_user_created}'!}</td></tr>
+  <tr><th>Modified:</th><td nowrap>{!date '{site_date_format}' '{user_user_modified}'!}</td></tr>
+  <tr><th nowrap>Last Login: </th>
+      <td>{!date '{site_date_format} {site_time_format}' '{user_user_last_login}'!}</td></tr>
+  <tr><th nowrap>Home Page: </th><td nowrap><a href="{user_user_homepage}">{user_user_homepage}</a></td></tr>
+  <tr><th>Groups: </th>
+  <td>
+  {BEGIN:user_groups user_user_id}
+  <a href="{site_path}/group.php?id={group_id}">{group_name}</a><br/>
+  {END:user_groups}
+  </td></tr>
+</table>
+
+{template:edituser}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>users</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<table class="list">
+<tr><th>User Name</th><th>Country</th><th>Home Page</th>
+<th>Joined </th><th>Last Login</th></tr>
+{BEGIN:all_users -r}
+<tr class="{row_class}">
+<td class="nowrap"><b><a href="{site_path}/user.php?id={user_user_id}">{user_user_name}</a></b> </td>
+<td class="nowrap">{user_user_country_name} </td>
+<td><a href="{user_user_homepage}">{user_user_homepage}</a> </td>
+<td nowrap>{!date '{site_date_format}' '{user_user_created}'!} </td>
+<td nowrap>{!date '{site_date_format} {site_time_format}' '{user_user_last_login}'!} </td>
+</tr>
+{END:all_users}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user_common</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{!# $Id: templates310.xml,v 1.1 2003/07/01 05:28:07 glen Exp $ #!}
+<p class="action">
+<a href="{site_path}/user.php?id={user_user_id}">User Home</a>
+{sep} <a href="{site_path}/user.php?id={user_user_id}&amp;page=user_folders">Folders</a>
+{sep} <a href="{site_path}/user.php?id={user_user_id}&amp;page=user_docs">Documents</a>
+{sep} <a href="{site_path}/user.php?id={user_user_id}&amp;page=user_images">Images</a>
+{sep} <a href="{site_path}/user.php?id={user_user_id}&amp;page=user_ratings">Ratings</a>
+{sep} <a href="{site_path}/user.php?id={user_user_id}&amp;page=user_favorites">Favorite Members</a>
+</p>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user_docs</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{template:user_common}
+{!set page_title "{user_user_name} - Documents"!}
+
+<table class="list">
+<tr><th>Type</th><th>Title</th><th>Folder</th></tr>
+{BEGIN:user_docs user_user_id -r}
+<tr class="{row_class}">
+    <td nowrap>{doc_type} </td>
+    <td><a href="{site_path}/document.php?id={doc_id}">{doc_title}</a> </td>
+    <td nowrap><a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a> </td>
+</tr>
+{END:user_docs}
+</table>
+{recordset}
+
+{template:edituser}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user_favorites</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{template:user_common}
+{!set page_title "{user_user_name} - Favorite Members"!}
+
+<table class="list">
+ <tr><th>Member Name</th>
+    <th>Rating Average</th>
+    <th># ratings</th>
+ </tr>
+{BEGIN:favorite_users user_user_id -r }
+    <tr class="{row_class}">
+        <td nowrap><a href="{site_path}/user.php?id={user_user_id}">{user_user_name}</a>{!user_indicators user!}</td>
+        <td align="right">{favorite_user_rating:%.2f}</td>
+        <td align="right">{favorite_user_rating_count:%d}</td>
+    </tr>
+{END:favorite_users}
+</table>
+{recordset}
+
+<p>Favorite members are determined by how this member has rated the
+submissions of other members. <b>Note:</b>
+Only members for whom 2 or more ratings have been given are listed.</p>
+{template:edituser}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user_folders</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{template:user_common}
+{!set page_title "{user_user_name} - Folders"!}
+
+<div class="subfolders">
+{BEGIN:user_folders user_user_id userfoldersihtml}
+<div class="subfolder">
+<a href="{site_path}/folder.php?id={folder_id}"><img src="{folder_image}" alt="{folder_name}"/></a>
+<br/>
+<a href="{site_path}/folder.php?id={folder_id}">{folder_name_display}</a>
+</div>
+{END:user_folders}
+</div>
+<p style="clear:left;">&nbsp;</p>
+
+{template:edituser}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user_images</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{template:user_common}
+{!set page_title "{user_user_name} - Images"!}
+
+<div class="subfolders">
+{BEGIN:user_images user_user_id}
+<div class="picboxlong">
+<a href="{site_path}/document.php?id={doc_id}"><img src="{doc_file_100}" border="0"/></a>
+<br/>
+<a href="{site_path}/document.php?id={doc_id}">{doc_title}</a>
+</div>
+{END:user_images}
+</div>
+<p style="clear:left;">&nbsp;</p>
+
+{template:edituser}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user_messages</template_name>
+    <template_file></template_file>
+    <template_type>99</template_type>
+    <date_modified>2003-06-28 21:08:47</date_modified>
+    <template_body><![CDATA[{!# user_messages - displays an "inbox" of notifications !}
+
+<table class="list">
+<tr><th>Date/Time</th><th>From</th><th>Message</th></tr>
+{BEGIN:active_notifications user_user_id}
+<tr class="{row_class}">
+<td>{!date '{site_date_format} {site_time_format}' '{note_created}'!}</td>
+<td>{!if defined(note_from_id)
+  '<a href="{site_path}/user.php?id={note_from_id}">{note_from}</a>'
+  '-'
+!}</td>
+<td><a href="#" onClick="javascript:window.open('{site_path}/msgpopup.php?id={note_id}','message','width=350,height=500,scrollbars=true');">{note_message}</a></td>
+</tr>
+{END:active_notifications}
+</table>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>user_ratings</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[{template:user_common}
+{!set page_title "{user_user_name} - Ratings"!}
+
+<table class="list">
+ <tr><th>Title</th>
+    <th>Owner</th>
+    <th>Rating</th></tr>
+{BEGIN:user_doc_ratings user_user_id -r }
+    <tr class="{row_class}">
+        <td><a href="{site_path}/document.php?id={doc_id}">{doc_title}</a></td>
+        <td nowrap><a href="{site_path}/user.php?id={doc_owner_id}">{doc_user_name}</a>{!user_indicators doc!}</td>
+        <td align="right">{rating:%d}</td>
+    </tr>
+{END:user_doc_ratings}
+</table>
+{recordset}
+
+<p class="action"><a href="#" title="click to view rating distribution chart"
+onClick="javascript:window.open('{site_path}/chart_user_ratings.php?id={user_user_id}',
+        'rating_chart',
+        'width=600,height=400,toolbar=no,scrollbar=no')"
+>Rating Distribution</a></p>
+
+{template:edituser}]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>xmlrdf</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+    rdf:about="{site_url}/document.php?id={doc_id}"
+    dc:identifer="{site_url}/document.php?id={doc_id}"
+    dc:title="{doc_title}"
+    trackback:ping="{site_url}/tb.php?doc={doc_id}" />
+</rdf:RDF>
+-->]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>xmlresponse</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<?xml version="1.0" encoding="iso-8859-1" ?>
+<response>
+<error>{xmlerror}</error>
+{!if defined(xmlmessage) '<message>{xmlmessage}</message>'!}
+</response>]]></template_body>
+  </template>
+  
+  <template>
+    <template_name>xmltbpings</template_name>
+    <template_file></template_file>
+    <template_type>0</template_type>
+    <date_modified>2003-06-28 18:54:47</date_modified>
+    <template_body><![CDATA[<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- name="generator" content="siteframe/{version}" -->
+<rss version="0.92">
+  <channel>
+    <title>{site_name}</title>
+    <link>{site_url}</link>
+    <copyright>Copyright {!date 'Y'!}, {site_name}. All Rights Reserved.</copyright>
+    <managingEditor>{site_email}</managingEditor>
+    <lastBuildDate>{!date 'F j, Y h:ia T'!}</lastBuildDate>
+    <docs>http://backend.userland.com/rss092</docs>
+  {!if defined(site_description)
+    '<description>{site_description:nohtml}</description>'
+  !}
+  {!if defined(logo)
+    '<image>
+        <url>{site_url}/{logo}</url>
+        <title>{site_name:nohtml}</title>
+        <link>{site_url}</link>
+     </image>'
+  !}
+  {BEGIN:tb_pings doc_id}
+    <item>
+        <tb_id>{tb_id}</tb_id>
+        <title>{tb_title:nohtml}</title>
+        <link>{tb_url}</link>
+        <description>{tb_excerpt}</description>
+    </item>
+  {END:tb_pings}
+  </channel>
+</rss>]]></template_body>
+  </template>
+  
+</theme>

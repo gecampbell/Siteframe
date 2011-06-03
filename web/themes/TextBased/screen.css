@@ -1,0 +1,450 @@
+/* $Id: screen.css,v 1.74 2003/06/22 17:56:54 glen Exp $
+** Copyright (c)2002, Broadpool, LLC. All Rights Reserved.
+*/
+body {
+background: white;
+color: black;
+margin: 10px;
+}
+h1,h2,h3,h4 {
+font-family: arial,helvetica,sans-serif;
+}
+h2 {
+background: powderblue;
+padding: 2px;
+}
+h3 {
+}
+h4 {
+}
+a span {
+text-decoration: none;
+}
+a:hover span {
+color: black;
+}
+a img {
+border: none;
+}
+img {
+border: none;
+}
+tr.backnext a {
+text-decoration: none;
+}
+
+/* major divisions */
+
+#page {
+width: 96%;
+border: none;
+margin: 0;
+padding: 0;
+border-collapse: collapse;
+border-spacing: 0;
+}
+#page tr {
+margin: 0;
+}
+#page td {
+vertical-align: top;
+}
+#menu {
+width: 180px;
+padding: 10px 10px 10px 0;
+}
+#menu {
+padding-bottom: 10px;
+}
+.navigation {
+border: 2px #dddddd solid;
+padding: 10px;
+}
+#content {
+padding-left: 10px;
+}
+#content {
+padding: 10px 0 10px 10px;
+}
+#footer {
+border-top: 2px black solid;
+margin-top: 10px;
+padding-top: 10px;
+color: gray;
+clear: both;
+text-align: center;
+}
+
+#logo img {
+border: none;
+margin: 0;
+}
+#menu #logo a {
+padding: 0;
+}
+#menu p {
+margin-bottom: 10px;
+}
+#site {
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: large;
+vertical-align: bottom;
+}
+#site a {
+color: black;
+text-decoration: none;
+}
+#title {
+vertical-align: bottom;
+border-bottom: 1px #dddddd solid;
+padding-bottom: 5px;
+}
+h1 {
+margin: 0;
+}
+#menu,#footer {
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+}
+#menu p {
+margin-top: 0;
+font-weight: bold;
+}
+#menu a {
+padding-left: 10px;
+font-weight: normal;
+}
+
+/* paragraphs */
+
+p.action,p.author,p.info,p.recordset {
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+clear: left;
+}
+p.action {
+text-align: center;
+margin: 10px 0 10px 0;
+}
+p.action a {
+padding: 0 10px 0 10px;
+}
+p.author {
+color: gray;
+font-weight: bold;
+}
+div.edit {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+background: lemonchiffon;
+padding: 3px;
+text-align: center;
+font-weight: bold;
+margin: 20px 20% 20px 20%;
+clear: left;
+}
+p.editor {
+margin: 0;
+}
+p.error {
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+background: khaki;
+padding: 10px;
+}
+p.recordset {
+color: gray;
+padding: 2px;
+background: mintcream;
+font-weight: bold;
+text-align: center;
+}
+p.recordset a {
+font-weight: normal;
+color: black;
+}
+
+/* forms */
+
+form {
+border: 2px silver solid;
+padding: 10px;
+}
+
+p.prompt {
+font-family: arial,helvetica,sans-serif;
+margin-bottom: 2px;
+margin-top: 10px;
+font-weight: bold;
+}
+p.field {
+margin-top: 2px;
+margin-bottom: 2px;
+}
+p.doc {
+font-family: arial,helvetica,sans-serif;
+color: gray;
+font-size: smaller;
+margin-top: 2px;
+}
+p.doc,textarea {
+width: 500px;
+}
+#shutterfly {
+display: none;
+border: none;
+}
+form#searchform {
+width: auto;
+background: #eeeeee;
+padding: 10px;
+border: none;
+text-align: center;
+font-size: 10px;
+margin: 10px 0 10px 0;
+}
+#searchform input {
+font-size: 10px;
+}
+#searchform input.small {
+width: 100px;
+display: block;
+}
+
+
+/* tables */
+
+table {
+margin: 10px 0 10px 0;
+}
+.list {
+border-top: 1px silver solid;
+border-bottom: 1px silver solid;
+clear: left;
+}
+.listinfo {
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+white-space: nowrap;
+}
+.infotablewrapper {
+/* unfortunately, this is required for Internet Explorer */
+text-align: center;
+}
+.infotable {
+padding: 5px;
+width: 600px;
+/* this centers the table on compliant browsers */
+margin-left: auto;
+margin-right: auto;
+}
+.infotable * {
+text-align: left;
+}
+.infotable tr {
+background: whitesmoke;
+}
+.infotable th {
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+border: none;
+text-align: left;
+width: 150px;
+}
+.even {
+background: whitesmoke;
+}
+th {
+border-bottom: 1px silver solid;
+}
+td {
+vertical-align: top;
+}
+.list td p, .infotable td p {
+margin: 0;
+}
+tr {
+padding: 2px;
+}
+.backnext {
+text-align: right;
+}
+.backnext a {
+text-decoration: none;
+}
+.backnext table {
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+font-weight: bold;
+}
+td.event_date {
+white-space: nowrap;
+}
+
+/* folders */
+
+div.subfolders {
+width: 100%;
+clear: right;
+}
+/* see .subfolder, below */
+div.path {
+background: oldlace;
+padding: 2px;
+margin-bottom: 20px;
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+}
+
+/* comments */
+
+div.Comments {
+margin: 10px 0 10px 0;
+background: #eeeeee;
+padding: 0 10px 0 10px;
+}
+div.Comments p {
+margin 0;
+}
+div.Comments p.subject {
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+padding-top: 10px;
+}
+div.Comments p.info {
+padding-bottom: 10px;
+color: gray;
+}
+
+/* polls */
+
+span.pollbar {
+border: 1px black solid;
+background: paleturquoise;
+}
+
+/* images */
+
+div.image {
+text-align: center;
+color: gray;
+}
+div.description {
+color: black;
+}
+p.imageframe {
+font-size: smaller;
+}
+.subfolder, .picbox, .picboxlong {
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+text-align: center;
+margin: 1px;
+padding: 1px;
+width: 110px;
+height: 110px;
+float: left;
+border: 1px palegoldenrod solid;
+overflow: auto;
+}
+.subfolder, .picboxlong {
+height: 140px;
+}
+
+/* imageboxes - table class to hold images */
+.imageboxes {
+clear: both;
+margin: 10px 0 10px 0;
+width: 100%;
+}
+.imageboxes td {
+text-align: center;
+height: 110px;
+font-family: arial,helvetica,sans-serif;
+font-size: smaller;
+}
+
+/* miscellaneous */
+
+hr {
+height: 1px;
+color: rosybrown;
+}
+legend {
+font-family: arial,helvetica,sans-serif;
+font-size: 10px;
+}
+
+/* text ads */
+
+.textadblock {
+font-family: arial,helvetica,sans-serif;
+font-size: 12px;
+float: right;
+width: 150px;
+margin-left: 10px;
+padding-left: 10px;
+border-left: 1px silver solid;
+}
+.textad {
+font-family: arial,helvetica,sans-serif;
+font-size: 12px;
+background: mintcream;
+border: 1px palegreen solid;
+margin: 10px 0 10px 0;
+padding: 5px;
+color: gray;
+text-align: left;
+width: 140px;
+}
+.textad a, #menu .textad a {
+text-decoration: none;
+padding: 0;
+}
+.textad b {
+color: black;
+display: block;
+}
+
+div.notices {
+margin-left: 1em;
+text-indent: -1em;
+}
+div.notices p {
+display: inline;
+}
+
+/* advertisements */
+div.ad {
+margin: 5px;
+border: 3px gray solid;
+padding: 5px;
+}
+div.adtitle {
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 12px;
+}
+div.adbody {
+font-family: times new roman,times,serif;
+font-size: 12pt;
+display: inline;
+}
+div.adbody p {
+display: inline;
+}
+div.adurl {
+font-family: verdana,arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 10px;
+}
+div.adowner {
+font-family: verdana,arial,helvetica,sans-serif;
+font-weight: normal;
+font-size: 9px;
+}
+
+.rating {
+display: none;
+}

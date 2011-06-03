@@ -1,0 +1,15 @@
+# .htaccess
+# Copyright (c)2001-2003, Broadpool, LLC. All rights reserved.
+# $Id: .htaccess,v 1.2 2006/12/07 05:21:04 glen Exp $
+RewriteEngine On
+RewriteBase /
+RewriteRule ^doc/([0-9]+) document.php?id=$1
+RewriteRule ^doc/(.*)$ document.php?tag=$1
+#
+# this defines a Siteframe-based error document
+#
+ErrorDocument 401 /error.php?code=401
+ErrorDocument 403 /error.php?code=403
+ErrorDocument 404 /error.php?code=404
+ErrorDocument 500 /error.php?code=500
+

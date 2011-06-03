@@ -1,0 +1,70 @@
+$Id: UPGRADE30.txt,v 1.4 2003/06/12 03:39:15 glen Exp $
+UPGRADE30.txt
+Instructions for upgrading a older version of Siteframe to release 3.0.
+
+BEFORE YOU BEGIN:
+
+1. Make a backup of your Siteframe database:
+    mysqldump databasename > savedfile
+
+You may be able to do this through a web interface.
+
+2. Make a backup of your Siteframe web directory
+
+DATABASE UPGRADE:
+
+Use the appropriate SQL file to upgrade your database. For example,
+if you are currently running Siteframe 2.4.2, use the upgrade240to300.sql
+file to upgrade your database. From the command line:
+
+    mysql -f databasename < upgrade240to300.sql
+
+IMPORT TEMPLATES:
+
+You have the option of either installing the supplied release 3.0
+templates, or importing your existing templates (if you have made
+modifications). To use the Siteframe 3.0 templates, use the
+templates.sql file:
+
+    mysql -f databasename < templates.sql
+
+If you want to use your existing templates, then use the
+import_templates.php script. This can be run either from a browser
+window or from the command line. From a browser window, point your
+browser to:
+
+    http://yoursitename/path/import_templates.php
+
+If you are running from the command line:
+
+    php import_templates.php
+
+FINISHING UP:
+
+In Siteframe 3.0, the Home Page, Navigation, and Footer areas are
+stored in templates in the database rather than in files. If you
+have customized your home page, navigation pane, or page footer,
+you may need to create new content templates to hold the existing
+values.
+
+1. To create a content template, go to your site's Control Panel:
+
+    http://yoursitename/path/admin/
+
+2. Select "Maintain Content Templates".
+
+3. Select "Create a new template". Make sure that you choose the
+proper TYPE of template (Home, Footer, Navigation).
+
+4. Return to the Control Panel menu and
+
+5. Select "Extended Properties"
+
+6. Scroll down to Templates, and select your new templates for the
+HOME_PAGE, FOOTER_TEXT, and NAVIGATION properties.
+
+AT LAST:
+
+Since you no longer need the import_templates.php script, you
+should delete it so that it cannot be inadvertently executed
+again.

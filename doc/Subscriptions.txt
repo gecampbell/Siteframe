@@ -1,0 +1,16 @@
+﻿Subscriptions
+
+In Siteframe, a ''subscription'' is a request from a user to be notified of activity involving a document, folder, or group. There are two types of notifications that can be requested:
+
+;add:the user is notified when something is added to the object. For example, the user is notified when a comment is added to a document, a document is added to a folder, or a user is added to a group.
+;modify:the user is notified when the requested object is modified. For example, the user would be notified when a document is edited and saved, or when the definition or a folder or group changes.
+
+These are two distinct types of notifications; a user can request either or both of them, but must request at least one (otherwise, there is no activity to subscribe to).
+
+!!! Notification types
+
+Users can request to be notified via e-mail or through an online notification (a popup window that appears the next time the user visits the site). For e-mail notifications, the user can choose to be notified immediately, hourly, daily, or weekly. If immediately, then the user will receive an individual e-mail for each notification. For hourly, daily, or weekly notifications, the user will receive a single e-mail containing all notifications from the preceding time period.
+
+!!! Administrative settings
+There are two global properties that control subscriptions. SUBSCRIPTION_ENABLE, if true, allows subscriptions to take place; otherwise, they are not permitted. SUBSCRIPTION_IMMEDIATE, if true, allows immediate notifications to be performed; since immediate notifications can negatively impact the website's performance, this allows them to be turned off.
+

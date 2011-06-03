@@ -1,0 +1,61 @@
+$Id: UPGRADE23.txt,v 1.2 2003/04/30 07:38:57 glen Exp $
+UPGRADE23.txt
+Instructions for upgrading a older version of Siteframe to release 2.3.
+
+
+DATABASE
+
+1. Ensure that your database is up to the release 2.2.0 level. There
+are a series of scripts in the ./sql directory entitled
+"upgradeOLDtoNEW.sql". These will progress your database structures
+up to the 2.2.0 level.
+
+2. If possible, halt your webserver before continuing.
+
+3. Run the script ./scripts/upgrade220to230.sh. This script dumps
+your database for safekeeping before applying the upgrade220to230.sql
+SQL script. This script modifies a number of tables as well as
+encrypting your passwords and generating user cookies. If you do
+not have access to the command line, then run the upgrade220to230.sql
+script via your MySQL interface.
+
+4. Update your system files to the 2.3 versions.
+
+5. Edit your config.php file and change the value of COOKIE; I
+recommend the new value "sf23". This will ensure that users are
+forced to login the next time they visit your site.
+
+5. Restart your web server.
+
+
+SECURITY
+
+All passwords are now stored in encrypted form. This means that
+password reminders are no longer available; instead, the "reminder.php"
+script has been replaced with the "reset.php" script, which generates
+a new, random password and sends it to the user. The user is required
+to change his or her password on their next login.
+
+
+MACROS
+
+The property MACRO_AUTOLOAD is now deprecated. Instead, Siteframe
+looks in the ./macros subdirectory and processes all files found
+there as macro files. If you have custom macros, put them in a file
+in that directory. If there are sequence dependencies (for example,
+if your macro overrides a standard macro), then ensure that the
+file names are in sequential order. The standard Siteframe macro
+library is called "100-siteframe.macro" in that directory.
+
+
+PLUG-INS
+
+Siteframe 2.3 now supports the concept of plug-ins. Any files found
+in the ./plugins subdirectory are automatically loaded. As an
+example, the "Bug Report" document class has been modified to run
+as a plugin. If you want to develop extensions or enhancements to
+Siteframe, you can place them in the ./plugins directory and they
+will be automatically loaded. If you have modified code, for example,
+it is highly recommended that you place the modified code in the
+./plugins directory. In this way, your changes will not be overwritten
+with new versions of the software.

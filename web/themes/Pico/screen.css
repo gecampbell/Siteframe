@@ -1,0 +1,288 @@
+body {
+background: white;
+margin-left: 15%;
+margin-right: 15%;
+}
+body, th, td, input, select {
+font-family: Trebuchet MS, Verdana, Arial, Helvetica, Sans-Serif;
+font-size: 12px;
+color: #333333;
+}
+#page {
+margin: 0 0 10% 0;
+}
+
+#header {
+border-bottom: 1px #dddddd solid;
+color: sienna;
+font-size: 16px;
+font-weight: bold;
+}
+#header a {
+color: sienna;
+text-decoration: none;
+}
+
+#menu {
+text-align: right;
+color: gray;
+margin: 2px 0 20px 0;
+font-size: 11px;
+}
+#menu a, #footer a {
+color: gray;
+text-decoration: none;
+margin: 0 2px 0 2px;
+}
+#menu a:hover, #footer a:hover {
+color: black;
+}
+
+#content {
+line-height: 200%;
+}
+#content a {
+color: black;
+text-decoration: none;
+}
+#content a:visited {
+color: gray;
+border-bottom: none;
+}
+#content a:hover {
+color: black;
+text-decoration: underline;
+border-bottom: none;
+}
+
+#footer {
+color: #dddddd;
+font-size: 11px;
+border-top: 1px #dddddd solid;
+margin: 32px 0 10px 0;
+text-align: center;
+clear: both;
+}
+
+form {
+line-height: 130%;
+background: #dddddd;
+padding: 20px;
+}
+p.prompt {
+margin: 0;
+font-weight: bold;
+}
+p.field {
+margin: 0;
+}
+p.doc {
+margin-top: 0;
+color: gray;
+font-size: 10px;
+line-height: 12px;
+}
+
+h1, h2 {
+text-align: center;
+}
+
+hr {
+color: #dddddd;
+height: 1px;
+clear: both;
+}
+
+img {
+border: none;
+}
+
+textarea {
+width: 500px;
+}
+
+th, td {
+vertical-align: top;
+}
+th {
+text-align: left;
+font-weight: bold;
+}
+
+.action {
+font-size: 11px;
+text-align: center;
+color: gray;
+clear: both;
+}
+#content .action a:link, #content .action a:visited {
+font-weight: bold;
+margin: 0 4px 0 4px;
+text-decoration: none;
+color: gray;
+border: none;
+}
+#content .action a:hover {
+color: black;
+}
+
+.author {
+width: 150px;
+padding: 10px;
+background: #dddddd;
+float: right;
+margin: 0 0 5px 10px;
+line-height: 12px;
+}
+
+.error {
+border-top: 5px darkslateblue solid;
+border-bottom: 5px darkslateblue solid;
+padding: 5px;
+margin: 5px 0 20px 0;
+text-align: center;
+}
+
+.event_date {
+white-space: nowrap;
+}
+
+.image {
+text-align: center;
+margin: 24px 0 24px 0;
+}
+
+.info {
+font-size: 10px;
+color: #dddddd;
+clear: both;
+text-align: center;
+}
+
+.odd {
+background: #dddddd;
+padding: 1px;
+}
+
+.pagenav {
+text-align: left;
+float: left;
+font-size: 10px;
+padding-top: 5px;
+}
+.pagenav a {
+color: gray;
+text-decoration: none;
+}
+.pagenav a:hover {
+text-decoration: none;
+color: black;
+}
+.backandforth {
+color: white;
+font-size: 11px;
+margin: 10px 0 10px 0;
+}
+#content .backandforth a {
+color: gray;
+text-decoration: none;
+}
+#content .backandforth a:hover {
+text-decoration: none;
+color: black;
+}
+#content .backandforth a span {
+color: white;
+}
+#content .backandforth a:hover span {
+color: black;
+}
+
+.picbox, .picboxlong, .subfolder {
+width: 120px;
+height: 120px;
+text-align: center;
+font-size: 10px;
+line-height: 12px;
+float: left;
+border: 1px #dddddd solid;
+padding: 4px;
+margin: 2px;
+}
+.picboxlong {
+height: 150px;
+}
+
+.subfolders, .imageboxes {
+clear: both;
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+}
+
+.comments {
+line-height: 140%;
+}
+.comments * {
+margin: 0;
+}
+.subject {
+font-weight: bold;
+font-size: 14px;
+border-top: 1px #dddddd solid;
+margin: 10px 0 2px 0;
+}
+.comments .info {
+text-align: left;
+}
+
+.item p {
+margin: .5in;
+text-indent: -.5in;
+}
+
+.selfportrait {
+text-align: center;
+}
+
+.description {
+text-align: left;
+}
+
+.recordset {
+font-size: 10px;
+color: black;
+text-align: center;
+}
+#content .recordset a {
+color: gray;
+text-decoration: none;
+padding: 1px;
+}
+#content .recordset a:hover {
+background: black;
+color: white;
+text-decoration: none;
+}
+
+.pollbar {
+background: #dddddd;
+}
+
+@media print {
+    #header { margin-top: 0; margin-bottom: .5in; }
+    #menu { display: none; }
+    .action { display: none; }
+    .backandforth { display: none; }
+    .pagenav { display: none; }
+    body { margin: 0; }
+}
+
+.messages {
+padding: 5px;
+margin: 5px 50px 5px 50px;
+text-align: center;
+background: #cceeee;
+margin-top: 10px;
+color: black;
+}

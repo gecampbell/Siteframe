@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<meta http-equiv="content-type" content="text/html; charset={charset}"/>
+{!if defined(site_meta_keywords)
+'<meta name="keywords" content="{site_meta_keywords}"/>'!}
+<meta name="generator" content="Siteframe {version}"/>
+<title>{page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" media="print" href="{site_path}/themes/{theme}/print.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="{site_path}/themes/{theme}/screen.css"/>
+{!if defined(custom_css)
+'<link rel="stylesheet" type="text/css" href="{custom_css}"/>'
+!}{!if defined(head_content) '{head_content}'!}
+{rdf}
+</head>
+<body>
+
+<div id="site">
+<a href="{site_path}/">
+{!if defined(logo)
+'<img src="{logo}" alt="{site_name}"/>'
+'{site_name}'
+!}</a></div>
+
+<div id="content">
+{folder_path}
+{!if defined(no_title) '' '<h1>{page_title}</h1>'!}
+{!if defined(error) '<p class="error">{error}</p>'!}
+{recordset}
+{body}
+</div>
+
+<div id="footer">
+{footer}
+</div>
+
+{!if defined(navigation)
+'<div id="menu">{navigation}</div>'
+!}
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- $Id: page.ihtml,v 1.6 2003/06/23 05:22:44 glen Exp $ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>{page_title}</title>
+<meta http-equiv="content-type" content="text/html; charset={charset}"/>
+<meta name="generator" content="Siteframe {siteframe_version}"/>
+{!if defined(site_meta_keywords)
+'<meta name="keywords" content="{site_meta_keywords}"/>'
+!}
+<link rel="stylesheet" type="text/css" media="print"
+      href="{site_path}/themes/{theme}/printer.css"/>
+<link rel="stylesheet" type="text/css" media="screen"
+      href="{site_path}/themes/{theme}/siteframe.css"/>
+{!if defined(head_content) '{head_content}'!}
+{rdf}
+</head>
+<body>
+<table width="100%" cellspacing="0" cellpadding="0" border="0" id="page">
+<tr>
+  <td colspan="3" id="title">
+      {!if defined(logo)
+        '<a href="{site_path}/"><img src="{logo}" alt="{site_name}" class="logo"/></a>'
+        '<a href="{site_path}/">{site_name}</a>'
+      !}
+  </td>
+</tr>
+<tr>
+  <td colspan="3" id="topmenu">
+    {!if defined(user_id)
+    ' {user_name} | <a href="{site_path}/user.php">My Page</a>
+      | <a href="{site_path}/prefs.php">Prefs</a>
+      | <a href="{site_path}/login.php">Logout</a>'
+    ' <a href="{site_path}/register.php">Register</a>
+      | <a href="{site_path}/login.php">Login</a>'
+    !}
+  </td>
+</tr>
+<tr>
+  <td id="left">
+  {navigation}
+  </td>
+  <td id="center">
+    <p class="folderpath">
+    {!if defined(folder_path)
+    '{folder_path}'
+    '<a href="{site_path}/">Home</a>'!}&nbsp;</p>
+    {!if defined(no_title) '' '<h1>{page_title}</h1>'!}
+    {!if defined(error) '<p class="error">{error}</p>'!}
+    {recordset}
+
+    <div id="content">
+    {body}
+    </div><!-- content -->
+
+    <div id="footer">
+    {footer}
+    </div><!-- footer -->
+  </td>
+  <td id="right">
+  {!if defined(right)
+  '{right}'
+  '<p><b>Recent Additions</b></p>
+  {BEGIN:recent_docs 10 _right_recent_docs_}
+  <p><a href="{site_path}/document.php?id={doc_id}">{doc_title}</a></p>
+  {END:recent_docs}'
+  !}
+  </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,349 @@
+/* screen.css
+** $Id: screen.css,v 1.48 2003/07/01 05:27:55 glen Exp $
+** This stylesheet is used for screen (not print) displays
+*/
+body {
+margin: 0;
+background: white;
+color: black;
+background-image: url("/themes/Broadpool/mouse.gif");
+background-repeat: no-repeat;
+background-position: bottom right;
+background-attachment: fixed;
+}
+
+#title {
+width: 100%;
+background: royalblue;
+color: white;
+height: 65px;
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 76px;
+padding: 2px 5px 2px 5px;
+overflow: hidden;
+letter-spacing: -.05em;
+}
+#title a, #title a:visited, #title a:hover {
+color: white;
+text-decoration: none;
+}
+.logo {
+float: right;
+}
+a img {
+border: none;
+}
+
+#subtitle {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+background: #eeeeee;
+color: gray;
+padding: 2px 5px 2px 5px;
+border-top: 2px midnightblue solid;
+border-bottom: 2px midnightblue solid;
+}
+#subtitle .left {
+float: left;
+}
+#subtitle .right {
+float: right;
+}
+#subtitle a, #subtitle a:visited {
+color: dimgray;
+text-decoration: none;
+margin: 0 0 0 2px;
+}
+#subtitle a:hover {
+color: black;
+}
+#subtitle .path {
+display: inline;
+}
+
+#page {
+width: 100%;
+}
+
+#content {
+padding: 20px 20px 10px 140px;
+font-family: georgia,times new roman,times,serif;
+font-size: small;
+line-height: 160%;
+}
+#footer {
+font-family: arial,helvetica,sans-serif;
+font-weight: normal;
+font-size: 11px;
+color: silver;
+position: relative;
+bottom: 0;
+margin: 20px 0 10px 0;
+line-height: 120%;
+}
+
+#menu {
+position: absolute;
+left: 10px;
+top: 80px;
+width: 110px;
+margin-top: 20px;
+overflow: visible;
+background: navajowhite;
+padding: 10px 0 10px 0;
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+color: gray;
+}
+#menu br {
+display: none;
+}
+#menu a, #menu a:visited, #menu b {
+display: block;
+text-decoration: none;
+padding: 1px 10px 1px 10px;
+}
+#menu a:hover {
+color: black;
+background: white;
+}
+#menu b {
+color: black;
+font-weight: bold;
+}
+
+a {
+color: chocolate;
+text-decoration: none;
+}
+a:visited {
+color: saddlebrown;
+}
+a:hover {
+text-decoration: underline;
+}
+
+h1 {
+margin: 0 0 20px 0;
+padding: 0 0.25em 0;
+font: bold 2.5em arial, helvetica, sans-serif;
+line-height: 0.8em;
+border-bottom: 1px solid silver;
+text-align: right;
+color: #557;
+letter-spacing: -.05em;
+}
+h2,h3,h4 {
+font-family: arial,helvetica,sans-serif;
+color: royalblue;
+clear: both;
+}
+h2 {
+border-bottom: 1px silver solid;
+letter-spacing: -1px;
+line-height: .7em;
+padding: 10px 20px 0 0;
+}
+h3,h4 {
+margin: 2em 0 0 0;
+}
+
+div.path {
+display: none;
+}
+
+/* forms */
+form {
+border-top: 2px gray dashed;
+border-bottom: 2px gray dashed;
+padding: 20px;
+line-height: 120%;
+}
+form hr {
+display: none;
+}
+p.prompt {
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 14px;
+color: gray;
+margin-bottom: 2px;
+}
+p.field {
+margin: 2px 0 2px 0;
+}
+p.doc {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+color: gray;
+margin-top: 2px;
+}
+textarea, p.doc {
+width: 600px;
+}
+
+/* tables */
+table {
+border-top: 1px gray solid;
+border-bottom: 1px gray solid;
+clear: both;
+}
+th {
+font-family: verdana,arial,helvetica,sans-serif;
+letter-spacing: -1px;
+font-size: 12px;
+vertical-align: bottom;
+text-align: left;
+border-bottom: 1px gray solid;
+color: gray;
+line-height: 130%;
+}
+td {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+vertical-align: top;
+line-height: 130%;
+}
+td p {
+margin: 0;
+}
+td.listinfo {
+white-space: nowrap;
+font-size: 10px;
+}
+.even {
+background: navajowhite;
+padding: 1px 0 1px 0;
+}
+.event_date {
+white-space: nowrap;
+}
+.infotable {
+border: none;
+background: #eeeeee;
+width: 400px;
+border-spacing: 1px;
+}
+.infotable th {
+border: none;
+width: 130px;
+vertical-align: top;
+}
+.backnext table {
+border: none;
+float: right;
+}
+
+.Document, .Comments {
+width: 600px;
+}
+.Comments {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+border-top: 1px silver solid;
+line-height: 130%;
+}
+.Comments p {
+margin: 0;
+}
+.Comments p.subject {
+font-size: 12px;
+font-weight: bold;
+margin: 10px 0 0 0;
+}
+
+p.action,p.author,p.info {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+clear: both;
+line-height: 120%;
+}
+p.action a, p.action a:visited {
+padding: 1px 3px 1px 3px;
+border: 1px silver solid;
+color: gray;
+margin-right: 5px;
+}
+p.action a:hover {
+color: black;
+text-decoration: none;
+}
+p.action a:active {
+background: gray;
+color: white;
+}
+p.author,p.info {
+font-size: 11px;
+color: gray;
+}
+p.error {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 12px;
+color: red;
+}
+#content small {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+color: gray;
+}
+.recordset {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+color: black;
+}
+.recordset a {
+color: gray;
+text-decoration: none;
+}
+.recordset a:visited {
+color: silver;
+}
+.recordset a:hover {
+color: red;
+text-decoration: none;
+}
+
+.subfolders, .imageboxes {
+clear: both;
+}
+div.subfolder, div.picbox, div.picboxlong {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+line-height: 100%;
+width: 90px;
+height: 90px;
+overflow: auto;
+border: 1px silver solid;
+padding: 2px;
+margin: 2px;
+float: left;
+text-align: center;
+background: white;
+}
+div.picbox {
+width: 110px;
+height: 110px;
+}
+div.picboxlong {
+width: 110px;
+height: 150px;
+}
+
+.imageframe {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+color: gray;
+}
+
+.pollbar {
+background: royalblue;
+}
+
+.messages {
+padding: 5px;
+text-align: center;
+color: black;
+background: yellow;
+margin: 0 10px 10px 10px;
+}

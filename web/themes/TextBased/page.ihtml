@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<meta http-equiv="content-type" content="text/html; charset={charset}"/>
+{!if defined(site_meta_keywords)
+'<meta name="keywords" content="{site_meta_keywords}"/>'!}
+<meta name="generator" content="Siteframe {version}"/>
+<title>{page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" media="print" href="{site_path}/themes/{theme}/print.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="{site_path}/themes/{theme}/screen.css"/>
+{!if defined(custom_css)
+'<link rel="stylesheet" type="text/css" href="{custom_css}"/>'
+!}
+{!if defined(head_content) '{head_content}'!}
+{rdf}
+</head>
+<body>
+{!if defined(page_width) '<div style="width:{page_width};">'!}
+<table id="page" align="center">
+<tr>
+  <td id="site" rowspan="2">
+    {!if defined(logo)
+    '<a href="{site_path}/"><img src="{logo}" class="logo" alt="{site_name}"
+        title="{site_name}: {site_description}"/></a>'
+    '<a href="{site_path}/">{site_name}</a>'
+    !}
+  </td>
+  <td id="title">
+  {!if defined(no_title) '&nbsp;' '<h1>{page_title}</h1>'!}
+  </td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td id="menu">
+    <div class="navigation">
+    <b>Choose</b><br/>
+    {navigation}
+    </div>
+    <form id="searchform" action="/search.php" method="post">
+    <i>Find on this site:</i>
+    <input type="text" maxsize="250" name="searchfor" value="" class="small"/>
+    <input type="hidden" name="submitted" value="1"/>
+    <input type="submit" value="Search"/>
+    </form>
+  </td>
+  <td id="content" rowspan="2">
+    {folder_path}
+    {!if defined(error) '<p class="error">{error}</p>'!}
+    {recordset}
+    {body}
+  </td>
+</tr>
+</table>
+<div id="footer">
+{!if defined(footer) '{footer}'
+'Copyright &copy;2002, {site_name}. All Rights Reserved.'!}
+</div>
+{!if defined(page_width) '</div>'!}
+</body>
+</html>

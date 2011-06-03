@@ -1,0 +1,43 @@
+{!# $Id: weblog.ihtml,v 1.3 2003/05/06 22:16:52 glen Exp $
+### Copyright (c)2001-2003, Broadpool, LLC. All rights reserved. See LICENSE.txt for details.
+### This file defines a weblog format (entries organized by day)
+### for the home page (index.php). You can either rename this file
+### to index.ihtml in the ./templates/ directory, or you can cut
+### and paste the contents of this file into a document to use as
+### an online home page.
+#!}
+{BEGIN:weblog 31 x}
+{!if '"{xday}"!="{doc_created_mday}"'
+    '<h2>{doc_created_weekday}, {doc_created_month}
+    {doc_created_mday}, {doc_created_year}</h2>'
+!}
+<h3>{!if '{doc_type}==Link'
+    '<a href="{doc_link_url}" target="_new">{doc_title}</a>'
+   '{doc_title}'
+!}
+<a href="{site_path}/document.php?id={doc_id}" style="border:0;">
+    <img src="{!icon 'document'!}" align="right"
+         border="0" alt="" title="Read entire document/add a comment">
+</a>
+</h3>
+<p class="info">
+    {!date 'h:ia T' '{doc_created}'!} |
+    <a href="{site_path}/user.php?id={doc_user_id}">{doc_user_name}</a>
+    {!if '{doc_folder_id}'
+        '| <a href="{site_path}/folder.php?id={doc_folder_id}">{doc_folder_name}</a>'
+    !}
+    | <a href="{site_path}/comment.php?id={doc_id}">Comment</a>
+</p>
+{!if '"{doc_type}"=="Image"'
+    '<a href="{site_path}/document.php?id={doc_id}">
+     <img src="{doc_file_50}" border="0" align="right"
+        alt="{doc_title}" title="{doc_title}"></a>'
+!}{!if defined(doc_summary)
+    '<p>{doc_summary}</p>'
+    '<p>{doc_body}</p>'
+!}
+{!if '{doc_type}==Poll'
+    '{poll_display}'
+!}
+{!set xday '{doc_created_mday}'!}
+{END:weblog}

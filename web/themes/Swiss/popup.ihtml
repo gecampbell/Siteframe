@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>Control Panel - {page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" href="{site_path}/themes/{theme}/swiss.css"/>
+<style type="text/css">
+<!--
+body {
+background: ghostwhite;
+margin: 0;
+padding: 10px;
+font-family: arial,helvetica,verdana,sans-serif;
+}
+textarea {
+font-family: arial,helvetica,verdana,sans-serif;
+width: auto;
+}
+form {
+border: none;
+padding: 0;
+width: auto;
+}
+#top {
+border-bottom: 1px darkgreen solid;
+font-weight: bold;
+}
+.action {
+display: none;
+}
+-->
+</style>
+{head_content}
+</head>
+<body>
+<div id="top">
+{site_name}
+</div>
+
+<h3>{page_title}</h3>
+{!if defined(error) '<p class="error">{error}</p>'!}
+{recordset}
+{body}
+
+<div id="footer">
+{footer}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* $Id: print.css,v 1.1.1.1 2002/09/05 16:43:14 glen Exp $
+** Copyright (c)2001, Broadpool, LLC. All Rights Reserved.
+*/
+body {
+    margin-left: 1in;
+    margin-right: 1in;
+    font-family: arial, helvetica, verdana, tahoma, times new roman, times, sans-serif;
+    font-size: 12pt;
+    line-height: 150%;
+}
+#content {
+    border: 1px solid gray;
+    padding: .2in;
+}
+/* these items will not appear in print view */
+#UL, #ML, #LL, #navigation, #menu, .action, .edit, .inputform {
+    display: none;
+}
+/* some colors */
+.error {
+    color: red;
+}
+a {
+    color: gray;
+    text-decoration: underline;
+}

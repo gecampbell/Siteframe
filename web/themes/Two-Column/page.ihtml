@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<!-- $Id: page.ihtml,v 1.7 2003/06/27 05:28:37 glen Exp $ -->
+<meta http-equiv="content-type" content="text/html; charset={charset}"/>
+<title>{page_title}</title>
+<meta name="generator" content="Siteframe {version}"/>
+<link rel="stylesheet" type="text/css" media="print"
+      href="{site_path}/themes/{theme}/print.css"/>
+<link rel="stylesheet" type="text/css" media="screen"
+      href="{site_path}/themes/{theme}/style.css"/>
+{!if defined(custom_css)
+    '<style type="text/css">
+     @import url({custom_css});
+     </style>'
+!}
+{head_content}
+{rdf}
+</head>
+<body>
+<div id="header">
+    <p>
+    <a href="{site_path}/">Home</a> &bull;
+    {!if defined(user_id)
+        '{user_name} &bull; <a href="{site_path}/user.php">My Page</a>
+         &bull; <a href="{site_path}/prefs.php">Preferences</a>'
+        '<a href="{site_path}/login.php">Login</a> &bull;
+         <a href="{site_path}/register.php">Register</a>'
+    !}</p>
+</div>
+<div id="left">
+    {!if defined(logo)
+        '<a href="{site_path}/" title="{site_name}"
+        ><img src="{logo}" alt="{site_name}" border="0"
+        ></a>'
+        '<p class="title">{site_name}</p>'
+    !}
+    {folder_path}
+    {!if defined(no_title) '' '<h1>{page_title}</h1>'!}
+    {!if defined(error) '<p class="error">{error}</p>'!}
+    {!if defined(recordset) '{recordset}'!}
+    {body}
+</div>
+<div id="right">
+    <b>Menu</b><br/>
+    {navigation}
+    {!if '{gen_rss}+0'
+        '<div style="text-align:center;">
+         <a href="{site_path}/rss.xml">
+         <img src="{site_path}/images/xml.gif" border="0" alt="RSS"/></a>
+         </div>'
+    !}
+    <div id="footer">
+    {!if defined(footer)
+        '{footer}'
+        '&copy;2003, {site_name}. All rights reserved.'
+    !}</div>
+</div>
+</body>
+</html>

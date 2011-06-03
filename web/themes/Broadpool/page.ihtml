@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="{language}">
+<head>
+<meta http-equiv="content-type" content="text/html; charset={charset}"/>
+<meta name="generator" content="Siteframe {version}" />
+{!if defined(site_meta_keywords)
+'<meta name="keywords" content="{site_meta_keywords}"/>'
+!}
+<title>{page_title}</title>
+<link rel="stylesheet" type="text/css" href="{site_path}/themes/{theme}/print.css"
+      media="print"/>
+<link rel="stylesheet" type="text/css" href="{site_path}/themes/{theme}/screen.css"
+      media="screen"/>
+{!if defined(custom_css)
+  '<link rel="stylesheet" type="text/css" href="{custom_css}"/>'
+!}
+{head_content}
+{rdf}
+</head>
+<body>
+
+<div id="title">
+  {!if defined(logo)
+  '<a href="{site_path}/"><img src="{logo}" alt="{site_name}" class="logo"/></a>'
+  !}
+  <a href="{site_path}/">{site_name}</a>
+</div>
+
+<div id="subtitle">
+  <span class="left">
+  {!if defined(folder_path)
+    '{folder_path}'
+    '{site_description}'
+  !}
+  </span>
+  <span class="right">
+  {!if defined(user_id)
+  '{user_name}
+   <a href="{site_path}/user.php">My Page</a>
+   <a href="{site_path}/prefs.php">Preferences</a>'
+  '<a href="{site_path}/register.php">Register</a>
+   <a href="{site_path}/login.php">Login</a>'
+  !}
+  </span>
+  &nbsp;
+</div>
+
+<div id="page">
+  <div id="content">
+  {folder_path}
+  {!if defined(no_title) '' '<h1>{page_title}</h1>'!}
+  {!if defined(error) '<p class="error">{error}</p>'!}
+  {!if defined(recordset) '{recordset}'!}
+  {body}
+    <div id="footer">
+    {!if defined(footer)
+      '{footer}'
+      'Copyright &copy;2002, {site_name}. All Rights Reserved.'
+    !}
+    </div>
+  </div>
+</div>
+
+{!if defined(navigation) '<div id="menu">{navigation}</div>'!}
+
+</body>
+</html>

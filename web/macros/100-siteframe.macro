@@ -1,0 +1,111 @@
+{!# Siteframe Macro Library
+### Copyright (c)2001-2003, Broadpool, LLC. All rights reserved.
+#!}
+{!set macro_library_version '$Id: 100-siteframe.macro,v 1.3 2003/06/12 03:03:57 glen Exp $'!}
+{!# ---------------------------------------------------------------------------
+### user - generates a hyperlinked reference to a user
+### syntax:
+###   !user N
+### example:
+###   !user 371
+#!}
+{!define user
+    '{BEGIN:user $1 user$1}<a href="{site_path}/user.php?id={user_user_id}"
+    >{user_user_name}</a>{END:user}'
+!}
+{!# ---------------------------------------------------------------------------
+### doclink - generates a hyperlinked reference to a document
+### n.b. name changed from 'document', which is an internal macro that inserts
+### the entire contents of a document at the macro location
+### syntax:
+###   !doclink N
+### example:
+###   !doclink 132
+#!}
+{!define doclink
+    '{BEGIN:document $1 doc$1}<a href="{site_path}/document.php?id={doc_id}"
+    >{doc_title}</a>{END:document}'
+!}
+{!# ---------------------------------------------------------------------------
+### folder - generates a hyperlinked reference to a folder
+### syntax:
+###   !folder N
+### example:
+###   !folder 132
+#!}
+{!define folder
+    '{BEGIN:folder $1 folder$1}<a href="{site_path}/folder.php?id={folder_id}"
+    >{folder_name_display}</a>{END:folder}'
+!}
+{!# ---------------------------------------------------------------------------
+### thumbnail - generates a clickable thumbnail
+### syntax:
+###   !thumbnail doc_id [options]
+### example:
+###   !thumbnail 242 'align="right"'
+### if you want thumbnails to be a different size, then change
+### {doc_file_150} to reference a different thumbnail size
+#!}
+{!define thumbnail
+    '{BEGIN:document $1 thumb$1}
+     <a href="{site_path}/document.php?id={doc_id}"
+     ><img src="{site_path}/{doc_file_150}" alt="{doc_title}" border="0"
+          title="{doc_title}" $2
+     /></a>
+     {END:document}'
+!}
+{!# ---------------------------------------------------------------------------
+### link - generates a hyperlink
+### syntax:
+###   !link text href
+### example:
+###   !link 'The Contax G Pages' 'http://www.contaxg.com'
+#!}
+{!define link
+    '<a href="$2">$1</a>'
+!}
+{!# ---------------------------------------------------------------------------
+### bookmark - similar to the above, but generates a named bookmark
+### syntax:
+###   !bookmark 'name'
+#!}
+{!define bookmark
+    '<a name="$1"></a>'
+!}
+{!# ---------------------------------------------------------------------------
+### icon definitions
+#!}
+{!define icon
+    '{site_path}/images/$1.gif'
+!}
+{!# ---------------------------------------------------------------------------
+### powered_by_siteframe
+### generates a link to the "Powered by Siteframe" image
+###
+### powered_by_siteframe_graphic
+### generates a link with a graphic image
+#!}
+{!define powered_by_siteframe
+    '<a href="http://siteframe.org">Powered by Siteframe</a>'
+!}
+{!define powered_by_siteframe_graphic
+    '<div $1><a href="http://siteframe.org"
+    ><img src="http://siteframe.org/siteframepower.gif"
+          alt="Powered by Siteframe"
+          title="Powered by Siteframe"
+    /></a></div>'
+!}
+{!# ---------------------------------------------------------------------------
+#!}
+{!set siteframe_credits
+    'Many thanks to the following people whose contributions helped
+    to make this a great product: Richard Sintchak, Knut Skjaerven,
+    Lincoln Michaud, Charez Golvalez, Vish Vishvanath, Anita Campbell,
+    Ted Campbell, Ted Pecot, Dennis Adams, Barbara Adams, Bob
+    Cousins, Steve Moorey, Christopher Chen, and Rich Preston &bull;
+    Thanks to Nikon for making great cameras &bull; Thanks to Contax
+    for making great cameras and for inspiring this work &bull;
+    Special thanks to Elam for teaching me that baseball is more
+    important than software &bull; Mountain Dew / Code Red &bull;
+    FreeBSD &bull; SuSE Linux'
+!}

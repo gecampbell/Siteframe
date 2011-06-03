@@ -1,0 +1,49 @@
+/* $Id: print.css,v 1.4 2002/11/14 16:32:14 glen Exp $ */
+#title {
+color: gray;
+font-family: arial,helvetica,sans-serif;
+font-weight: bold;
+font-size: 24pt;
+text-align: right;
+letter-spacing: -.05em;
+}
+#title a, #title a:visited, #title a:hover {
+color: white;
+text-decoration: none;
+}
+h1,h2,h3,h4,#footer,p.author,p.info,p.subject {
+font-family: arial,helvetica,sans-serif;
+margin-bottom: 0;
+}
+p.author,p.info {
+font-style: italic;
+margin: 12pt 0 24pt 0;
+}
+#content {
+font-family: georgia,times new roman,times,serif;
+font-size: small;
+line-height: 160%;
+}
+#footer {
+margin-top: 1em;
+font-size: smaller;
+color: gray;
+}
+div.Comments {
+font-size: smaller;
+line-height: 130%;
+}
+div.Comments p {
+margin: 0;
+}
+div.Comments p.subject {
+margin-top: 1em;
+font-weight: bold;
+}
+p.author,p.info {
+font-size: smaller;
+}
+
+#subtitle,#site,#menu,.action,.edit,.path,.textad,.textadblock {
+display: none;
+}

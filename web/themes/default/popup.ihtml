@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="{charset}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{language}" lang="{language}">
+<head>
+<title>Control Panel - {page_title:STRIPTAGS}</title>
+<link rel="stylesheet" type="text/css" href="{site_path}/themes/{theme}/stylesheet.css"/>
+{head_content}
+</head>
+<body>
+
+<div id="banner" style="font-size:24px;">
+{site_name}
+</div>
+
+<div id="content" style="padding:10px;">
+    <h3>{page_title}</h3>
+    {!if defined(error) '<p class="error">{error}</p>'!}
+    {recordset}
+    {body}
+</div>
+
+<div id="footer">
+{footer}
+</div>
+</body>
+</html>

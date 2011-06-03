@@ -1,0 +1,93 @@
+﻿MENUBUILDER plugin
+$Id: Menubuilder.txt,v 1.2 2003/06/18 05:08:49 glen Exp $
+Copyright (c)2003, Broadpool, LLC. All rights reserved.
+see LICENSE.txt for details.
+
+The MENUBUILDER plugin lets you easily and quickly define menus (a
+menu is a list of links composed of a prompt and a URL). For example,
+the bottom of each document and folder contains an "action" menu
+(actions that can be performed on/with the selected document or
+folder). With this plugin, you can add items to the menu in any
+sequence, then display the menu in either sorted order or in the
+order items were added.
+
+Because of the flexibility and simplicity of this method for
+generating menus (as opposed to the "hard-coded" method currently
+in use, I expect that this will become a standard mechanism for
+future releases of Siteframe.
+
+This plugin defines these three macros:
+
+{!menu_item menuname prompt link [condition]!}
+  menuname - a name you give to the menu (not visible on the web
+  page)
+  prompt - the prompt string for the menu item
+  link - the URL or reference for the link
+  condition - an optional condition; if this evaluates to TRUE, the
+  item is added to the menu; otherwise, it is discarded.
+
+  example: {!menu_item action 'Comment'
+                '{site_path}/comment.php?id={doc_id}'
+                'defined(user_id)'!}
+
+  This creates a link on the "action" menu to the comment script;
+  however, it only adds the link if there is a currently-defined
+  user_id (i.e., only if the page is viewed by a logged-in member).
+
+  The "link" can be either a bare URL ("/prefs.php") or a complete
+  anchor tag ("<a href=something title=something onclick=java>%s</a>").
+  If the link is a complete anchor tag, it needs to have a '%s'
+  field marking the location of the prompt string. (This might seem
+  unnecessarily complicated, but it actually makes it easier to
+  provide multi-lingual prompt strings in the future.)
+
+  If the "link" portion is blank, then the prompt string is output
+  surrounded by <b>tags</b>. This allows you to define subheadings
+  within the menu.
+
+  If you want to dictate the order of items, you can prefix any of
+  the prompt strings with numeric digits, and they are stripped before
+  being printed. If you want numeric digits as part of the prompt string,
+  then use HTML character entities.
+
+
+{!menu menuname [separator]!}
+  This formats and displays the menu 'menuname'. If provided, it
+  will place 'separator' between each menu item. Note that, without
+  the separator, items will be crammed up against each other. For
+  example, if you want each menu item to appear on a separate line,
+  you could set the separator to "<br/>".
+
+{!menu_sorted menuname [separator]!}
+  Sorts the menu 'menuname' before displaying it (as in "menu"
+  above).
+
+EXAMPLE 1
+
+  To create a menu like this:
+
+    Comment | Permissions | Share
+
+  You'd use these macro statements
+
+  {!menu_item action 'Comment' '{site_path}/comment.php?id={doc_id}'!}
+  {!menu_item action 'Share' '{site_path}/share.php?id={doc_id}'!}
+  {!menu_item action 'Permissions' '{site_path}/permissions.php?id={doc_id}'!}
+  {!menu_sort action ' | '!}
+
+  Because the menu is displayed in
+  sorted order, it does not matter the sequence in which the menu items
+  are defined. The menu items can even be defined in different locations,
+  which makes this a very convenient way to define the menu.
+
+EXAMPLE 2
+
+  Let's say you want to have the same menu as above, but only want the
+  "Permissions" item to be displayed when the current user is an
+  editor of the document. You'd change the third macro to:
+
+  {!menu_item action 'Permissions' '{site_path}/permissions.php?id={doc_id}'
+      'editor(doc_id,document)'!}
+
+  The extra condition tag associated with the item ensures that it
+  will only be displayed for editors.

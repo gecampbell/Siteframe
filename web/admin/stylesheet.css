@@ -1,0 +1,236 @@
+/* $Id: stylesheet.css,v 1.18 2003/05/14 18:02:28 glen Exp $ */
+body {
+background: white;
+margin: 0;
+}
+body,input,select,td,th {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+}
+table {
+border: none;
+}
+td,th {
+line-height: 135%;
+vertical-align: top;
+}
+#banner {
+width: 100%;
+background: #cccccc;
+padding: 5px 5px 5px 10px;
+border-bottom: 1px black solid;
+font-family: trebuchet ms,arial,helvetica,sans-serif;
+font-size: 36px;
+font-weight: bold;
+color: darkslateblue;
+letter-spacing: -2px;
+}
+#banner span {
+font-style: italic;
+font-size: 12px;
+}
+#banner a, #banner a:hover {
+color: darkslateblue;
+text-decoration: none;
+}
+#tag {
+width: 100%;
+background: darkslateblue;
+color: white;
+padding: 2px 5px 2px 10px;
+border-bottom: 1px black solid;
+}
+#content {
+background: white;
+padding: 20px;
+line-height: 150%;
+border-left: 1px darkslateblue solid;
+}
+#menu {
+width: 140px;
+line-height: 150%;
+font-weight: bold;
+padding: 10px;
+background: #eeeeee;
+}
+a {
+color: darkslateblue;
+text-decoration: none;
+}
+a:hover {
+color: black;
+text-decoration: underline;
+}
+#footer {
+width: 100%;
+clear: both;
+text-align: center;
+padding: 10px;
+border-top: 1px darkslateblue solid;
+color: gray;
+}
+h1,h2,h3,h4 {
+font-family: trebuchet ms,arial,helvetica,sans-serif;
+line-height: 100%;
+}
+h1 {
+margin-bottom: 40px;
+}
+form {
+}
+.prompt {
+border-top: 1px dotted gray;
+padding-top: 5px;
+margin-bottom: 2px;
+font-weight: bold;
+}
+.field {
+margin: 0;
+}
+.doc {
+margin-top: 2px;
+color: gray;
+}
+textarea {
+width:90%;
+}
+.error {
+font-weight: bold;
+font-size: 12px;
+color: maroon;
+}
+
+.subfolders,.imageboxes {
+margin: 5px 0 5px 0;
+clear: both;
+}
+.subfolder,.picbox,.picboxlong {
+text-align:center;
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 10px;
+line-height: 12px;
+margin: 2px;
+padding: 2px;
+border: 1px #eeeeee solid;
+float: left;
+}
+.subfolder {
+width: 90px;
+height: 90px;
+}
+.picbox {
+width: 110px;
+height: 110px;
+}
+.picboxlong {
+width: 110px;
+height: 140px;
+}
+
+.backnext {
+float:right;
+}
+.infotable {
+width: 600px;
+border: 1px gray solid;
+}
+.list {
+clear: both;
+}
+.list p {
+margin-top: 0;
+padding-top: 0;
+}
+th {
+border-bottom: 1px darkslateblue solid;
+text-align: left;
+}
+.infotable th {
+text-align: left;
+border: none;
+margin-right: 10px;
+white-space: nowrap;
+width: 120px;
+}
+
+.info {
+font-size: 10px;
+color: gray;
+}
+
+.action {
+color: gray;
+clear: left;
+}
+.action a {
+color: gray;
+text-decoration: none;
+}
+#content .action a:hover;
+color: black;
+text-decoration: underline;
+}
+
+.event_date {
+white-space: nowrap;
+}
+
+img {
+border: none;
+}
+
+.Comments {
+width: 600px;
+}
+.Comments p {
+margin: 0 0 5px 0;
+}
+.subject {
+font-weight: bold;
+border-top: 1px dotted gray;
+margin-top: 20px;
+}
+
+.stats {
+float: right;
+border: 1px gray solid;
+padding: 10px;
+}
+
+.even {
+background: #eeeeee;
+padding: 2px;
+}
+
+.pollbar {
+background: darkslateblue;
+}
+
+.weblog {
+width: 90%;
+}
+.weblog td {
+vertical-align: top;
+line-height: 150%;
+}
+.weblog p {
+}
+.weblog .icon {
+width: 50px;
+text-align: left;
+}
+.weblog .info {
+}
+
+dt {
+font-weight: bold;
+padding-bottom: 0;
+}
+dd {
+padding-top: 0;
+}
+
+hr {
+color: darkslateblue;
+height: 1px;
+}

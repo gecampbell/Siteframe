@@ -1,0 +1,88 @@
+Siteframe v2.4
+Copyright (c)2001-2003, Broadpool, LLC. All rights reserved.
+See LICENSE.txt for details.
+$Id: INSTALL.txt,v 1.10 2003/06/12 03:39:15 glen Exp $
+
+UPDATED: June 10, 2003
+
+-----SUPPORT---------------------------------------------------------
+It is highly recommended that you subscribe to the Siteframe mailing
+list at http://siteframe.org/mailman/listinfo/siteframe to keep up
+with product releases and security announcements. If you wish to
+participate in the development of additional Siteframe features, make
+sure you register with the website at http://siteframe.org.
+---------------------------------------------------------------------
+
+IF YOU ARE UPGRADING TO SITEFRAME 3.0 FROM A PRIOR RELEASE, PLEASE
+SEE UPGRADE30.txt IN ADDITION TO THIS FILE.
+
+Assuming you have siteframe10.tar.gz (the file name may change to
+reflect the version):
+
+1. Create a directory (let's call it "siteframe") and cd to it,
+then unpack the gzip'd archive there
+
+    cd siteframe
+    tar zxvf /path/to/siteframe.tar
+
+All further paths in this document are relative to the "siteframe"
+directory.
+
+2. Create a MySQL database and assign appropriate user ID's and
+passwords (I'll assume that you know how to do this; if you're using
+a web hosting service, then most likely the database will be built
+for you). Build the siteframe database tables using this command:
+
+    mysql database < ./sql/siteframe.sql
+
+where "database" is the name of the database you have created or
+been given. If you don't have access to a command line, then you'll
+need to run the siteframe.sql file through your MySQL web interface
+or other application.
+
+IF YOU ARE INSTALLING A NEW SYSTEM: load the SQL file templates.sql.
+This will create a default set of templates for your new system:
+
+    mysql database < ./sql/templates.sql
+
+3. Configure your web server to use PHP4 and have the directory
+index set to index.php. For apache, the lines will look something
+like this:
+
+    DocumentRoot your-directory
+    <Directory your-directory>
+        DirectoryIndex index.php index.html
+    </Directory>
+
+Again, if you're using a web hosting service, this will most likely
+already be done for you.
+
+4. Move the file ./config.php to a location OUTSIDE your web server's
+document root so that it cannot be inadvertently accessed. Edit the
+file and use your MySQL database's name, user ID, and password.
+Create a new file ./web/config.php and have it contain only the
+following lines:
+
+    <?php
+    require "/path/to/original/config.php";
+    ?>
+
+(Since the config.php with the database ID and passwords is stored
+outside the web root, it will be inaccessible to hackers.)
+
+5. All the files in ./web/ and lower should be stored in the directory
+root of your web server. The subdirectories files/ and themes/
+should be writable by your web server. For example, if your web
+server runs as "www", then these commands should work:
+
+    chown -R www files/ themes/
+    chmod -R u+w files/ themes/
+
+6. Point your web browser at the proper URL for your site (I assume
+you know how to configure your web server to point to the proper
+location); it should automatically invoke the file "admin/globals.php".
+Use "globals.php" to define the name of your site and set initial
+values for system control variables.
+
+7. Upload your content and start to work!
+

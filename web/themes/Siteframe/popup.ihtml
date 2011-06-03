@@ -1,0 +1,52 @@
+<!-- $Id: popup.ihtml,v 1.2 2003/06/23 05:22:44 glen Exp $ -->
+<html>
+<head>
+<title>{page_title}</title>
+<style type="text/css">
+body, th, td {
+font-family:verdana,arial,helvetica,sans-serif;
+font-size: 11px;
+}
+.prompt,.field,.doc,p {
+margin: 0;
+display: block;
+}
+.prompt {
+font-weight: bold;
+}
+.doc {
+margin-bottom: 5px;
+color: gray;
+font-size: 10px;
+}
+.button {
+font-size: 9px;
+}
+textarea {
+width: 350px;
+}
+form {
+margin: 5px 0 0 0;
+}
+h4 {
+font-family: arial,helvetica,sans-serif;
+margin: 0;
+background: tan;
+padding: 2px;
+}
+.error {
+color: red;
+font-style: italic;
+margin: 10px 0 10px 0;
+}
+</style>
+</head>
+<body>
+<h4>{page_title}</h4>
+{!if defined(error) '<p class="error">{error}</p>'!}
+{body}
+<p class="button">
+  <small>[<a href="#" onClick="javascript:self.close();">Close</a>]</small>
+</p>
+</body>
+</html>

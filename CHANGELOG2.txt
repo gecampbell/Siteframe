@@ -1,0 +1,592 @@
+CHANGELOG2.txt
+$Id: CHANGELOG2.txt,v 1.1 2003/05/27 03:59:52 glen Exp $
+Copyright (c)2002-3003, Broadpool, LLC. All rights reserved.
+
+This file contains documentation of changes in the 2.0 version of
+Siteframe.
+
+======================================================================
+CHANGES IN 2.4.2 - May 22, 2003
+======================================================================
+* Changed the algorithm for iseditor() to check the "folder"
+permissions for document-level permissions. Basically, if a document
+is in a folder, then the folder permissions dictate who is an editor;
+only if the document is standalone are the document's permissions
+used. (N.B. There's actually not any way currently to change
+permissions on a standalone document.)
+
+* Lots of cleanup in the "templates-minimal" template set to make
+them more consistent with the others.
+
+* Changes in macros.php; now, if the value of a defined macro is
+the name of a function, the function is called with the argument
+array as its only parameter. This is to support plugin->set_macro()
+functionality.
+
+* Changes to classes/plugin.php to support set_macro() method.
+
+* Large-scale cleanup of templates-minimal to get rid of folder_path
+and various other p.action fixes.
+
+======================================================================
+CHANGES IN 2.4.1 - May 20, 2003
+======================================================================
+* Correction to register.php to correctly set user_status when the
+register_model is "open"
+
+* Enhancements to document.php to generate next_id and prev_id with
+extract "&folder=N" when the document is coming from a folder other
+than the one specified in doc_folder_id (i.e., from a virtual folder,
+for example). This means that, if you click on a link from a virtual
+folder, the "Back" and "Next" buttons will scroll through the virtual
+folder, and not through the document's original folder.
+
+======================================================================
+CHANGES IN 2.4 - May 16, 2003
+======================================================================
+
+    IMPORTANT: If you are upgrading from release 2.3 to release
+    2.4, and you are running under MySQL 4.0, perform the following
+    MySQL command:
+
+        INSERT INTO properties VALUES ('ENCRYPTION','SHA1')
+
+    This will ensure that you can continue to login to your site,
+    since various encryption methods are now offered. If you are
+    upgrading from a version before 2.3, you simply need to run the
+    sql/upgrade... scripts in the proper sequence.
+
+* Moved _htaccess to .htaccess so that it's on by default.
+
+* Added error.php, which is an HTTP error-handling document. This
+allows site administrators to display error messages using the
+site's theme.  This page requires the template error.ihtml, which
+I've added to all the template directories.
+
+* New macro {!case compare value 'return' value 'return' 'default'!}
+This is really cool, because it implements a standard SWITCH or
+CASE statement, which lets you avoid all those multiple embedded
+IF macros.
+
+* Support for Groups. You can think of a group as a folder for
+users.  This required a new class as well as numerous new support
+files (editgroup, joingroup, leavegroup, groups, group, plus group
+templates and autoblocks). What can you do with a group? Right now,
+not much.  However, these will be tied in with the authentication
+system so that you can limit a folder to a group of people.
+
+* Support for Permissions. You can now grant permissions on documents,
+folders, and groups. Members can be designated as editors or
+submittors (groups and folders only). Groups can also have permissions
+granted them.
+
+* mailto.php has been modified to send e-mail to groups.
+
+* modified autoblocks that it performs appropriately with non-document
+blocks
+
+* corrected a number of SQL statements that were not compatible with
+older versions of MySQL.
+
+* Fixed bug where custom user properties were not set from the
+registration page.
+
+* Fixed bug where regular users could use admin pages.
+
+* Added website registration form to the Control Panel
+
+* Added "feedback" page to Control Panel. This lets site administrators
+send feedback directly to Siteframe.
+
+* New script multiload.php allows uploading of multiple images in
+one fell swoop. The global property MULTI_IMAGE_UPLOAD determines
+whether or not the site allows multiple image upload.
+
+* Global property ALLOW_UNCONFIRMED indicates whether or not
+unconfirmed users are allowed to login and use the system immediately
+(as was the case in prior versions). This prevents the case where
+someone logs in using a bad e-mail address, uploads a lot of content,
+and then loses it all a few days later when their account is deleted.
+
+* Changed the global properties page so that LOGO is set via a file
+upload instead of by manually entering the filename and path.  This
+is to ensure that the user is not required to have file upload (ftp)
+capabilities in order to use Siteframe.
+
+======================================================================
+CHANGES IN 2.3.2 - May 10, 2003
+======================================================================
+* Added MAINTENANCE_MODE - when this global property is true (1),
+then all pages display a maintenance message instead of their usual
+behavior. This can be toggled through the Administrative menus
+(which will still function, even in maintenance mode). This is to
+allow system updates without unduly disrupting users.
+
+* Fixed parse_text() in siteframe.php and added table support.
+
+* Added column user_nickname to user table.
+
+* Added column doc_version to docs table (future feature).
+
+* Changed the administrative interface so that it uses a standard
+look and feel no matter what theme is selected.  Changed the name
+to the "Control Panel" (hopefully, easier to understand).  Modified
+the creation of the administrative user to a separate function.
+
+======================================================================
+CHANGES IN 2.3.1 May 5, 2003
+======================================================================
+* Fixed bug that prevented editing of Images after their initial
+creation.
+
+* Fixed problem in parse_text() that incorrectly identified
+paragraphs.
+
+======================================================================
+CHANGES IN 2.3 May 2, 2003
+======================================================================
+* New global property MAX_IMAGE_SIZE restricts the largest pixel
+dimension of uploaded image files.
+
+* Fixed bug that caused admin-only properties to be lost when the user
+edited the object.
+
+* Added global property MAX_DOC_PER_DAY; if this is set to a non-zero
+value, it prevents members from creating more than this many documents
+per day (within the last 24 hours).
+
+* Edited most of the theme files to use the {charset} slot. This
+allows the default character set to be modified; for example, it
+can be changed to "UTF-8" if you need to support alternate characters.
+Also modified the administrative properties to set the CHARSET
+property.
+
+* The primary Siteframe SQL script has been modified to use FOREIGN
+KEY constraints. If your version of SQL does not have foreign key
+support, you should edit the SQL file and remove the foreign key
+clauses.
+
+* Added {site_path} to a number of templates
+
+* New functionality to specify the sort order of documents within
+a folder. This involves a new folder property, folder_sorted, which
+also creates a property folder_group. The "folder_group" property
+specifies whether the folder should be grouped for display (which
+can be ignored by the templates). Within the autoblocks.php program,
+the property folder_group_break is set to 1 if it's the start of a
+new group. The template file templates/folder_image.ihtml has been
+modified to show how this can be used.
+
+* Also performs sorting on subfolders
+
+* Also scrolls properly through documents in sorted folders
+
+* Added Slideshow functionality! The slideshow.php script loads the
+template file slideshow.ihtml instead of the default theme's
+page.ihtml. The provided slideshow.ihtml file uses some portable
+Javascript to load all the images in a folder and display them
+sequentially as a slideshow. Pretty cool stuff, if I may say so
+myself.
+
+* Added the :noquote qualifier to the parser. This replaces any
+double quotation marks with &quot; HTML character entities.
+
+* Added new global property USER_THEME; if this is TRUE, then users
+can change their THEME; if not, then they must use the site default.
+
+* New global property DEFAULT_FOLDER_TYPE, which defines the default
+type of new folders; this can be changed, but it makes it easier
+if this is what shows up.
+
+* New folder type "PicFolder" (Image Gallery). This is a plain
+folder with a folder_limit_type=Image and folder_children=0.
+
+* New theme "Pico" and associated template set "templates-pico."
+
+* New property DEFAULT_FOLDER_PARENT, which defines the default
+parent of any new folder created.
+
+* Modified autoblocks.php so that, when iterating through any of
+the folder blocks (folder_children, public_folders, etc.) and the
+folder has a parent, it creates a set of properties "parent_" for
+all of the parent's information. Therefore, you can access
+{parent_folder_public}, for example, to see if the parent folder
+of the current folder is public. In case you need to.
+
+* Modified the Email class to support the Reply-To header.
+
+* Modified comments so that comments sent to users use the Reply-To
+header to store the email address of the person commenting; this
+way, a recipient can hit reply to a comment and it will respond to
+the original author.
+
+* Removed trailing slash from the site cookie in login.php, because
+this seemed to cause more problems than with Safari (which the slash
+was intended to prevent).
+
+* New folder type 'VFolder'. This is a "Virtual Folder" that can
+only be created or edited by a site administrator. Instead of holding
+documents, the virtual folder defines an SQL statement that retrieves
+the documents, thus allowing for novel collections of documents.
+
+* Removed support for the MACRO_AUTOLOAD property, and instead will
+automatically load all macro files located in the macros/ subdirectory.
+For this, removed macros.ihtml from all template sets. PLEASE TAKE
+NOTE: you will need to move your modified macros.ihtml file from
+the template directory into the macros/ directory.
+
+* Added support for plugins; essentially, every file in "./plugins"
+is loaded and executed. This allows administrators to develop new
+extensions to Siteframe and have them automatically loaded, without
+the need to edit other code.
+
+* Passwords are now stored in encrypted form. PLEASE NOTE: this
+requires a database update for any existing users. The script
+./scripts/upgrade220to230.sh will upgrade the database appropriately
+and encrypt the existing passwords. It calls the SQL script
+./sql/upgrade220to230.sql; if you do not have access to the command
+line, then you can run these SQL statements to upgrade your database.
+
+* The user_cookie field has been added; the cookie value is now
+stored on the user's PC instead of their user ID, which was a
+potential security breach.
+
+* Because passwords are now encrypted, the "Password Reminder" page
+has been changed to the "Password Reset" page, which generates a
+new password.
+
+* Moved the popup.ihtml template from the templates/ folder into
+the theme. This is really much more logical, since it allows the
+theme to control the appearance of the popup windows, instead of
+making them appear the same all the time. __NOTE:__ if you are using
+a custom theme, you will need to move a copy of popup.ihtml into
+your theme directory.
+
+* Enhanced plugin support to allow access to events (for example,
+you can specify an action to take place when a document is updated).
+
+* Completed Trackback, both send and receive.
+
+* Fixed a bug in siteframe.php, function parse_text(), that caused
+multiple paragraphs to be consolidated into a single paragraph.
+
+======================================================================
+CHANGES IN 2.2.4 - March 7, 2003
+======================================================================
+* Modifications in login.php to correct a cookie-path setting which
+made Siteframe incompatible with Apple's Safari browser.
+
+======================================================================
+CHANGES IN 2.2.3 - December 26, 2002
+======================================================================
+* Added support for "date" datatype in the extended object properties
+(requested by M.Borque).
+
+* Updated the "Nikon" theme to support all the latest features.
+
+* Small modifications in the email headers produced by
+classes/email.php to conform with MIME 1.0 speification (specifically,
+the inclusion of the MIME-version header).
+
+======================================================================
+CHANGES IN 2.2.2 - November 14, 2002
+======================================================================
+* corrected a minor error in parse_text() that stopped parsing web
+links that included a "~" character (for example, http://site/~user).
+
+* added checks to prevent uploading of .PHP, .HTM, .HTML, .ASP, or
+.CGI files - these could be clicked directly to execute code on the
+server, which is a security breach. If you need to upload these files,
+put them into a .ZIP or .TAR archive file; that way, they won't be
+executed on the server.
+
+======================================================================
+CHANGES IN 2.2.1 - November 14, 2002
+======================================================================
+* Complete overhaul of the "Broadpool" theme. Not really a very
+popular theme, so it probably won't affect many people.
+
+* Modified daily.php so that it does not email the newsletter if there
+are no site changes. This allows administrators to run the script
+daily (to validate and warn users pending confirmation), but not send
+out materials unecessarily.
+
+* Fixed a security hole that allowed access to files outside the web
+directory.
+
+======================================================================
+CHANGES IN 2.2.0 - November 11, 2002
+======================================================================
+* New document type "Ad" (advertisement). Used for classified
+advertising. Currently treated like any other document type.
+
+* Major enhancement to allow the extension of base document types (and
+user objects) by defining new custom properties through the
+administrative menu. As a result of this, many of the "extraneous"
+properties have been removed from the document class files (for
+example, all the camera information has been removed from image.php),
+and it's been added in as static data in the new tables objs and
+obj_props. This allows site administrators to tailor their documents
+with specific properties.
+
+* Added the new DOCSTRINGS array in lang/language.php. These are
+documentation strings for the various fields used on input forms.
+Eventually, I hope to move all documentation strings out of the class
+files and into this array (for language portability). This should make
+most forms easier to use.
+
+* Lots of cleanups to both template sets; added JavaScript options to
+image.ihtml in the standard template set to hide or display the photo
+information table.
+
+* Added "Siteframe" theme (used on http://siteframe.org).
+
+======================================================================
+CHANGES IN 2.1 - October 28, 2002
+======================================================================
+* modified template.php to check for certain properties whilst parsing
+and automatically replace HTML links; this might be expanded in the
+future to do some Wiki-like text formatting. The function parse_text()
+in web/siteframe.php actually does the formatting. I had to take some
+auto-format code out of classes/document.php to make this work.
+
+* Totally revised theme Contax_G to use JavaScript cascading menus.
+Looks really cool, but doesn't work in many browsers.
+
+* Revamped theme TextBased - it's now an attempt to combine XHTML-
+standard code with a Google/Yahoo appearance. The page markup is
+structural and very simple, but the CSS keeps the styles consistent
+and easily-modifiable.
+
+* New script random_image.php. This can be used as the target of an
+IMG directive: <img src="/random_image.php?size=100"/> and it will
+generate a random image selected from the database. The autoblock
+{BEGIN:random "Image"}...{END:random} is now deprecated since it will
+not function properly when the pages are statically-generated (which I
+hope to do some day soon).
+
+* New autoblock {BEGIN:rss}...{END:rss}. This block automatically
+parses an industry-standard RSS file for content syndication; see
+http://siteframe.org for complete details. Added table 'rss' to hold
+cached values for RSS items; modified template.php to check the cache
+before loading file.
+
+* New page variable function :truncate. If you have a value like
+{user_name:truncate), then it will use the global property
+TRUNCATE_SIZE to truncate the value to the specified length. If the
+value is shorter than TRUNCATE_SIZE, then it is unchanged. If it is
+longer than TRUNCATE_SIZE, then it is truncated and "..." is appended
+to the end of it. If not specified, TRUNCATE_SIZE defaults to 50.
+
+* Extended the parse_text() function in siteframe.php to do a lot of
+Wiki-type formatting. Now supports rules, line breaks, automatic
+lists, headings, preformatted text, and paragraphs.
+
+* (#0147) Implemented the "share this folder" option as requested in
+the bug report.
+
+* Added "most_commented" autoblock; also "most_commented_images"
+
+* New theme "G2" (it was there before, but was in progress)
+
+* Added new folder type CFolder - Member Competition Folder LOTS of
+changes to support this. See http://siteframe.org for more detail.
+
+* Added new document type Notice - a "notice" is a small document with
+a begin and end date; during that time, the document appears in the
+autoblock "active_notices" and can be used, for example, to display
+current, timely information on a site. The autoblock "all_notices"
+displays all notices, both active and inactive. New top-level script
+"notices.php" displays both active and inactive notices to allow user
+to edit them. New templates notice.ihtml and notices.ihtml for the
+single notice and multiple-notice display as well. The script
+"daily.php" has been modified to automatically delete all notices
+where then end date is more than 7 days ago.
+
+======================================================================
+CHANGES IN 2.0.2 - September 30, 2002
+======================================================================
+* all administrative function have been moved under the ./admin/
+directory. This means that, if you have links to /log.php, it will
+need to change to /admin/log.php.
+
+* as part of the administrative change above, the install.php script
+has been moved to /admin/properties.php, since it really is a
+reuseable function. The site will still redirect to it automatically
+if it has not been initialized.
+
+* added new global property CACHED_VALUE_UPDATE_TIME. This is the
+frequency (in minutes) that expensive values like the
+{BEGIN:top_rated_week} autoblock are computed. In older versions,
+these queries (among the most expensive queries issued by Siteframe)
+were executed for every occurrence of the value. With this property,
+the computations are only performed every N minutes, and the cached
+value is saved.
+
+* HTML is now supported in folder descriptions (it was previously
+stripped out).
+
+* A property "last_login" is updated when a member logs into the site.
+While not currently used for anything, I expect to have a future
+setting that will allow the site administrator to automatically remove
+members who have been inactive for a specified period.
+
+* A significant change as to how document/folder classes interact with
+autoblocks. In prior versions the autoblock code iterated through each
+list once, and for each item it instantiated a class, causing another
+database query for the object. In this version, most autoblocks only
+move through the database once, drastically reducing the database
+overhead.
+
+* Added a global property USE_GD18, which tells the software to use
+functionality available in GD1.8 instead of GD2.0 (the default).
+
+* Changed the user templates (in the standard template set):
+user.ihtml, to refer separately to Folders, Documents, Images, and
+Ratings. This should improve performance when viewing user
+information.
+
+* Added global properties PUBLIC_FOLDER_PREFIX and
+PUBLIC_FOLDER_SUFFIX. These strings are inserted before and after the
+names of public folders wherever they appear.
+
+* Added global property TOP_FOLDERS_ADMIN_ONLY; if true, then top-
+level folders (those with a parent_folder_id=0) can only be created by
+site administrators.
+
+* Fixed a bug where folder_user_limit was not respected on updates. If
+you had a limit of 5 documents, you could add a sixth to the folder by
+editing a document. However, adding a new document worked properly. It
+now works properly for both adds and updates.
+
+* Inspired by the above, added DOC_HIDDEN_PREFIX and DOC_HIDDEN_SUFFIX
+to identify documents with the doc_hidden tag set.
+
+* Added global properties SITE_DATE_FORMAT and SITE_TIME_FORMAT and
+modified the standard template set to use them. The values of these
+are a string acceptable to the PHP date() function (see
+http://www.php.net/date for documentation) for date and time values.
+These values can be set via the default properties interface.
+
+* Tons of cleanup on themes (hey, a lot of these really don't work too
+well). I'm hoping for more input from the user community on these.
+
+* New global property SITE_TEMPLATES contains the directory of the
+template set in use. By default, this is "templates". If you want to
+use the minimal template set, change this to "templates-minimal"
+(through the Global Properties page).
+
+* Fixed the autoblocks {BEGIN:xxx}...{END:xxx} so that they have a
+true context (via a stack). This necessitated a new macro {!setglobal
+var value!} which is identical to the {!set var value!} macro except
+that it defines a global variable. This can be used within an
+autoblock to pass information outside it (for example, the last state
+of the iteration or the last known row).
+
+* New global property COOKIE_DAYS which sets the duration (in days) of
+the cookie used by /login.php for "Remember me" logins. For example,
+if you set this to 30, then users will be required to re-login every
+30 days. If you set it to 365, then they will only have to re-login
+once per year (from the same computer and browser).
+
+* Modified the SFolder (scheduled folder) object so that documents are
+automatically removed from the folder after their time has expired.
+
+* Added support for master/slave (replicated database) configurations.
+In the ./web/config.php file, there are now two possible database host
+definitions. DBHOST is used for queries, but DBWRITE can be used for
+INSERTS and UPDATES. If DBWRITE is not defined, then it is set to
+DBHOST, so nothing will happen inadvertently.
+
+* New script "email.php" that allows a logged-in user to send a link
+about a document to someone else. Standard templates have been updated
+to have this as an option on document pages.
+
+* "email.php" updates the document property {doc_share_count}, which
+tracks the number of times a document has been emailed.
+
+* Added global property SFOLDER_AUTO_REMOVE that determines whether or
+not documents should automatically be removed from scheduled folders
+at the end of their term.
+
+* Created new object Email(), which is a standardized interface for
+sending electronic mail messages. This supports both ASCII-only and
+HTML email, and is currently used for (1) messages to unconfirmed
+users, (2) messages for people who have documents deleted, (3) the
+daily newsletter, (4) "share this document" messages, and (5) "send
+email to user" messages.
+
+* Added user property "no_html_email" which, if true, will allow
+members to receive only ASCII email instead of HTML (default).
+
+* HTML email is NOT currently supported for member notifications and
+comments.
+
+* Allow users to specify date and time format through their
+Preferences page. Used similar code to make it easier to choose the
+site date and time format from the admin page.
+
+* Users can now select to receive automatic emailing of comments on
+their documents (this is independent of whether or not the comment is
+sent to the mailing list).
+
+* Made the THEME interface much more robust. If the system can't find
+the user's theme, it attempts to use SITE_THEME (the site's default
+them). If it can't load that one, it attempts to use "default". If it
+still can't find that one, it finally gives up and dies.
+
+* Added new script chart_ratings.php which generates a distribution
+bar chart showing the number of times each rating has been awarded.
+
+* New global property SITE_META_KEYWORDS. This is intended to be used
+by these to set the appropriate <META> tag in their HTML. Several of
+the more commonly-used themes have been modified to use this.
+
+* New global property TREE_TITLE. If set to a non-blank value, this
+defines the title used by tree.php (which creates a hierarchical view
+of folders) instead of the default "Site Folder Map".
+
+* Modified the table "properties" and changed the column "value" from
+VARCHAR(250) to TEXT. This is because certain properties (mostly the
+OKTAGS value) were getting truncated after 250 characters. This change
+resulted in the new script ./sql/upgrade200to202.sql, which performs
+an ALTER TABLE on the table.
+
+* Added support for "Categories". This involves two new tables
+(categories and doc_categories) and a new global property
+(MAX_DOC_CATEGORIES), as well as supporting code all over the document
+stuff. MAX_DOC_CATEGORIES determines the maximum number of categories
+that can be assigned to a document. A new function in siteframe.php
+(doc_categories()) returns a list of categories for use elsewhere. New
+codeblocks (category_docs and categories) for lists of docs within a
+category and a list of the categories themselves.
+
+UPGRADE INSTRUCTIONS
+
+After you install the files as normal (you can use install_copy.sh),
+you should invoke your web browser at http://<domain>/admin/, select
+Global Properties, and ensure that the new global properties (above)
+have acceptable values.
+
+======================================================================
+CHANGES IN 2.0.1 - September 20, 2002
+======================================================================
+
+* Added support for hierarchical folders. This involved adding two
+columns to the folders table and a number of changes across the
+board. There's also three new site properties set via install.php.
+The slot {folder_path} is automatically generated to show the path
+to the current folder. The standard templates have been modified
+to use this path.
+
+* A number of bug fixes; see http://siteframe.org for more details.
+
+* A number of database enhancements and indexes to improve
+performance. Most of these will likely be unnoticeable on smaller
+sites
+
+* To upgrade, run the upgradeXXtoYY.sql script on your database.
+  - edit config.php to use your database parameters
+  - save your templates if you have modified them, and edit them
+    to use the new folder_path stuff, above
+
