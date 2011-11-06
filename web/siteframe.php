@@ -722,4 +722,26 @@ if (!$ADMIN_PAGE && $MAINTENANCE_MODE) {
 if ($PHP_SELF=='')
   $PHP_SELF = $_SERVER['PHP_SELF'];
 
-?>
+// clean up attack vectors
+function clean_it_up( $arr )
+{
+	foreach( $arr as $name => $value )
+	{
+		switch( $name )
+		{
+		case 'comment_doc_id':
+		case 'comment_reply_to':
+		case 'folder':
+		case 'group':
+		case 'group_id':
+		case 'id':
+		case 'user':
+			$$global[ $name ] = mysql_real_escape_string( $value );
+			break;
+		default:
+		}
+	}
+	return $arr;
+}
+if (isset($_GET))  $_GET = clean_it_up( $_GET );
+if (isset($_POST)) $_POST = clean_it_up( $_POST );

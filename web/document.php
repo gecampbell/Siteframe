@@ -10,7 +10,7 @@ $page_start = microtime();
 include "siteframe.php";
 
 $full = $_GET['full'];
-$id = $_GET['id'] ? $_GET['id'] : $_POST['id'];;
+$id = ($_GET['id'] ? $_GET['id'] : $_POST['id']) + 0;
 $tag = $_GET['tag'];
 
 if ($full) {
