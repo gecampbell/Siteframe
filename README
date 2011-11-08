@@ -1,8 +1,18 @@
 Siteframe v3.1
-Copyright (c)2001-2003, Broadpool, LLC. All rights reserved.
-See LICENSE.txt for details.
-$Id: README.txt,v 1.139 2005/11/06 16:30:24 glen Exp $
+Copyright (c)2001-2011, Glen Campbell. All rights reserved.
+See LICENSE.txt for licensing details.
 http://siteframe.org
+
+
+
+PLEASE NOTE that Siteframe version 3.x has known security vulnerabilities
+and is NOT recommended for use on production systems. In addition,
+there are probably undetected vulnerabilities as well. Seriously,
+if you install this code, your site will be able to be hacked, and
+probably will. It is unsupported and I assume no liability for your
+use of this code.
+
+
 
 ======================================================================
 SYSTEM REQUIREMENTS
